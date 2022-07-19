@@ -22,7 +22,6 @@ namespace FindRApi.Extensions
             //builder.Services.AddSingleton<ISignalRHubHelper, SignalRHubHelper>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
 
-
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr)
             {
@@ -38,6 +37,8 @@ namespace FindRApi.Extensions
     
 
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<INotificationService, NotificationService>();
+           
 
             builder.Services.AddAuthentication(auth =>
             {

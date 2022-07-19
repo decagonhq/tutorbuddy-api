@@ -9,20 +9,20 @@ namespace FindR.Integrations
 {
     public class NotificationService : INotificationService
     {
-        private readonly IFluentEmail _fluentEmail;
+      
         private readonly IConfiguration configuration;
 
         private readonly Dictionary<NotifyWith, INotificationProvider>
             _notificationProviders = new Dictionary<NotifyWith, INotificationProvider>();
 
-        public NotificationService(
+        public NotificationService
+            (
             ILogger<NotificationService> logger,
-            IFluentEmail fluentEmail,
             IConfiguration configuration
             )
 
         {
-            _fluentEmail = fluentEmail;
+         
             this.configuration = configuration;
 
             _notificationProviders
@@ -35,7 +35,7 @@ namespace FindR.Integrations
         public async Task<bool> SendAsync(NotifyWith target, NotificationContext payload)
         {
             //Inject DI instances, cos different providers might use different Instances.
-            payload.FluentEmail = _fluentEmail;
+           
             payload.Config = configuration;
 
             try
