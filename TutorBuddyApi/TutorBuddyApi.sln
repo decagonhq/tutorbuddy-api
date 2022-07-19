@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.Core", "Tutor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.BusinessDomain", "TutorialBuddy.BusinessDomain\TutorialBuddy.BusinessDomain.csproj", "{04517F81-FA58-4C67-B2CA-55F0C32734BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.ExternalServices", "TutorialBuddy.ExternalServices\TutorialBuddy.ExternalServices.csproj", "{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

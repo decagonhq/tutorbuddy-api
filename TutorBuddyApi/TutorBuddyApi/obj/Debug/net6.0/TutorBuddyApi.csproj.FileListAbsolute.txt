@@ -25,3 +25,15 @@ C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\obj\Debu
 C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\obj\Debug\net6.0\ref\TutorBuddyApi.dll
 C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\obj\Debug\net6.0\TutorBuddyApi.pdb
 C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\obj\Debug\net6.0\TutorBuddyApi.genruntimeconfig.cache
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\IdentityModel.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\IdentityServer4.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\IdentityServer4.Storage.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.Google.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.OpenIdConnect.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\eharry\source\repos\tutorbuddy-api\TutorBuddyApi\TutorBuddyApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
