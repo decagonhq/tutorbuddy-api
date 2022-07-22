@@ -20,19 +20,23 @@
     /// Gets the Heroku Postgres Connection string for Production environment
     /// </summary>
     /// <returns>string</returns>
-    private static string GetHerokuConnectionString()
+    private static string GetConnectionString()
     {
         // Get the Database URL from the ENV variables in Heroku
-        string connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+        //string connectionUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
 
         // parse the connection string
-        var databaseUri = new Uri(connectionUrl);
+        //var databaseUri = new Uri(connectionUrl);
 
-        string db = databaseUri.LocalPath.TrimStart('/');
-        string[] userInfo = databaseUri.UserInfo.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+       // string db = databaseUri.LocalPath.TrimStart('/');
+       // string[] userInfo = databaseUri.UserInfo.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
-        return $"User ID={userInfo[0]};Password={userInfo[1]};Host={databaseUri.Host};Port={databaseUri.Port};" +
-               $"Database={db};Server={databaseUri.Host};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+       // var url1 = $"User ID={userInfo[0]};Password={userInfo[1]};Host={databaseUri.Host};Port={databaseUri.Port};" +
+       //        $"Database={db};Server={databaseUri.Host};Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+
+        var url2 = $"User ID=postgres;Password=tutorbuddy-pword;Host=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Port=5432;" +
+               $"Database=tutorbuddy_db;Server=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+        return url2;
     }
 
     /// <summary>
@@ -42,7 +46,7 @@
     public static string DatabaseConnectionString(IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
     {
         return webHostEnvironment.IsDevelopment()
-            ? "Server=127.0.0.1;Port=5432;Database=TBuddy;Uid=postgres;Password=postgres"
-            : GetHerokuConnectionString();
+            ? GetConnectionString()
+            : GetConnectionString();
     }
 }
