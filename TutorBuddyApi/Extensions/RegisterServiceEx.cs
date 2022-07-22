@@ -26,19 +26,24 @@ namespace FindRApi.Extensions
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr)
             {
                 // Todo: add to secrets
-               // Password = "postgres"
+                // Password = "postgres"
             };
 
-            builder.Services.AddDbContext<TutorialBuddyContext>(opt => opt.UseNpgsql(connStr));
+            builder.Services.AddDbContext<TutorialBuddyContext>(opt => opt.UseNpgsql(connStr)
+
+            );
             builder.Services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<TutorialBuddyContext>()
                 .AddDefaultTokenProviders();
 
-    
+            builder.Services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = Config["RedisCacheUrl"];
+                opt.InstanceName = "master";
+            });
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
-           
 
             builder.Services.AddAuthentication(auth =>
             {
@@ -53,7 +58,7 @@ namespace FindRApi.Extensions
                     ClockSkew = TokenValidationParameters.DefaultClockSkew,
                     ValidateIssuer = false,
                     ValidateAudience = false,
-       
+
                     ValidateIssuerSigningKey = true,
                     ValidAudience = Config["JWT:ValidAudience"],
                     ValidIssuer = Config["JWT:ValidIssuer"],
