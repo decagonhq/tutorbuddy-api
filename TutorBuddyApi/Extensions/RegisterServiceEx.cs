@@ -6,8 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using System.Text;
 using TutorialBuddy.Core.Models;
-using TutorialBuddy.DataAccess;
 using Serilog;
+using TutorialBuddy.Infastructure;
 
 namespace FindRApi.Extensions
 {

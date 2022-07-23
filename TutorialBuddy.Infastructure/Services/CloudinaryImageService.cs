@@ -6,7 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using TutorialBuddy.Core;
 using TutorialBuddy.Core.Models;
-using TutorialBuddy.DataAccess;
 
 namespace TutorialBuddy.Infastructure.Services
 {
