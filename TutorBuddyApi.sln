@@ -3,17 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorBuddyApi", "TutorBuddyApi\TutorBuddyApi.csproj", "{CFB36AAD-DD1B-456D-91C1-34268D3D9712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorBuddyApi", "TutorBuddyApi\TutorBuddyApi.csproj", "{CFB36AAD-DD1B-456D-91C1-34268D3D9712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.Infastructure", "TutorialBuddy.Infastructure\TutorialBuddy.Infastructure.csproj", "{41B5EDCE-4583-40EE-84A0-45B9AF9BD9CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialBuddy.Infastructure", "TutorialBuddy.Infastructure\TutorialBuddy.Infastructure.csproj", "{41B5EDCE-4583-40EE-84A0-45B9AF9BD9CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.DataAccess", "TutorialBuddy.DataAccess\TutorialBuddy.DataAccess.csproj", "{FC226804-FD93-4D44-B5AE-6FF618827F06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialBuddy.DataAccess", "TutorialBuddy.DataAccess\TutorialBuddy.DataAccess.csproj", "{FC226804-FD93-4D44-B5AE-6FF618827F06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.Core", "TutorialBuddy.Core\TutorialBuddy.Core.csproj", "{2E3B957F-91FB-4D4D-A298-9D02C65DFA51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialBuddy.Core", "TutorialBuddy.Core\TutorialBuddy.Core.csproj", "{2E3B957F-91FB-4D4D-A298-9D02C65DFA51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.BusinessDomain", "TutorialBuddy.BusinessDomain\TutorialBuddy.BusinessDomain.csproj", "{04517F81-FA58-4C67-B2CA-55F0C32734BD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TutorialBuddy.ExternalServices", "TutorialBuddy.ExternalServices\TutorialBuddy.ExternalServices.csproj", "{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorialBuddy.BusinessDomain", "TutorialBuddy.BusinessDomain\TutorialBuddy.BusinessDomain.csproj", "{04517F81-FA58-4C67-B2CA-55F0C32734BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04517F81-FA58-4C67-B2CA-55F0C32734BD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C6BE874-D0E5-45A6-BFCF-70470BC4D15D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

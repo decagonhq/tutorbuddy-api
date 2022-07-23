@@ -6,6 +6,6 @@
         Email = 0,
         SMS = 1,
         SignalR = 2,
-        OneSignal = 4,
+        OneSignal = 3,
     }
 }

@@ -22,5 +22,6 @@ namespace TutorialBuddy.DataAccess
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<TutorComment> TutorComments { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<ImageMeta> ImageMeta { get; set; }
     }
 }

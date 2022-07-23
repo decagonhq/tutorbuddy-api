@@ -1,6 +1,5 @@
 using FindRApi.Extensions;
-using StackExchange.Redis;
-using System;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +16,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+//Registering Serilog as a log provider
+var logger = new LoggerConfiguration()
+  .ReadFrom.Configuration(builder.Configuration)
+  .Enrich.FromLogContext()
+  .CreateLogger();
+builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
 
@@ -33,5 +38,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+logger.Information("Lets the ball role...");
 
 app.Run();

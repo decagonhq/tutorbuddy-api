@@ -7,6 +7,7 @@ using Npgsql;
 using System.Text;
 using TutorialBuddy.Core.Models;
 using TutorialBuddy.DataAccess;
+using Serilog;
 
 namespace FindRApi.Extensions
 {
@@ -41,6 +42,11 @@ namespace FindRApi.Extensions
                 opt.Configuration = Config["RedisCacheUrl"];
                 opt.InstanceName = "master";
             });
+
+            builder.Host.UseSerilog((ctx, lc) => lc
+            .WriteTo.Console()
+            .WriteTo.Seq("http://localhost:5341")
+            );
 
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
