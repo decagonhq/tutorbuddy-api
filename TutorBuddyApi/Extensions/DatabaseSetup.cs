@@ -34,7 +34,7 @@
     public static string DatabaseConnectionString(IWebHostEnvironment webHostEnvironment, IConfiguration configuration)
     {
         return webHostEnvironment.IsDevelopment()
-            ? "Server=127.0.0.1;Port=5432;Database=TbuddyDb;Uid=postgres;"
+            ? "Server=127.0.0.1;Port=5432;Database=TutorbuddyDb;Uid=postgres;Password=postgres;"
             : GetConnectionString();
     }
 }

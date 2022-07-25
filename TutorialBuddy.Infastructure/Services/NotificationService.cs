@@ -24,7 +24,7 @@ namespace FindR.Integrations
         {
          
             this.configuration = configuration;
-
+            // Register Providers
             _notificationProviders
                 .Add(NotifyWith.Email, new SendGridEmailProvider());
             Logger = logger;
