@@ -11,14 +11,14 @@ namespace TutorialBuddy.Infastructure.Services
 {
     public class ImageUploadService : IImageUploadService
     {
-        private readonly TutorialBuddyContext _context;
+        private readonly TutorBuddyContext _context;
         private readonly IConfiguration _configuration;
         private readonly Cloudinary _cloudinary;
         private CloudinarySettings _cloudinaryOptions;
 
         public ImageUploadService(IServiceProvider provider, IOptions<CloudinarySettings> cloudinaryOptions, IConfiguration configuration)
         {
-            _context = provider.GetRequiredService<TutorialBuddyContext>();
+            _context = provider.GetRequiredService<TutorBuddyContext>();
             _configuration = configuration;
             _cloudinaryOptions = cloudinaryOptions.Value;
             _cloudinary = new Cloudinary(new Account(_cloudinaryOptions.CloudName, _cloudinaryOptions.ApiKey, _cloudinaryOptions.ApiSecret));

@@ -30,11 +30,11 @@ namespace FindRApi.Extensions
                 // Password = "postgres"
             };
 
-            builder.Services.AddDbContext<TutorialBuddyContext>(opt => opt.UseNpgsql(connStr)
+            builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr)
 
             );
             builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<TutorialBuddyContext>()
+                .AddEntityFrameworkStores<TutorBuddyContext>()
                 .AddDefaultTokenProviders();
 
             builder.Services.AddStackExchangeRedisCache(opt =>
@@ -48,7 +48,7 @@ namespace FindRApi.Extensions
             .WriteTo.Seq("http://localhost:5341")
             );
 
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserService, AuthService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
 
             builder.Services.AddAuthentication(auth =>
