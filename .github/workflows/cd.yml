@@ -5,11 +5,11 @@ on:
     branches: [ "cicd-setup" ]
 
 env:
-  ECS_CLUSTER: tuttorbuddy-api                 
-  ECS_SERVICE: tuttorbuddy-api-service              
+  ECS_CLUSTER: tutorbuddy-api                 
+  ECS_SERVICE: tutorbuddy-api-service              
   ECS_TASK_DEFINITION: task-definition.json 
-  CONTAINER_NAME: tuttorbuddy-api-container 
-  ECR_REPOSITORY: tuttorbuddy-api          
+  CONTAINER_NAME: tutorbuddy-api-container 
+  ECR_REPOSITORY: tutorbuddy-api          
   AWS_REGION: us-east-2
 
 jobs:
