@@ -24,7 +24,7 @@ namespace FindR.Integrations
         {
          
             this.configuration = configuration;
-
+            // Register Providers
             _notificationProviders
                 .Add(NotifyWith.Email, new SendGridEmailProvider());
             Logger = logger;
@@ -46,7 +46,6 @@ namespace FindR.Integrations
             catch (Exception)
             {
                 Logger.LogError($"notification Error: {target} => {payload.Header}");
-
                 return await Task.FromResult(false);
             }
 

@@ -2,20 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TutorialBuddy.DataAccess;
+using TutorialBuddy.Infastructure;
 
 #nullable disable
 
-namespace TutorialBuddy.DataAccess.Migrations
+namespace TutorBuddy.Infastructure.Migrations
 {
-    [DbContext(typeof(TutorialBuddyContext))]
-    [Migration("20220719075352_initials")]
-    partial class initials
+    [DbContext(typeof(TutorBuddyContext))]
+    partial class TutorBuddyContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,14 +164,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SubjectID")
                         .HasColumnType("integer");
@@ -200,7 +198,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateOnly>("Day")
                         .HasColumnType("date");
@@ -210,7 +208,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TutorID")
                         .HasColumnType("integer");
@@ -220,6 +218,42 @@ namespace TutorialBuddy.DataAccess.Migrations
                     b.HasIndex("TutorID");
 
                     b.ToTable("Avialabilities");
+                });
+
+            modelBuilder.Entity("TutorialBuddy.Core.Models.ImageMeta", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDepricated")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tag")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ImageMeta");
                 });
 
             modelBuilder.Entity("TutorialBuddy.Core.Models.RateStudent", b =>
@@ -232,14 +266,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
@@ -264,14 +298,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
@@ -283,7 +317,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.HasIndex("SessionID");
 
-                    b.ToTable("RateTutor");
+                    b.ToTable("RateTutors");
                 });
 
             modelBuilder.Entity("TutorialBuddy.Core.Models.Reminder", b =>
@@ -296,14 +330,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -325,20 +359,20 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("EndTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<DateTime>("Startime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("Status")
                         .HasColumnType("integer");
@@ -377,14 +411,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SessionID")
                         .HasColumnType("integer");
@@ -406,7 +440,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -417,7 +451,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Topic")
                         .IsRequired()
@@ -447,14 +481,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -480,14 +514,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("SessiomID")
                         .HasColumnType("integer");
@@ -509,14 +543,14 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
 
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("TutorID")
                         .HasColumnType("integer");

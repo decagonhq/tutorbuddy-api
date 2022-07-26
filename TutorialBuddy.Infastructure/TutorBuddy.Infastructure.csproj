@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TutorialBuddy.Core\TutorialBuddy.Core.csproj" />
+    <ProjectReference Include="..\TutorialBuddy.Core\TutorBuddy.Core.csproj" />
   </ItemGroup>
 
 </Project>

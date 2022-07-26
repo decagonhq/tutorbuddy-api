@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
+using Serilog;
 using System.Text;
 using TutorialBuddy.Core.Models;
-using Serilog;
 using TutorialBuddy.Infastructure;
+using TutorialBuddy.Infastructure.Services;
 
 namespace FindRApi.Extensions
 {
@@ -20,21 +21,15 @@ namespace FindRApi.Extensions
         public static void RegisterServices(this WebApplicationBuilder builder)
         {
             var Config = builder.Configuration;
-            //builder.Services.AddSingleton<ISignalRHubHelper, SignalRHubHelper>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
 
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
-            var dbBuilder = new NpgsqlConnectionStringBuilder(connStr)
-            {
-                // Todo: add to secrets
-                // Password = "postgres"
-            };
+            var dbBuilder = new NpgsqlConnectionStringBuilder(connStr);
 
-            builder.Services.AddDbContext<TutorialBuddyContext>(opt => opt.UseNpgsql(connStr)
+            builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
 
-            );
             builder.Services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<TutorialBuddyContext>()
+                .AddEntityFrameworkStores<TutorBuddyContext>()
                 .AddDefaultTokenProviders();
 
             builder.Services.AddStackExchangeRedisCache(opt =>
@@ -48,8 +43,10 @@ namespace FindRApi.Extensions
             .WriteTo.Seq("http://localhost:5341")
             );
 
-            builder.Services.AddScoped<IUserService, UserService>();
+            //Add To DI
+            builder.Services.AddScoped<IUserService, AuthService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
+            builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
 
             builder.Services.AddAuthentication(auth =>
             {

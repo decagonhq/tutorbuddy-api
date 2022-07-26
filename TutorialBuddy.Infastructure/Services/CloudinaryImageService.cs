@@ -11,14 +11,14 @@ namespace TutorialBuddy.Infastructure.Services
 {
     public class ImageUploadService : IImageUploadService
     {
-        private readonly TutorialBuddyContext _context;
+        private readonly TutorBuddyContext _context;
         private readonly IConfiguration _configuration;
         private readonly Cloudinary _cloudinary;
         private CloudinarySettings _cloudinaryOptions;
 
         public ImageUploadService(IServiceProvider provider, IOptions<CloudinarySettings> cloudinaryOptions, IConfiguration configuration)
         {
-            _context = provider.GetRequiredService<TutorialBuddyContext>();
+            _context = provider.GetRequiredService<TutorBuddyContext>();
             _configuration = configuration;
             _cloudinaryOptions = cloudinaryOptions.Value;
             _cloudinary = new Cloudinary(new Account(_cloudinaryOptions.CloudName, _cloudinaryOptions.ApiKey, _cloudinaryOptions.ApiSecret));
@@ -45,6 +45,12 @@ namespace TutorialBuddy.Infastructure.Services
             return status;
         }
 
+        /// <summary>
+        /// Upload a collection of images.
+        /// </summary>
+        /// <param name="upload">Collection Of Images</param>
+        /// <param name="tag">unique tag to associate with owner</param>
+        /// <returns></returns>
         public async Task<List<ImageMeta>> UploadImages(MultiImageUploadDto upload, string tag)
         {
             List<ImageMeta> imageMetadatas = new List<ImageMeta>();
@@ -65,6 +71,12 @@ namespace TutorialBuddy.Infastructure.Services
             return imageMetadatas;
         }
 
+        /// <summary>
+        /// Uploads a single image
+        /// </summary>
+        /// <param name="file">Image data</param>
+        /// <param name="tag">unique tag to associate with owner</param>
+        /// <returns></returns>
         public async Task<UploadResult> UploadSingleImage(IFormFile file, string tag)
         {
             //Runtime Complexity Check needed.
@@ -87,14 +99,14 @@ namespace TutorialBuddy.Infastructure.Services
             return uploadResult;
         }
 
-        public async Task<ApiResponse> DeleteByPublicId(string publicId)
+        public async Task<ApiResponse<bool>> DeleteByPublicId(string publicId)
         {
-            var response = new ApiResponse();
-            var imageMetadatas = _context.ImageMeta.FirstOrDefault(Im => Im.PublicId == publicId);
+            var response = new ApiResponse<bool>();
+            var imageMetadata = _context.ImageMeta.FirstOrDefault(Im => Im.PublicId == publicId);
 
-            if (imageMetadatas != null)
+            if (imageMetadata != null)
             {
-                _context.ImageMeta.Remove(imageMetadatas);
+                _context.ImageMeta.Remove(imageMetadata);
                 _ = await _context.SaveChangesAsync();
                 await _cloudinary.DeleteResourcesByPrefixAsync(publicId);
             }
@@ -105,19 +117,17 @@ namespace TutorialBuddy.Infastructure.Services
             return response;
         }
 
-        public async Task<ApiResponse> DeleteByTag(string tag)
+        public async Task<ApiResponse<bool>> DeleteByTag(string tag)
         {
-            var response = new ApiResponse();
+            var response = new ApiResponse<bool>();
             var imageMeta = _context.ImageMeta.Where(Im => Im.PublicId == tag).ToList();
 
             if (imageMeta.Any())
             {
                 _context.ImageMeta.RemoveRange(imageMeta);
-                //_context.ImageMetadatas.RemoveRange(imageMetadatas);
                 _ = await _context.SaveChangesAsync();
                 await Task.Run(async () => await _cloudinary.DeleteResourcesByTagAsync(tag));
             }
-
             response.Message = "Images Deleted";
             response.Data = true;
             response.Success = true;

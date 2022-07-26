@@ -1,5 +1,7 @@
 using FindRApi.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using TutorialBuddy.Infastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,10 @@ builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var db = scope.ServiceProvider.GetRequiredService<TutorBuddyContext>();
+db.Database.Migrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace TutorialBuddy.Core
 {
-    public class ApiResponse
+    public class ApiResponse<T>
     {
         public bool Success { get; set; }
-        public dynamic Data { get; set; }
+        public T Data { get; set; }
         public string Message { get; set; }
     }
 }

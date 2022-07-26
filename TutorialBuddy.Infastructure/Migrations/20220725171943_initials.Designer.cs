@@ -2,18 +2,20 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TutorialBuddy.DataAccess;
+using TutorialBuddy.Infastructure;
 
 #nullable disable
 
-namespace TutorialBuddy.DataAccess.Migrations
+namespace TutorBuddy.Infastructure.Migrations
 {
-    [DbContext(typeof(TutorialBuddyContext))]
-    partial class TutorialBuddyContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(TutorBuddyContext))]
+    [Migration("20220725171943_initials")]
+    partial class initials
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -220,6 +222,42 @@ namespace TutorialBuddy.DataAccess.Migrations
                     b.ToTable("Avialabilities");
                 });
 
+            modelBuilder.Entity("TutorialBuddy.Core.Models.ImageMeta", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime?>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDepricated")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("PublicId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Tag")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("ImageMeta");
+                });
+
             modelBuilder.Entity("TutorialBuddy.Core.Models.RateStudent", b =>
                 {
                     b.Property<int>("ID")
@@ -281,7 +319,7 @@ namespace TutorialBuddy.DataAccess.Migrations
 
                     b.HasIndex("SessionID");
 
-                    b.ToTable("RateTutor");
+                    b.ToTable("RateTutors");
                 });
 
             modelBuilder.Entity("TutorialBuddy.Core.Models.Reminder", b =>

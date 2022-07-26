@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace TutorialBuddy.DataAccess.Migrations
+namespace TutorBuddy.Infastructure.Migrations
 {
     public partial class initials : Migration
     {
@@ -51,6 +51,24 @@ namespace TutorialBuddy.DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ImageMeta",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PublicId = table.Column<string>(type: "text", nullable: false),
+                    Url = table.Column<string>(type: "text", nullable: false),
+                    Tag = table.Column<string>(type: "text", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ImageMeta", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,8 +184,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -188,8 +206,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BioNote = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -210,8 +228,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Day = table.Column<DateOnly>(type: "date", nullable: false),
                     TutorID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -232,8 +250,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TutorID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -256,8 +274,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                     Topic = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
                     TutorSubjectsID = table.Column<int>(type: "integer", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -278,8 +296,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     SubjectID = table.Column<int>(type: "integer", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -307,11 +325,11 @@ namespace TutorialBuddy.DataAccess.Migrations
                     SubjectID = table.Column<int>(type: "integer", nullable: false),
                     TutorID = table.Column<int>(type: "integer", nullable: false),
                     StudentId = table.Column<string>(type: "text", nullable: true),
-                    Startime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Startime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -344,8 +362,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Rate = table.Column<int>(type: "integer", nullable: false),
                     SessionID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -360,22 +378,22 @@ namespace TutorialBuddy.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RateTutor",
+                name: "RateTutors",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Rate = table.Column<int>(type: "integer", nullable: false),
                     SessionID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RateTutor", x => x.ID);
+                    table.PrimaryKey("PK_RateTutors", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_RateTutor_Sessions_SessionID",
+                        name: "FK_RateTutors_Sessions_SessionID",
                         column: x => x.SessionID,
                         principalTable: "Sessions",
                         principalColumn: "ID",
@@ -390,8 +408,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Comment = table.Column<string>(type: "text", nullable: false),
                     SessionID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -413,8 +431,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Comment = table.Column<string>(type: "text", nullable: false),
                     SessiomID = table.Column<int>(type: "integer", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -486,8 +504,8 @@ namespace TutorialBuddy.DataAccess.Migrations
                 column: "SessionID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RateTutor_SessionID",
-                table: "RateTutor",
+                name: "IX_RateTutors_SessionID",
+                table: "RateTutors",
                 column: "SessionID");
 
             migrationBuilder.CreateIndex(
@@ -560,10 +578,13 @@ namespace TutorialBuddy.DataAccess.Migrations
                 name: "Avialabilities");
 
             migrationBuilder.DropTable(
+                name: "ImageMeta");
+
+            migrationBuilder.DropTable(
                 name: "RateStudents");
 
             migrationBuilder.DropTable(
-                name: "RateTutor");
+                name: "RateTutors");
 
             migrationBuilder.DropTable(
                 name: "Reminders");

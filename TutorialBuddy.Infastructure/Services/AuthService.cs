@@ -13,12 +13,12 @@ public interface IUserService
     Task<ResponseModel> Authenticate(RequestModel requestModel);
 }
 
-public class UserService : IUserService
+public class AuthService : IUserService
 {
     private readonly IOptions<JWTAppSettings> jwtSetting;
     private readonly UserManager<User> userManager;
 
-    public UserService(IOptions<JWTAppSettings> jwtSetting, UserManager<User> userManager)
+    public AuthService(IOptions<JWTAppSettings> jwtSetting, UserManager<User> userManager)
     {
         this.jwtSetting = jwtSetting;
         this.userManager = userManager;
