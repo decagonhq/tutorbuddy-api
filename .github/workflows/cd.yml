@@ -5,7 +5,7 @@ on:
     branches: [ "cicd-setup" ]
 
 env:
-  ECS_CLUSTER: tutorbuddy-api                 
+  ECS_CLUSTER: tutorbuddy-api                
   ECS_SERVICE: tutorbuddy-api-service              
   ECS_TASK_DEFINITION: task-definition.json 
   CONTAINER_NAME: tutorbuddy-api-container 
