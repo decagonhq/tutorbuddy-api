@@ -20,6 +20,6 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore TutorBuddyApi/TutorBuddyApi.csproj
     - name: Build
-      run: dotnet build --no-restore TutorBuddyApi/TutorBuddyApi.csproj -c Release -o /app/build
+      run: dotnet build --no-restore TutorBuddyApi/TutorBuddyApi.csproj
     - name: Test
       run: dotnet test --no-build --verbosity normal
