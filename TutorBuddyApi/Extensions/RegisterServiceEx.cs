@@ -38,10 +38,10 @@ namespace FindRApi.Extensions
                 opt.InstanceName = "master";
             });
 
-            builder.Host.UseSerilog((ctx, lc) => lc
-            .WriteTo.Console()
-            .WriteTo.Seq("http://localhost:5341")
-            );
+            //builder.Host.UseSerilog((ctx, lc) => lc
+            //.WriteTo.Console()
+            //.WriteTo.Seq("http://localhost:5341")
+            //);
 
             //Add To DI
             builder.Services.AddScoped<IUserService, AuthService>();
