@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["TutorBuddyApi.csproj", "TutorBuddyApi/"]
+COPY ["TutorBuddyApi/TutorBuddyApi.csproj", "TutorBuddyApi/"]
 RUN dotnet restore "TutorBuddyApi/TutorBuddyApi.csproj"
 COPY . .
 WORKDIR "/src/TutorBuddyApi"
