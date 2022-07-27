@@ -1,4 +1,4 @@
-﻿namespace TutorialBuddy.Infastructure.Services
+﻿namespace TutorialBuddy.Core
 {
     public interface IImageUploadService
     {

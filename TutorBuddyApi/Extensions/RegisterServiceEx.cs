@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Serilog;
 using System.Text;
+using TutorialBuddy.Core;
 using TutorialBuddy.Core.Models;
 using TutorialBuddy.Infastructure;
 using TutorialBuddy.Infastructure.Services;
@@ -21,7 +22,6 @@ namespace FindRApi.Extensions
         public static void RegisterServices(this WebApplicationBuilder builder)
         {
             var Config = builder.Configuration;
-            builder.Services.AddScoped<INotificationService, NotificationService>();
 
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr);
@@ -44,7 +44,7 @@ namespace FindRApi.Extensions
             //);
 
             //Add To DI
-            builder.Services.AddScoped<IUserService, AuthService>();
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
 

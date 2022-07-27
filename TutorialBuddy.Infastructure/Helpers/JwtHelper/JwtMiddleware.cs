@@ -18,7 +18,7 @@ namespace FindR.Infastructure.Helpers.JwtHelper
             AppSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context, IAuthService userService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?
                 .Split(" ")
@@ -30,7 +30,7 @@ namespace FindR.Infastructure.Helpers.JwtHelper
             await Next(context);
         }
 
-        private async Task attachUserToContext(HttpContext context, IUserService userService, string token)
+        private async Task attachUserToContext(HttpContext context, IAuthService userService, string token)
         {
             try
             {
