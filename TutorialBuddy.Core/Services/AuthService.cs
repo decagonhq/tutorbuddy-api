@@ -6,14 +6,31 @@ using System.Security.Claims;
 using System.Text;
 using TutorialBuddy.Core.Models;
 
-public interface IUserService
+public interface IAuthService
 {
     Task<User> GetByIdAsync(string userId);
 
     Task<ResponseModel> Authenticate(RequestModel requestModel);
 }
 
-public class AuthService : IUserService
+public class ResponseModel
+{
+    private User user;
+    private string token;
+
+    public ResponseModel(User user, string token)
+    {
+        this.user = user;
+        this.token = token;
+    }
+}
+
+public class RequestModel
+{
+    public string Email { get; internal set; }
+}
+
+public class AuthService : IAuthService
 {
     private readonly IOptions<JWTAppSettings> jwtSetting;
     private readonly UserManager<User> userManager;
@@ -37,7 +54,7 @@ public class AuthService : IUserService
         var roles = new List<Claim>();
         var userRoles = await userManager.GetRolesAsync(user);
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(jwtSetting.Value.Secret!);
+        var key = Encoding.ASCII.GetBytes((string)(jwtSetting.Value.Secret!));
 
         foreach (var role in userRoles)
         {
@@ -60,4 +77,9 @@ public class AuthService : IUserService
     {
         return await userManager.FindByIdAsync(userId);
     }
+}
+
+public class JWTAppSettings
+{
+    public object Secret { get; internal set; }
 }

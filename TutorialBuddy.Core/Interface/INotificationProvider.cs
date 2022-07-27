@@ -1,4 +1,6 @@
-﻿using TutorialBuddy.Infastructure.NotificationProviders;
+﻿
+
+using TutorialBuddy.Infastructure.NotificationProviders;
 
 namespace FindR.Integrations
 {
