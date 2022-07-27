@@ -54,7 +54,7 @@ public class AuthService : IAuthService
         var roles = new List<Claim>();
         var userRoles = await userManager.GetRolesAsync(user);
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(jwtSetting.Value.Secret!);
+        var key = Encoding.ASCII.GetBytes((string)(jwtSetting.Value.Secret!));
 
         foreach (var role in userRoles)
         {
@@ -81,4 +81,5 @@ public class AuthService : IAuthService
 
 public class JWTAppSettings
 {
+    public object Secret { get; internal set; }
 }
