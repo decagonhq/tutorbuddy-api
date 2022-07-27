@@ -11,7 +11,7 @@ namespace TutorialBuddy.Infastructure
         }
 
         public DbSet<AreaOfInterest> AreaOfInterests { get; set; }
-        public DbSet<Avialability> Avialabilities { get; set; }
+        public DbSet<Availability> Avialabilities { get; set; }
         public DbSet<RateStudent> RateStudents { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<RateTutor> RateTutors { get; set; }

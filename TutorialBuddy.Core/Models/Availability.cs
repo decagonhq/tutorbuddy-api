@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TutorialBuddy.Core.Models
 {
-    public class Avialability: BaseEntity
+    public class Availability: BaseEntity
     {
         public DateOnly Day { get; set; }
         public Tutor Tutor { get; set; }
