@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TutorBuddy.Infrastructure.Repository.Interface
 {
-	public interface IGenericRepository<T> where T : class
+	public interface IGenericRepository<T>
     {
         Task<bool> Add(T entity);
         Task<bool> AddRange(IEnumerable<T> entities);
