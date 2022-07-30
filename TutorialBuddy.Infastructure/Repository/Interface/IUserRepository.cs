@@ -5,8 +5,8 @@ namespace TutorBuddy.Infrastructure.Repository.Interface
 {
 	public interface IUserRepository
 	{
-        Task<User> GetUser(string userId);
-        Task<bool> UpdateUser(User user);
-    }
+		Task<User> GetAUserNotification(string userId);
+
+	}
 }
 

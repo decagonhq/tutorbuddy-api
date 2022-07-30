@@ -6,6 +6,8 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Serilog;
 using System.Text;
+using TutorBuddy.Core.Interface;
+using TutorBuddy.Core.Services;
 using TutorBuddy.Infrastructure.Repository.Implementation;
 using TutorBuddy.Infrastructure.Repository.Interface;
 using TutorialBuddy.Core;
@@ -51,7 +53,7 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddAuthentication(auth =>
             {

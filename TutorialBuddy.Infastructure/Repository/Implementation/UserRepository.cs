@@ -14,7 +14,7 @@ namespace TutorBuddy.Infrastructure.Repository.Implementation
             _appDbContext = appDbContext;
         }
 
-        public Task<User> GetUser(string userId)
+        public Task<User> GetAUserNotification(string userId)
         {
             throw new NotImplementedException();
         }
