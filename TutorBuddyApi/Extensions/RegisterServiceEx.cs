@@ -51,6 +51,7 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddAuthentication(auth =>
             {
