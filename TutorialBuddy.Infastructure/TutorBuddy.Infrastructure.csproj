@@ -33,4 +33,14 @@
     <ProjectReference Include="..\TutorialBuddy.Core\TutorBuddy.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repository\" />
+    <None Remove="Repository\Interface\" />
+    <None Remove="Repository\Implementation\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repository\" />
+    <Folder Include="Repository\Interface\" />
+    <Folder Include="Repository\Implementation\" />
+  </ItemGroup>
 </Project>
