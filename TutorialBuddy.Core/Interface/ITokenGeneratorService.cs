@@ -1,4 +1,4 @@
-﻿using TutorialBuddy.Core.Models;
+﻿using TutorBuddy.Core.Models;
 
 namespace TutorBuddy.Core.Interface
 {

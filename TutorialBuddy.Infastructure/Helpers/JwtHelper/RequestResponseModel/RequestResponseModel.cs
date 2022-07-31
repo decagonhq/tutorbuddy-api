@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TutorialBuddy.Core.Models;
+using TutorBuddy.Core.Models;
 
 public class RequestModel
 {

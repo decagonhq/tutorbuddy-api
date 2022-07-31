@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorialBuddy.Core.Models
+namespace TutorBuddy.Core.Models
 {
      public class Reminder: BaseEntity
     {
+        public string? Title { get; set; }
+        public string? Note { get; set; }
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TutorBuddy.Core.DTOs
 {
-    public class ConfirmEmailResponseDTO
+    public class CredentialResponseDTO
     {
         public string Id { get; set; }
+        public string Token { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

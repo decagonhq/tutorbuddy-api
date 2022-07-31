@@ -2,14 +2,15 @@
 {
 	public interface IGenericRepository<T>
     {
-        Task<bool> Add(T entity);
-        Task<bool> AddRange(IEnumerable<T> entities);
-        Task<bool> Delete(T entity);
-        Task<bool> DeleteRange(IEnumerable<T> entities);
+        Task Add(T entity);
+        Task AddRange(IEnumerable<T> entities);
+        void Delete(T entity);
+        void DeleteRange(IEnumerable<T> entities);
         Task<IEnumerable<T>> GetAllRecord();
         Task<T> GetARecord(string Id);
-        Task<bool> Update(T entity);
-        Task<bool> UpdateRange(IEnumerable<T> entities);
+        void Update(T entity);
+        void UpdateRange(IEnumerable<T> entities);
+        Task<bool> SaveAsync();
     }
 }
 

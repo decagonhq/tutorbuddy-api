@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorialBuddy.Core.Models
+namespace TutorBuddy.Core.Models
 {
     public class TutorComment: BaseEntity
     {
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
         public Session Sessiom { get; set; }
     }
 }

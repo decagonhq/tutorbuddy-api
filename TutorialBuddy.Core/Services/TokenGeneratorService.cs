@@ -5,7 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using TutorBuddy.Core.Interface;
-using TutorialBuddy.Core.Models;
+using TutorBuddy.Core.Models;
 
 namespace TutorBuddy.Core.Services
 {
@@ -44,7 +44,7 @@ namespace TutorBuddy.Core.Services
             (audience: _configuration["JwtSettings:Audience"],
              issuer: _configuration["JwtSettings:Issuer"],
              claims: authClaims,
-             expires: DateTime.Now.AddHours(2),
+             expires: user.RefreshTokenExpiryTime,
              signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
             return new JwtSecurityTokenHandler().WriteToken(token);

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TutorBuddy.Core.Models
+namespace TutorBuddy.Core.Enums
 {
-    public class Availability: BaseEntity
+    public enum UserRole
     {
-        public string Day { get; set; }
+        Tutor,
+        Student
     }
 }

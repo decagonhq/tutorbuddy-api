@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TutorBuddy.Core.Interface;
-using TutorialBuddy.Core.Models;
-using TutorialBuddy.Infastructure.DataAccess;
+using TutorBuddy.Core.Models;
+using TutorBuddy.Infrastructure.DataAccess;
 
 namespace TutorBuddy.Infrastructure.Repository
 {
@@ -32,6 +32,19 @@ namespace TutorBuddy.Infrastructure.Repository
                 throw new ArgumentException($"User with id {userId} does not exist");
 
             return user;
+        }
+
+        public async Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects)
+        {
+            if (subjects.Any())
+            {
+                var userAreaOfInterest = new AreaOfInterest()
+                {
+                    User = user,
+                    Subjects = subjects
+                };
+                await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
+            }
         }
     }
 }
