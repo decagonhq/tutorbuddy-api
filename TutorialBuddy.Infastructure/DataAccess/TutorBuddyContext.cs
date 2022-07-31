@@ -23,5 +23,7 @@ namespace TutorBuddy.Infrastructure.DataAccess
         public DbSet<TutorComment> TutorComments { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<ImageMeta> ImageMeta { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Notifications> Notifications { get; set; }
     }
 }
