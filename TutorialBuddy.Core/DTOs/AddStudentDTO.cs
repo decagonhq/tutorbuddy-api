@@ -8,6 +8,12 @@ namespace TutorBuddy.Core.DTOs
 {
     public class AddStudentDTO : BaseRegisterDTO
     {
-        public IEnumerable<string> AreaOfInterest { get; set; }
+        public IEnumerable<AddStudentSubjectDTO> AreaOfInterest { get; set; }
+    }
+
+    public class AddStudentSubjectDTO
+    {
+        public string Topic { get; set; }
+        public string Description { get; set; }
     }
 }

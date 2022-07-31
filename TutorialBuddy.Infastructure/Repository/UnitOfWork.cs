@@ -7,12 +7,15 @@ namespace TutorBuddy.Infrastructure.Repository
     {
         private readonly TutorBuddyContext _appDbContext;
         private IUserRepository _userRepository;
+        private ITutorRepository _tutorRepository;
         public UnitOfWork(TutorBuddyContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(_appDbContext);
+        public ITutorRepository TutorRepository => _tutorRepository ??= new TutorRepository(_appDbContext);
+
 
         public void Dispose()
         {
@@ -20,9 +23,9 @@ namespace TutorBuddy.Infrastructure.Repository
             GC.SuppressFinalize(this);
         }
 
-        public async Task Save()
+        public async Task<bool> Save()
         {
-            await _appDbContext.SaveChangesAsync();
+            return await _appDbContext.SaveChangesAsync() > 0;
         }
     }
 }
