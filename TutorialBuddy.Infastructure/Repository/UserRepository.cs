@@ -33,6 +33,19 @@ namespace TutorBuddy.Infrastructure.Repository
 
             return user;
         }
+
+        public async Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects)
+        {
+            if (subjects.Any())
+            {
+                var userAreaOfInterest = new AreaOfInterest()
+                {
+                    User = user,
+                    Subjects = subjects
+                };
+                await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
+            }
+        }
     }
 }
 

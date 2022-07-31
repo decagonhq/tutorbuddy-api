@@ -12,7 +12,7 @@ using TutorBuddy.Infrastructure.DataAccess;
 namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
-    [Migration("20220731091457_New modelling relationships")]
+    [Migration("20220731105523_New modelling relationships")]
     partial class Newmodellingrelationships
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,7 +211,7 @@ namespace TutorBuddy.Infrastructure.Migrations
 
                     b.HasIndex("TutorAvailabilityID");
 
-                    b.ToTable("Avialabilities");
+                    b.ToTable("Availabilities");
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.ImageMeta", b =>
@@ -502,13 +502,14 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("TutorID")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
                     b.HasIndex("TutorID");
 
-                    b.ToTable("Availabilities");
+                    b.ToTable("TutorAvailabilities");
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.TutorComment", b =>
@@ -798,7 +799,9 @@ namespace TutorBuddy.Infrastructure.Migrations
                 {
                     b.HasOne("TutorBuddy.Core.Models.Tutor", "Tutor")
                         .WithMany()
-                        .HasForeignKey("TutorID");
+                        .HasForeignKey("TutorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tutor");
                 });

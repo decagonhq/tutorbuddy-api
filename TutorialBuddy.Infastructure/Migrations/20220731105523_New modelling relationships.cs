@@ -239,23 +239,24 @@ namespace TutorBuddy.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Availabilities",
+                name: "TutorAvailabilities",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
-                    TutorID = table.Column<string>(type: "text", nullable: true),
+                    TutorID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Availabilities", x => x.ID);
+                    table.PrimaryKey("PK_TutorAvailabilities", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Availabilities_Tutor_TutorID",
+                        name: "FK_TutorAvailabilities_Tutor_TutorID",
                         column: x => x.TutorID,
                         principalTable: "Tutor",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,7 +281,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Avialabilities",
+                name: "Availabilities",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
@@ -292,11 +293,11 @@ namespace TutorBuddy.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Avialabilities", x => x.ID);
+                    table.PrimaryKey("PK_Availabilities", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Avialabilities_Availabilities_TutorAvailabilityID",
+                        name: "FK_Availabilities_TutorAvailabilities_TutorAvailabilityID",
                         column: x => x.TutorAvailabilityID,
-                        principalTable: "Availabilities",
+                        principalTable: "TutorAvailabilities",
                         principalColumn: "ID");
                 });
 
@@ -492,13 +493,8 @@ namespace TutorBuddy.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Availabilities_TutorID",
+                name: "IX_Availabilities_TutorAvailabilityID",
                 table: "Availabilities",
-                column: "TutorID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Avialabilities_TutorAvailabilityID",
-                table: "Avialabilities",
                 column: "TutorAvailabilityID");
 
             migrationBuilder.CreateIndex(
@@ -552,6 +548,11 @@ namespace TutorBuddy.Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TutorAvailabilities_TutorID",
+                table: "TutorAvailabilities",
+                column: "TutorID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TutorComments_SessiomID",
                 table: "TutorComments",
                 column: "SessiomID");
@@ -580,7 +581,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Avialabilities");
+                name: "Availabilities");
 
             migrationBuilder.DropTable(
                 name: "ImageMeta");
@@ -604,7 +605,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Availabilities");
+                name: "TutorAvailabilities");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

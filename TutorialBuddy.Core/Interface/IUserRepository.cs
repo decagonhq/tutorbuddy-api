@@ -6,6 +6,7 @@ namespace TutorBuddy.Core.Interface
 	{
 		Task<User> GetAUserNotification(string userId);
 		Task<User> GetUserByRefreshToken(string token, string userId);
+		Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects);
 	}
 }
 
