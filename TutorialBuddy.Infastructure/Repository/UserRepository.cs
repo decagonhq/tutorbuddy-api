@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TutorBuddy.Core.Interface;
-using TutorialBuddy.Core.Models;
-using TutorialBuddy.Infastructure.DataAccess;
+using TutorBuddy.Core.Models;
+using TutorBuddy.Infrastructure.DataAccess;
 
 namespace TutorBuddy.Infrastructure.Repository
 {

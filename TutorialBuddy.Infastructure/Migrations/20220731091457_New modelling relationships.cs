@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace TutorBuddy.Infastructure.Migrations
+namespace TutorBuddy.Infrastructure.Migrations
 {
-    public partial class initials : Migration
+    public partial class Newmodellingrelationships : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,7 @@ namespace TutorBuddy.Infastructure.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     RefreshToken = table.Column<string>(type: "text", nullable: true),
                     AvatarUrl = table.Column<string>(type: "text", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -57,8 +58,7 @@ namespace TutorBuddy.Infastructure.Migrations
                 name: "ImageMeta",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     PublicId = table.Column<string>(type: "text", nullable: false),
                     Url = table.Column<string>(type: "text", nullable: false),
                     Tag = table.Column<string>(type: "text", nullable: false),
@@ -90,6 +90,26 @@ namespace TutorBuddy.Infastructure.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AreaOfInterests",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AreaOfInterests", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_AreaOfInterests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -181,8 +201,7 @@ namespace TutorBuddy.Infastructure.Migrations
                 name: "Reminders",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -202,8 +221,7 @@ namespace TutorBuddy.Infastructure.Migrations
                 name: "Tutor",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     BioNote = table.Column<string>(type: "text", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -221,35 +239,31 @@ namespace TutorBuddy.Infastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Avialabilities",
+                name: "Availabilities",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Day = table.Column<DateOnly>(type: "date", nullable: false),
-                    TutorID = table.Column<int>(type: "integer", nullable: false),
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    TutorID = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Avialabilities", x => x.ID);
+                    table.PrimaryKey("PK_Availabilities", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Avialabilities_Tutor_TutorID",
+                        name: "FK_Availabilities_Tutor_TutorID",
                         column: x => x.TutorID,
                         principalTable: "Tutor",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "TutorSubjects",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TutorID = table.Column<int>(type: "integer", nullable: false),
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    TutorID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -266,14 +280,35 @@ namespace TutorBuddy.Infastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Avialabilities",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    Day = table.Column<string>(type: "text", nullable: false),
+                    TutorAvailabilityID = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Avialabilities", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Avialabilities_Availabilities_TutorAvailabilityID",
+                        column: x => x.TutorAvailabilityID,
+                        principalTable: "Availabilities",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Subjects",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     Topic = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    TutorSubjectsID = table.Column<int>(type: "integer", nullable: true),
+                    AreaOfInterestID = table.Column<string>(type: "text", nullable: true),
+                    TutorSubjectsID = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -282,6 +317,11 @@ namespace TutorBuddy.Infastructure.Migrations
                 {
                     table.PrimaryKey("PK_Subjects", x => x.ID);
                     table.ForeignKey(
+                        name: "FK_Subjects_AreaOfInterests_AreaOfInterestID",
+                        column: x => x.AreaOfInterestID,
+                        principalTable: "AreaOfInterests",
+                        principalColumn: "ID");
+                    table.ForeignKey(
                         name: "FK_Subjects_TutorSubjects_TutorSubjectsID",
                         column: x => x.TutorSubjectsID,
                         principalTable: "TutorSubjects",
@@ -289,41 +329,12 @@ namespace TutorBuddy.Infastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AreaOfInterests",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SubjectID = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AreaOfInterests", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_AreaOfInterests_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_AreaOfInterests_Subjects_SubjectID",
-                        column: x => x.SubjectID,
-                        principalTable: "Subjects",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    SubjectID = table.Column<int>(type: "integer", nullable: false),
-                    TutorID = table.Column<int>(type: "integer", nullable: false),
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    SubjectID = table.Column<string>(type: "text", nullable: true),
+                    TutorID = table.Column<string>(type: "text", nullable: true),
                     StudentId = table.Column<string>(type: "text", nullable: true),
                     Startime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -344,24 +355,21 @@ namespace TutorBuddy.Infastructure.Migrations
                         name: "FK_Sessions_Subjects_SubjectID",
                         column: x => x.SubjectID,
                         principalTable: "Subjects",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_Sessions_Tutor_TutorID",
                         column: x => x.TutorID,
                         principalTable: "Tutor",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "RateStudents",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     Rate = table.Column<int>(type: "integer", nullable: false),
-                    SessionID = table.Column<int>(type: "integer", nullable: false),
+                    SessionID = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -373,18 +381,16 @@ namespace TutorBuddy.Infastructure.Migrations
                         name: "FK_RateStudents_Sessions_SessionID",
                         column: x => x.SessionID,
                         principalTable: "Sessions",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "RateTutors",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     Rate = table.Column<int>(type: "integer", nullable: false),
-                    SessionID = table.Column<int>(type: "integer", nullable: false),
+                    SessionID = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -396,18 +402,16 @@ namespace TutorBuddy.Infastructure.Migrations
                         name: "FK_RateTutors_Sessions_SessionID",
                         column: x => x.SessionID,
                         principalTable: "Sessions",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
                 name: "StudentComments",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     Comment = table.Column<string>(type: "text", nullable: false),
-                    SessionID = table.Column<int>(type: "integer", nullable: false),
+                    SessionID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -427,10 +431,9 @@ namespace TutorBuddy.Infastructure.Migrations
                 name: "TutorComments",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ID = table.Column<string>(type: "text", nullable: false),
                     Comment = table.Column<string>(type: "text", nullable: false),
-                    SessiomID = table.Column<int>(type: "integer", nullable: false),
+                    SessiomID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
@@ -445,11 +448,6 @@ namespace TutorBuddy.Infastructure.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AreaOfInterests_SubjectID",
-                table: "AreaOfInterests",
-                column: "SubjectID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AreaOfInterests_UserId",
@@ -494,9 +492,14 @@ namespace TutorBuddy.Infastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Avialabilities_TutorID",
-                table: "Avialabilities",
+                name: "IX_Availabilities_TutorID",
+                table: "Availabilities",
                 column: "TutorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Avialabilities_TutorAvailabilityID",
+                table: "Avialabilities",
+                column: "TutorAvailabilityID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RateStudents_SessionID",
@@ -534,6 +537,11 @@ namespace TutorBuddy.Infastructure.Migrations
                 column: "SessionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Subjects_AreaOfInterestID",
+                table: "Subjects",
+                column: "AreaOfInterestID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Subjects_TutorSubjectsID",
                 table: "Subjects",
                 column: "TutorSubjectsID");
@@ -556,9 +564,6 @@ namespace TutorBuddy.Infastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "AreaOfInterests");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -599,10 +604,16 @@ namespace TutorBuddy.Infastructure.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Availabilities");
+
+            migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "AreaOfInterests");
 
             migrationBuilder.DropTable(
                 name: "TutorSubjects");

@@ -1,0 +1,14 @@
+07/31/2022 10:02:13 Failed executing DbCommand ("34"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""ALTER TABLE \"TutorSubjects\" ALTER COLUMN \"TutorID\" TYPE text;"
+07/31/2022 10:06:33 Failed executing DbCommand ("9"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""ALTER TABLE \"TutorSubjects\" ALTER COLUMN \"TutorID\" TYPE text;"
+07/31/2022 10:06:56 Failed executing DbCommand ("0"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""ALTER TABLE \"TutorSubjects\" ALTER COLUMN \"TutorID\" TYPE text;"
+07/31/2022 10:08:24 Failed executing DbCommand ("20"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""CREATE TABLE \"AspNetRoles\" (
+    \"Id\" text NOT NULL,
+    \"Name\" character varying(256) NULL,
+    \"NormalizedName\" character varying(256) NULL,
+    \"ConcurrencyStamp\" text NULL,
+    CONSTRAINT \"PK_AspNetRoles\" PRIMARY KEY (\"Id\")
+);"

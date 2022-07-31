@@ -5,8 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using TutorialBuddy.Core;
-using TutorialBuddy.Core.Models;
-using TutorialBuddy.Infastructure.DataAccess;
+using TutorBuddy.Core.Models;
+using TutorBuddy.Infrastructure.DataAccess;
 
 namespace TutorialBuddy.Infastructure.Services
 {

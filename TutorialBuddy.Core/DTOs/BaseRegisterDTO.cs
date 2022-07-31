@@ -10,7 +10,9 @@ namespace TutorBuddy.Core.DTOs
     public class BaseRegisterDTO
     {
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         [Required]
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }

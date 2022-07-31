@@ -1,5 +1,5 @@
 ﻿using TutorBuddy.Core.Interface;
-using TutorialBuddy.Infastructure.DataAccess;
+using TutorBuddy.Infrastructure.DataAccess;
 
 namespace TutorBuddy.Infrastructure.Repository
 {

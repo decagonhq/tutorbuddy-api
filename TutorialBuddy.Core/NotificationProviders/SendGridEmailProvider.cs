@@ -6,7 +6,7 @@ namespace FindR.Integrations.NotificationProviders
 {
     public class SendGridEmailProvider : INotificationProvider
     {
-        public async Task<bool> SendAsync(string recipientAddress, NotificationContext nctx)
+        public async Task<bool> SendAsync(NotificationContext nctx)
         {
             var apikey = nctx.Config["FluentEmail:SendGridPkey"];
             var client = new SendGridClient(apikey);
@@ -17,7 +17,7 @@ namespace FindR.Integrations.NotificationProviders
                 Subject = nctx.Header,
                 PlainTextContent = nctx.Payload.ToString(),
             };
-            msg.AddTo(new EmailAddress(recipientAddress!, "Tbuddy User"));
+            msg.AddTo(new EmailAddress(nctx.Address!, "Tbuddy User"));
             var response = await client.SendEmailAsync(msg).ConfigureAwait(false);
             return response.IsSuccessStatusCode;
         }

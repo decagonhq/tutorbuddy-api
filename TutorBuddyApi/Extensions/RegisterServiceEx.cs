@@ -10,9 +10,8 @@ using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Services;
 using TutorBuddy.Infrastructure.Repository;
 using TutorialBuddy.Core;
-using TutorialBuddy.Core.Models;
-using TutorialBuddy.Infastructure;
-using TutorialBuddy.Infastructure.DataAccess;
+using TutorBuddy.Core.Models;
+using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
 
 namespace FindRApi.Extensions

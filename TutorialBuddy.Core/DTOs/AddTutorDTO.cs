@@ -10,6 +10,6 @@ namespace TutorBuddy.Core.DTOs
     {
         public  string ShortBio { get; set; }
         public IEnumerable<string> Subjects { get; set; }
-        private IEnumerable<string> Availability { get; set; }  
+        public IEnumerable<string> Availability { get; set; }  
     }
 }
