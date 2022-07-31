@@ -1,7 +1,7 @@
 ﻿using System;
 namespace TutorBuddy.Core.Models
 {
-	public class Notifications : BaseEntity
+	public class Notification : BaseEntity
     {
         public string SenderId { get; set; }
         public string Message { get; set; }

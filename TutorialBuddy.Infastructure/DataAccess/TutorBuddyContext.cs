@@ -24,6 +24,6 @@ namespace TutorBuddy.Infrastructure.DataAccess
         public DbSet<Session> Sessions { get; set; }
         public DbSet<ImageMeta> ImageMeta { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Notifications> Notifications { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
     }
 }
