@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using TutorialBuddy.Core.Models;
 
-namespace TutorialBuddy.Infastructure
+namespace TutorialBuddy.Infastructure.DataAccess
 {
     public class TutorBuddyContext : IdentityDbContext<User>
     {

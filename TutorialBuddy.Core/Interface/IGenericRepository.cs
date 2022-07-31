@@ -1,5 +1,4 @@
-﻿using System;
-namespace TutorBuddy.Infrastructure.Repository.Interface
+﻿namespace TutorBuddy.Core.Interface
 {
 	public interface IGenericRepository<T>
     {

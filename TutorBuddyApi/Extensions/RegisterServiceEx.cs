@@ -8,11 +8,11 @@ using Serilog;
 using System.Text;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Services;
-using TutorBuddy.Infrastructure.Repository.Implementation;
-using TutorBuddy.Infrastructure.Repository.Interface;
+using TutorBuddy.Infrastructure.Repository;
 using TutorialBuddy.Core;
 using TutorialBuddy.Core.Models;
 using TutorialBuddy.Infastructure;
+using TutorialBuddy.Infastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
 
 namespace FindRApi.Extensions
@@ -32,7 +32,13 @@ namespace FindRApi.Extensions
 
             builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
 
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(x =>
+                {
+                    x.Password.RequiredLength = 8;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireUppercase = true;
+                    x.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<TutorBuddyContext>()
                 .AddDefaultTokenProviders();
 

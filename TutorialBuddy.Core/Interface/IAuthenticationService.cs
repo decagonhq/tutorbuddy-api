@@ -10,7 +10,11 @@ namespace TutorBuddy.Core.Interface
 {
     public interface IAuthenticationService
     {
-        Task<ApiResponse<string>> AddStudent(AddStudentDTO addStudentDTO);
-        Task<ApiResponse<string>> AddTutor(AddTutorDTO addTutorDTO);
+        Task<ApiResponse<AddResponseDTO>> AddStudent(AddStudentDTO addStudentDTO);
+        Task<ApiResponse<AddResponseDTO>> AddTutor(AddTutorDTO addTutorDTO);
+        Task<ApiResponse<AddResponseDTO>> LoginUser(LoginUserDTO loginUserDTO);
+        Task<ApiResponse<string>> ForgotPassword(ForgotPasswordDTO forgotPasswordDTO);
+        Task<ApiResponse<string>> ResetPassword(ResetPasswordDTO resetPasswordDTO);
+        Task<ApiResponse<ConfirmEmailResponseDTO>> ConfirmEmail(ConfirmEmailDTO confirmEmailDTO);
     }
 }

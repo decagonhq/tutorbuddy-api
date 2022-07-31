@@ -1,16 +1,16 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using TutorBuddy.Infrastructure.Repository.Interface;
-using TutorialBuddy.Infastructure;
+using TutorBuddy.Core.Interface;
+using TutorialBuddy.Infastructure.DataAccess;
 
-namespace TutorBuddy.Infrastructure.Repository.Implementation
+namespace TutorBuddy.Infrastructure.Repository
 {
-	public class GenericRepository<T> : IGenericRepository<T> where T:class
-	{
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    {
         protected readonly TutorBuddyContext _dbContext;
         private readonly DbSet<T> _dbSet;
         public GenericRepository(TutorBuddyContext dbContext)
-		{
+        {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<T>();
         }

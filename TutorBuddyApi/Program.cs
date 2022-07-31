@@ -1,7 +1,7 @@
 using FindRApi.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using TutorialBuddy.Infastructure;
+using TutorialBuddy.Infastructure.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
