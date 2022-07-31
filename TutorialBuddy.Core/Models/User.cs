@@ -9,6 +9,7 @@ namespace TutorialBuddy.Core.Models
         public string? FirstName { get; set; }
         public string? RefreshToken { get; set; }
         public string? AvatarUrl { get; set; }
+        public string? PublicUrl { get; set; }
 
         public IEnumerable<Tutor> Tutors { get; set; }
         public IEnumerable<Reminder> Reminders { get; set; }
