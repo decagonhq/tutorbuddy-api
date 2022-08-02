@@ -10,6 +10,12 @@ namespace TutorBuddy.Infrastructure.DataAccess
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+        }
+
         public DbSet<AreaOfInterest> AreaOfInterests { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<RateStudent> RateStudents { get; set; }

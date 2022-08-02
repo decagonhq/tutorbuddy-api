@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -11,9 +12,10 @@ using TutorBuddy.Infrastructure.DataAccess;
 namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
-    partial class TutorBuddyContextModelSnapshot : ModelSnapshot
+    [Migration("20220802042011_flume")]
+    partial class flume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -638,9 +640,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");

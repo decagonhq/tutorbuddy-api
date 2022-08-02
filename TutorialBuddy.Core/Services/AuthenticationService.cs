@@ -155,7 +155,8 @@ namespace TutorBuddy.Core.Services
             {
                 FirstName = baseRegister.FirstName,
                 LastName = baseRegister.LastName,
-                Email = baseRegister.Email
+                Email = baseRegister.Email,
+                UserName = $"{baseRegister.FirstName[0]}{baseRegister.LastName[0]}{new Random().Next(1001,10000)}"
             };
             var response = new ApiResponse<User>();
 
