@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using TutorialBuddy.Core.Models;
+using TutorBuddy.Core.Models;
 
 namespace TutorialBuddy.Infastructure.Services
 {

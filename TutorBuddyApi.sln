@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorBuddyApi", "TutorBuddyApi\TutorBuddyApi.csproj", "{CFB36AAD-DD1B-456D-91C1-34268D3D9712}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorBuddy.Infastructure", "TutorialBuddy.Infastructure\TutorBuddy.Infastructure.csproj", "{41B5EDCE-4583-40EE-84A0-45B9AF9BD9CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorBuddy.Infrastructure", "TutorialBuddy.Infastructure\TutorBuddy.Infrastructure.csproj", "{41B5EDCE-4583-40EE-84A0-45B9AF9BD9CB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TutorBuddy.Core", "TutorialBuddy.Core\TutorBuddy.Core.csproj", "{2E3B957F-91FB-4D4D-A298-9D02C65DFA51}"
 EndProject

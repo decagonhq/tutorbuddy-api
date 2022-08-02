@@ -6,9 +6,12 @@ using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Serilog;
 using System.Text;
+using TutorBuddy.Core.Interface;
+using TutorBuddy.Core.Services;
+using TutorBuddy.Infrastructure.Repository;
 using TutorialBuddy.Core;
-using TutorialBuddy.Core.Models;
-using TutorialBuddy.Infastructure;
+using TutorBuddy.Core.Models;
+using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
 
 namespace FindRApi.Extensions
@@ -28,7 +31,13 @@ namespace FindRApi.Extensions
 
             builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
 
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(x =>
+                {
+                    x.Password.RequiredLength = 8;
+                    x.Password.RequireDigit = false;
+                    x.Password.RequireUppercase = true;
+                    x.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<TutorBuddyContext>()
                 .AddDefaultTokenProviders();
 
@@ -47,6 +56,13 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
             builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ITutorRepository, TutorRepository>();
+            builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
             builder.Services.AddAuthentication(auth =>
             {

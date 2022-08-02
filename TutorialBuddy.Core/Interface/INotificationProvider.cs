@@ -6,6 +6,6 @@ namespace FindR.Integrations
 {
     public interface INotificationProvider
     {
-        Task<bool> SendAsync(string recipientAddress, NotificationContext payload);
+        Task<bool> SendAsync(NotificationContext payload);
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TutorialBuddy.Core.Enums;
 
-namespace TutorialBuddy.Core.Models
+namespace TutorBuddy.Core.Models
 {
     public class Session: BaseEntity
     {

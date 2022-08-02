@@ -4,7 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using TutorialBuddy.Core.Models;
+using TutorBuddy.Core.Models;
 
 public interface IAuthService
 {

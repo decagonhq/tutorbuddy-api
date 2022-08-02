@@ -41,7 +41,7 @@ namespace FindR.Integrations
             try
             {
                 _ = !target.HasFlag(NotifyWith.Email) ||
-                    await _notificationProviders[NotifyWith.Email].SendAsync(payload.Address, payload);
+                    await _notificationProviders[NotifyWith.Email].SendAsync(payload);
             }
             catch (Exception)
             {

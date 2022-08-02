@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using TutorialBuddy.Infastructure;
+using TutorBuddy.Infrastructure.DataAccess;
 
 #nullable disable
 
-namespace TutorBuddy.Infastructure.Migrations
+namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
     partial class TutorBuddyContextModelSnapshot : ModelSnapshot
@@ -154,13 +154,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.AreaOfInterest", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.AreaOfInterest", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -172,36 +170,30 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("integer");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SubjectID");
-
                     b.HasIndex("UserId");
 
                     b.ToTable("AreaOfInterests");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Avialability", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Availability", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateOnly>("Day")
-                        .HasColumnType("date");
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsDepricated")
                         .HasColumnType("boolean");
@@ -210,23 +202,21 @@ namespace TutorBuddy.Infastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("TutorID")
-                        .HasColumnType("integer");
+                    b.Property<string>("TutorAvailabilityID")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("TutorID");
+                    b.HasIndex("TutorAvailabilityID");
 
-                    b.ToTable("Avialabilities");
+                    b.ToTable("Availabilities");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.ImageMeta", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.ImageMeta", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -256,13 +246,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("ImageMeta");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.RateStudent", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.RateStudent", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -278,8 +266,8 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SessionID")
-                        .HasColumnType("integer");
+                    b.Property<string>("SessionID")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -288,13 +276,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("RateStudents");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.RateTutor", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.RateTutor", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -310,8 +296,8 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Property<int>("Rate")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SessionID")
-                        .HasColumnType("integer");
+                    b.Property<string>("SessionID")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -320,13 +306,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("RateTutors");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Reminder", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Reminder", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -349,13 +333,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("Reminders");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Session", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Session", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -380,11 +362,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Property<string>("StudentId")
                         .HasColumnType("text");
 
-                    b.Property<int>("SubjectID")
-                        .HasColumnType("integer");
+                    b.Property<string>("SubjectID")
+                        .HasColumnType("text");
 
-                    b.Property<int>("TutorID")
-                        .HasColumnType("integer");
+                    b.Property<string>("TutorID")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -397,13 +379,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("Sessions");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.StudentComment", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.StudentComment", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -420,8 +400,9 @@ namespace TutorBuddy.Infastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("SessionID")
-                        .HasColumnType("integer");
+                    b.Property<string>("SessionID")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -430,13 +411,14 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("StudentComments");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Subject", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Subject", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("text");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                    b.Property<string>("AreaOfInterestID")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -457,23 +439,23 @@ namespace TutorBuddy.Infastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("TutorSubjectsID")
-                        .HasColumnType("integer");
+                    b.Property<string>("TutorSubjectsID")
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AreaOfInterestID");
 
                     b.HasIndex("TutorSubjectsID");
 
                     b.ToTable("Subjects");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Tutor", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Tutor", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<string>("BioNote")
                         .IsRequired()
@@ -500,13 +482,39 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("Tutor");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.TutorComment", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorAvailability", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("text");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                    b.Property<DateTime?>("CreatedOn")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsDepricated")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("LastModifiedOn")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("TutorID")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("TutorID");
+
+                    b.ToTable("TutorAvailabilities");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorComment", b =>
+                {
+                    b.Property<string>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("text");
 
                     b.Property<string>("Comment")
                         .IsRequired()
@@ -523,8 +531,9 @@ namespace TutorBuddy.Infastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("SessiomID")
-                        .HasColumnType("integer");
+                    b.Property<string>("SessiomID")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -533,13 +542,11 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("TutorComments");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.TutorSubjects", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorSubjects", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<string>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID"));
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
@@ -552,8 +559,9 @@ namespace TutorBuddy.Infastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("TutorID")
-                        .HasColumnType("integer");
+                    b.Property<string>("TutorID")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("ID");
 
@@ -562,7 +570,7 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.ToTable("TutorSubjects");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.User", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -616,6 +624,9 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Property<string>("RefreshToken")
                         .HasColumnType("text");
 
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("timestamp without time zone");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
@@ -627,6 +638,9 @@ namespace TutorBuddy.Infastructure.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -649,7 +663,7 @@ namespace TutorBuddy.Infastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", null)
+                    b.HasOne("TutorBuddy.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -658,7 +672,7 @@ namespace TutorBuddy.Infastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", null)
+                    b.HasOne("TutorBuddy.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -673,7 +687,7 @@ namespace TutorBuddy.Infastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TutorialBuddy.Core.Models.User", null)
+                    b.HasOne("TutorBuddy.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -682,87 +696,67 @@ namespace TutorBuddy.Infastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", null)
+                    b.HasOne("TutorBuddy.Core.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.AreaOfInterest", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.AreaOfInterest", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Subject", "Subject")
-                        .WithMany()
-                        .HasForeignKey("SubjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TutorialBuddy.Core.Models.User", "User")
+                    b.HasOne("TutorBuddy.Core.Models.User", "User")
                         .WithMany("AreaOfInterests")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("Subject");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Avialability", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Availability", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Tutor", "Tutor")
-                        .WithMany()
-                        .HasForeignKey("TutorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tutor");
+                    b.HasOne("TutorBuddy.Core.Models.TutorAvailability", null)
+                        .WithMany("Availabilities")
+                        .HasForeignKey("TutorAvailabilityID");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.RateStudent", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.RateStudent", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Session", "Session")
+                    b.HasOne("TutorBuddy.Core.Models.Session", "Session")
                         .WithMany()
-                        .HasForeignKey("SessionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SessionID");
 
                     b.Navigation("Session");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.RateTutor", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.RateTutor", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Session", "Session")
+                    b.HasOne("TutorBuddy.Core.Models.Session", "Session")
                         .WithMany()
-                        .HasForeignKey("SessionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SessionID");
 
                     b.Navigation("Session");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Reminder", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Reminder", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", null)
+                    b.HasOne("TutorBuddy.Core.Models.User", null)
                         .WithMany("Reminders")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Session", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Session", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", "Student")
+                    b.HasOne("TutorBuddy.Core.Models.User", "Student")
                         .WithMany()
                         .HasForeignKey("StudentId");
 
-                    b.HasOne("TutorialBuddy.Core.Models.Subject", "Subject")
+                    b.HasOne("TutorBuddy.Core.Models.Subject", "Subject")
                         .WithMany()
-                        .HasForeignKey("SubjectID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubjectID");
 
-                    b.HasOne("TutorialBuddy.Core.Models.Tutor", "Tutor")
+                    b.HasOne("TutorBuddy.Core.Models.Tutor", "Tutor")
                         .WithMany()
-                        .HasForeignKey("TutorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TutorID");
 
                     b.Navigation("Student");
 
@@ -771,9 +765,9 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Navigation("Tutor");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.StudentComment", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.StudentComment", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Session", "Session")
+                    b.HasOne("TutorBuddy.Core.Models.Session", "Session")
                         .WithMany()
                         .HasForeignKey("SessionID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -782,36 +776,29 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Navigation("Session");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Subject", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Subject", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.TutorSubjects", null)
+                    b.HasOne("TutorBuddy.Core.Models.AreaOfInterest", null)
+                        .WithMany("Subjects")
+                        .HasForeignKey("AreaOfInterestID");
+
+                    b.HasOne("TutorBuddy.Core.Models.TutorSubjects", null)
                         .WithMany("Subjects")
                         .HasForeignKey("TutorSubjectsID");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.Tutor", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.Tutor", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.User", "User")
+                    b.HasOne("TutorBuddy.Core.Models.User", "User")
                         .WithMany("Tutors")
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.TutorComment", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorAvailability", b =>
                 {
-                    b.HasOne("TutorialBuddy.Core.Models.Session", "Sessiom")
-                        .WithMany()
-                        .HasForeignKey("SessiomID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Sessiom");
-                });
-
-            modelBuilder.Entity("TutorialBuddy.Core.Models.TutorSubjects", b =>
-                {
-                    b.HasOne("TutorialBuddy.Core.Models.Tutor", "Tutor")
+                    b.HasOne("TutorBuddy.Core.Models.Tutor", "Tutor")
                         .WithMany()
                         .HasForeignKey("TutorID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -820,12 +807,44 @@ namespace TutorBuddy.Infastructure.Migrations
                     b.Navigation("Tutor");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.TutorSubjects", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorComment", b =>
+                {
+                    b.HasOne("TutorBuddy.Core.Models.Session", "Sessiom")
+                        .WithMany()
+                        .HasForeignKey("SessiomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sessiom");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorSubjects", b =>
+                {
+                    b.HasOne("TutorBuddy.Core.Models.Tutor", "Tutor")
+                        .WithMany()
+                        .HasForeignKey("TutorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tutor");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.AreaOfInterest", b =>
                 {
                     b.Navigation("Subjects");
                 });
 
-            modelBuilder.Entity("TutorialBuddy.Core.Models.User", b =>
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorAvailability", b =>
+                {
+                    b.Navigation("Availabilities");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.TutorSubjects", b =>
+                {
+                    b.Navigation("Subjects");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.User", b =>
                 {
                     b.Navigation("AreaOfInterests");
 

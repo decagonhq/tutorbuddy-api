@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TutorialBuddy.Core.Models;
+using TutorBuddy.Core.Models;
 
-namespace TutorialBuddy.Infastructure
+namespace TutorBuddy.Infrastructure.DataAccess
 {
     public class TutorBuddyContext : IdentityDbContext<User>
     {
@@ -10,13 +10,20 @@ namespace TutorialBuddy.Infastructure
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+        }
+
         public DbSet<AreaOfInterest> AreaOfInterests { get; set; }
-        public DbSet<Avialability> Avialabilities { get; set; }
+        public DbSet<Availability> Availabilities { get; set; }
         public DbSet<RateStudent> RateStudents { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<RateTutor> RateTutors { get; set; }
         public DbSet<Tutor> Tutor { get; set; }
         public DbSet<TutorSubjects> TutorSubjects { get; set; }
+        public DbSet<TutorAvailability> TutorAvailabilities { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<TutorComment> TutorComments { get; set; }

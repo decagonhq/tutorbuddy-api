@@ -33,4 +33,9 @@
     <ProjectReference Include="..\TutorialBuddy.Core\TutorBuddy.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Repository\" />
+    <None Remove="Repository\Interface\" />
+    <None Remove="Repository\Implementation\" />
+  </ItemGroup>
 </Project>
