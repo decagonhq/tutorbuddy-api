@@ -33,7 +33,8 @@ jobs:
 
   deploy-dev:
     name: Deploy to Dev
-    if: github.event.ref == 'refs/heads/cicd-setup'
+    if: github.event.ref == 'refs/heads/develop'
+
     runs-on: ubuntu-latest
     needs: [build]
 
