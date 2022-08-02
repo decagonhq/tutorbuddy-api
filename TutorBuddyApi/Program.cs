@@ -1,7 +1,9 @@
 using FindRApi.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using TutorialBuddy.Infastructure;
+using TutorBuddy.Infrastructure.DataAccess;
+using TutorBuddyApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,12 @@ var app = builder.Build();
 using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<TutorBuddyContext>();
 db.Database.Migrate();
+
+using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider())
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    new DbBootstrapEx(roleManager);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
