@@ -17,18 +17,15 @@ namespace TutorBuddyApi.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IImageUploadService _imageUpload;
+
         private readonly IUserService _userService;
-        private readonly UserManager<User> _userManager;
-        public UserController(IImageUploadService imageUpload, IUserService userService, UserManager<User> userManager)
+
+        public UserController(IUserService userService)
         {
-            _imageUpload = imageUpload;
+
             _userService = userService;
-            _userManager = userManager;
+
         }
-
-
-
 
         /// <summary>
         /// Endpoint is to upload a single image on the user profile 
@@ -41,19 +38,56 @@ namespace TutorBuddyApi.Controllers
         {
             try
             {
-                var user = await _userManager.FindByIdAsync(Id);
+                var result = await _userService.UploadUserAvatarAsync(Id, imageDto);
+                return StatusCode(result.StatusCode, result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-                if (user != null)
-                {
-                    var upload = await _imageUpload.UploadSingleImage(imageDto.ImageToUpload, "single");
+        /// <summary>
+        /// Update user password 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPatch("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordDTO model)
+        {
+            try
+            {
+                var result = await _userService.UpdatePasswordAsync(model);
+                return StatusCode(result.StatusCode, result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
 
-                    user.AvatarUrl = upload.Url.ToString();
-                    user.PublicUrl = upload.PublicId;
-                    await _userManager.UpdateAsync(user);
-                    return Ok(upload);
-                }
-                return NotFound("User not found");
+        [HttpGet("Id")]
+        public async Task<IActionResult> GetUser(string Id)
+        {
+            try
+            {
+                var result = await _userService.GetUser(Id);
+                return StatusCode(result.StatusCode, result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPatch("Id")]
+        public async Task<IActionResult> UpdatePassword([FromBody] UpdateUserDTO model)
+        {
+            try
+            {
+                var result = await _userService.UpdateAsync(model);
+                return StatusCode(result.StatusCode, result);
             }
             catch (ArgumentException ex)
             {

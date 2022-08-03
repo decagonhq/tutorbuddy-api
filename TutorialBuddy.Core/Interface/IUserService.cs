@@ -7,13 +7,13 @@ namespace TutorBuddy.Core.Interface
 {
 	public interface IUserService
 	{
-		Task<ApiResponse<User>> GetUser(string Id);
+		Task<ApiResponse<UserResponseDTO>> GetUser(string Id);
 
-        Task<ApiResponse<bool>> UploadUserAvatar(string Id, UploadImageDTO imageDto);
+        Task<ApiResponse<string>> UploadUserAvatarAsync(string Id, UploadImageDTO imageDto);
 
-        Task<ApiResponse<string>> UpdatePassword(UpdatePasswordDTO model);
+        Task<ApiResponse<string>> UpdatePasswordAsync(UpdatePasswordDTO model);
 
-        Task<ApiResponse<string>> Update(UpdateUserDTO model);
+        Task<ApiResponse<string>> UpdateAsync(UpdateUserDTO model);
     }
 }
 

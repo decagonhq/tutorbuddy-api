@@ -46,6 +46,29 @@ namespace TutorBuddy.Infrastructure.Repository
                 await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
             }
         }
+
+        public async Task<User> GetAUser(string Id, string role)
+        {
+            if(role == "Student")
+            {
+                var user = await _appDbContext.Users
+                        .Where(x => x.Id == Id)
+                        .Include(x => x.AreaOfInterests)
+                            .ThenInclude(x => x.Subjects)
+                        .FirstOrDefaultAsync();
+                return user;
+            }
+
+            else
+            {
+                var user = await _appDbContext.Users
+                        .Where(x => x.Id == Id)
+                        .Include(x => x.Tutors)
+                        .FirstOrDefaultAsync();
+                return user;
+            }
+            
+        }
     }
 }
 
