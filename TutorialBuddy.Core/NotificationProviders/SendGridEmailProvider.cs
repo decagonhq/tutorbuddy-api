@@ -13,9 +13,9 @@ namespace FindR.Integrations.NotificationProviders
 
             var msg = new SendGridMessage
             {
-                From = new EmailAddress("tbuddy.support@gmail.com", "Tutorial Buddy"),
+                From = new EmailAddress("emma4lil@gmail.com", "Tutorial Buddy"),
                 Subject = nctx.Header,
-                PlainTextContent = nctx.Payload.ToString(),
+                HtmlContent = nctx.Payload.ToString(),
             };
             msg.AddTo(new EmailAddress(nctx.Address!, "Tbuddy User"));
             var response = await client.SendEmailAsync(msg).ConfigureAwait(false);

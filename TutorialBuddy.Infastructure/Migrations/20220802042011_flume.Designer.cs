@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -11,9 +12,10 @@ using TutorBuddy.Infrastructure.DataAccess;
 namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
-    partial class TutorBuddyContextModelSnapshot : ModelSnapshot
+    [Migration("20220802042011_flume")]
+    partial class flume
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,34 +214,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.ToTable("Availabilities");
                 });
 
-            modelBuilder.Entity("TutorBuddy.Core.Models.Category", b =>
-                {
-                    b.Property<string>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsDepricated")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Categories");
-                });
-
             modelBuilder.Entity("TutorBuddy.Core.Models.ImageMeta", b =>
                 {
                     b.Property<string>("ID")
@@ -272,44 +246,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ImageMeta");
-                });
-
-            modelBuilder.Entity("TutorBuddy.Core.Models.Notification", b =>
-                {
-                    b.Property<string>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("CreatedOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("IsDepricated")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("Isread")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTime?>("LastModifiedOn")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("SenderId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.RateStudent", b =>
@@ -389,12 +325,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Note")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("text");
-
                     b.Property<string>("UserId")
                         .HasColumnType("text");
 
@@ -458,6 +388,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Comment")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
@@ -491,10 +422,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.Property<string>("AreaOfInterestID")
                         .HasColumnType("text");
 
-                    b.Property<string>("CategoryID")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime?>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp without time zone");
@@ -521,8 +448,6 @@ namespace TutorBuddy.Infrastructure.Migrations
 
                     b.HasIndex("AreaOfInterestID");
 
-                    b.HasIndex("CategoryID");
-
                     b.HasIndex("TutorSubjectsID");
 
                     b.ToTable("Subjects");
@@ -535,6 +460,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("BioNote")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
@@ -547,12 +473,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
-
-                    b.Property<double?>("Price")
-                        .HasColumnType("double precision");
-
-                    b.Property<string>("UnitOfPrice")
-                        .HasColumnType("text");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text");
@@ -599,6 +519,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Comment")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedOn")
@@ -676,9 +597,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("text");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
                     b.Property<string>("LastName")
                         .HasColumnType("text");
 
@@ -705,9 +623,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("PublicUrl")
-                        .HasColumnType("text");
-
                     b.Property<string>("RefreshToken")
                         .HasColumnType("text");
 
@@ -725,9 +640,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -806,15 +718,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasForeignKey("TutorAvailabilityID");
                 });
 
-            modelBuilder.Entity("TutorBuddy.Core.Models.Notification", b =>
-                {
-                    b.HasOne("TutorBuddy.Core.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("TutorBuddy.Core.Models.RateStudent", b =>
                 {
                     b.HasOne("TutorBuddy.Core.Models.Session", "Session")
@@ -878,17 +781,9 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .WithMany("Subjects")
                         .HasForeignKey("AreaOfInterestID");
 
-                    b.HasOne("TutorBuddy.Core.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("TutorBuddy.Core.Models.TutorSubjects", null)
                         .WithMany("Subjects")
                         .HasForeignKey("TutorSubjectsID");
-
-                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.Tutor", b =>

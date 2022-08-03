@@ -10,7 +10,6 @@
         Task<T> GetARecord(string Id);
         void Update(T entity);
         void UpdateRange(IEnumerable<T> entities);
-        Task<bool> SaveAsync();
     }
 }
 

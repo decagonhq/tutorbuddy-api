@@ -59,6 +59,10 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<ITutorRepository, TutorRepository>();
+            builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
 
             builder.Services.AddAuthentication(auth =>
             {

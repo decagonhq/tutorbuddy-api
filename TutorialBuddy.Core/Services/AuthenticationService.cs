@@ -45,12 +45,44 @@ namespace TutorBuddy.Core.Services
                 Password = addStudentDTO.Password
             };
 
-            response.StatusCode = (int)HttpStatusCode.Created;
-            response.Message = "Student created successfully! Check your mail to verify your account.";
-            response.Data = String.Empty;
-            response.Success = true;
+            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                var (emailResponse, registerResponse) = await Register(baseUser, UserRole.Tutor.ToString());
+                if (registerResponse.Success)
+                {
+                    if (emailResponse)
+                    {
+                        _logger.LogInformation("Mail sent successfully");
+                        var subjects = new List<Subject>();
+                        subjects.AddRange(addStudentDTO.AreaOfInterest.Select(s => new Subject()
+                        {
+                            Topic = s.Topic,
+                            Description = s.Description
+                        }));
+                        await _unitOfWork.UserRepository.AddUserAreaOfInterestA(registerResponse.Data, subjects);
+                        await _unitOfWork.Save();
+                        response.StatusCode = (int)HttpStatusCode.Created;
+                        response.Success = true;
+                        response.Data = registerResponse.Data.Id;
+                        response.Message = "User created successfully! Please check your mail to verify your account.";
+                        transaction.Complete();
+                        return response;
+                    }
+                    _logger.LogInformation("Mail service failed");
+                    transaction.Dispose();
+                    response.StatusCode = (int)HttpStatusCode.BadRequest;
+                    response.Success = false;
+                    response.Message = "Registration failed. Please try again";
+                    return response;
+                }
 
-            return response;
+                response.StatusCode = registerResponse.StatusCode;
+                response.Success = registerResponse.Success;
+                response.Data = string.Empty;
+                response.Message = registerResponse.Message;
+                transaction.Complete();
+                return response;
+            }
         }
 
         public async Task<ApiResponse<string>> AddTutor(AddTutorDTO addTutorDTO)
@@ -73,15 +105,29 @@ namespace TutorBuddy.Core.Services
                     if(emailResponse)
                     {
                         _logger.LogInformation("Mail sent successfully");
-                        //var customer = new Customer
-                        //{
-                        //    AppUser = user
-                        //};
-                        //await _unitOfWork.UserRepository.GetUserByRefreshToken(customer);
+                        var tutor = new Tutor()
+                        {
+                            BioNote = addTutorDTO.ShortBio,
+                            User = registerResponse.Data
+                        };
+                        await _unitOfWork.TutorRepository.Add(tutor);
+                        var subjects = new List<Subject>();
+                        subjects.AddRange(addTutorDTO.Subjects.Select(s => new Subject()
+                        {
+                            Topic = s.Topic,
+                            Description = s.Description
+                        }));
+                        await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                        var availabilities = new List<Availability>();
+                        availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
+                        {
+                            Day = a.Day
+                        }));
+                        await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
                         await _unitOfWork.Save();
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
-                        response.Data = registerResponse.Data;
+                        response.Data = registerResponse.Data.Id;
                         response.Message = "User created successfully! Please check your mail to verify your account.";
                         transaction.Complete();
                         return response;
@@ -94,20 +140,25 @@ namespace TutorBuddy.Core.Services
                     return response;
                 }
 
+                response.StatusCode = registerResponse.StatusCode;
+                response.Success = registerResponse.Success;
+                response.Data = string.Empty;
+                response.Message = registerResponse.Message;
                 transaction.Complete();
-                return registerResponse;
+                return response;
             }
         }
 
-        private async Task<(bool, ApiResponse<string>)> Register(BaseRegisterDTO baseRegister, string userRole)
+        private async Task<(bool, ApiResponse<User>)> Register(BaseRegisterDTO baseRegister, string userRole)
         {
             var user = new User()
             {
                 FirstName = baseRegister.FirstName,
                 LastName = baseRegister.LastName,
-                Email = baseRegister.Email
+                Email = baseRegister.Email,
+                UserName = $"{baseRegister.FirstName[0]}{baseRegister.LastName[0]}{new Random().Next(1001,10000)}"
             };
-            var response = new ApiResponse<string>();
+            var response = new ApiResponse<User>();
 
             var result = await _userManager.CreateAsync(user, baseRegister.Password);
             if (result.Succeeded)
@@ -133,7 +184,7 @@ namespace TutorBuddy.Core.Services
                     Payload = mailBody
                 };
 
-                response.Data = user.Id;
+                response.Data = user;
                 response.Success = true;
                 return (await _notificationService.SendAsync(NotifyWith.Email, notificationContext), response);
             }

@@ -54,11 +54,6 @@ namespace TutorBuddy.Infrastructure.Repository
         {
             _dbContext.Set<T>().UpdateRange(entities);
         }
-
-        public async Task<bool> SaveAsync()
-        {
-            return await _dbContext.SaveChangesAsync() > 0;
-        }
     }
 }
 

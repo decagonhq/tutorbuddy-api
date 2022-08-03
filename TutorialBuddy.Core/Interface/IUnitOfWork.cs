@@ -3,7 +3,8 @@
 	public interface IUnitOfWork : IDisposable
 	{
         IUserRepository UserRepository { get; }
-        Task Save();
+        ITutorRepository TutorRepository { get; }
+        Task<bool> Save();
     }
 }
 
