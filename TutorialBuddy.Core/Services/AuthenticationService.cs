@@ -59,8 +59,8 @@ namespace TutorBuddy.Core.Services
                             Topic = s.Topic,
                             Description = s.Description
                         }));
-                        await _unitOfWork.UserRepository.AddUserAreaOfInterestA(registerResponse.Data, subjects);
-                        await _unitOfWork.Save();
+                        //await _unitOfWork.UserRepository.AddUserAreaOfInterestA(registerResponse.Data, subjects);
+                        //await _unitOfWork.Save();
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
                         response.Data = registerResponse.Data.Id;
