@@ -22,8 +22,15 @@
     "Tutor": {
       "BioNote": "I am software engineer with 10 experience in writing Python",
       "Price": 1500.00,
-      "UnitOfPrice":"hour"
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "Day": "Monday" },
+        { "Day": "Tuesday" },
+        { "Day": "Friday" }
+      ]
     }
+
+
   },
   {
     "Id": "27e9e275-adde-4b6d-881c-6397b46a9020",
@@ -37,8 +44,14 @@
     "Tutor": {
       "BioNote": "I am a devOP engineer with 10 experience in AWS, Azure and Google Cloud",
       "Price": 2500.00,
-      "UnitOfPrice": "hour"
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "Day": "Monday" },
+        { "Day": "Wednesday" },
+        { "Day": "Friday" }
+      ]
     }
+   
   },
   {
     "Id": "f40276cc-ce31-474a-8a7e-a697ca82574b",
@@ -52,8 +65,14 @@
     "Tutor": {
       "BioNote": "I am a Network Engineer with 10 experience",
       "Price": 3500.00,
-      "UnitOfPrice": "hour"
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "Day": "Thursday" },
+        { "Day": "Wednesday" },
+        { "Day": "Friday" }
+      ]
     }
+   
   },
   {
     "Id": "d7c29369-929b-4426-b54d-04b5f1560b50",
@@ -67,8 +86,14 @@
     "Tutor": {
       "BioNote": "I am a Database Administrator with 10 experience working with MsSQL, Oracle, MySQL",
       "Price": 1500.00,
-      "UnitOfPrice": "hour"
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "Day": "Monday" },
+        { "Day": "Tuesday" },
+        { "Day": "Wednesday" }
+      ]
     }
+    
   },
   {
     "Id": "794d242b-7669-4c61-a5e2-b6ab35f4a8d6",
