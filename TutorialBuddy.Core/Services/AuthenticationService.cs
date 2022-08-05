@@ -117,13 +117,13 @@ namespace TutorBuddy.Core.Services
                             Topic = s.Topic,
                             Description = s.Description
                         }));
-                        await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                       // await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
                         var availabilities = new List<Availability>();
                         availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
                         {
                             Day = a.Day
                         }));
-                        await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
+                       // await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
                         await _unitOfWork.Save();
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
