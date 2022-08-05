@@ -8,8 +8,9 @@ namespace TutorBuddy.Core.Models
 {
     public class TutorSubjects: BaseEntity
     {
-        public IEnumerable<Subject> Subjects { get; set; }
+        public Subject Subjects { get; set; }
         public Tutor Tutor { get; set; }
+        public IEnumerable<Session>? Sessions { get; set; }
 
     }
 }

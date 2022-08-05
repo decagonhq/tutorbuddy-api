@@ -5,7 +5,7 @@ namespace TutorBuddy.Core.Models
     {
         public string? Title { get; set; }
         public string? Description { get; set; }
-        
+        public IEnumerable<Subject>? Subjects { get; set; }
     }
 }
 

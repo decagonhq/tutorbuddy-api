@@ -9,8 +9,7 @@ namespace TutorBuddy.Core.Models
 {
     public class Session: BaseEntity
     {
-        public Subject Subject { get; set; }
-        public Tutor Tutor { get; set; }
+        public TutorSubjects TutorSubject { get; set; }
         public User Student { get; set; }
         public DateTime Startime { get; set; }
         public DateTime EndTime { get; set; }

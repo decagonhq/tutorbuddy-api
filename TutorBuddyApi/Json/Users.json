@@ -1,0 +1,134 @@
+﻿[
+  {
+    "Id": "44415fe5-5a2c-49c1-ad25-4331a313ea82",
+    "FirstName": "Mathew",
+    "LastName": "Joe",
+    "UserName": "robertsonhart@maaluba.com",
+    "Email": "robertsonhart@maaluba.com",
+    "PhoneNumber": "+2348175023764",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+    
+  },
+  {
+    "Id": "7dfa1ecc-2230-444e-9c7e-955119e42ff5",
+    "FirstName": "Katheryn",
+    "LastName": "Dickerson",
+    "UserName": "katheryndickerson@baluba.com",
+    "Email": "katheryndickerson@baluba.com",
+    "PhoneNumber": "+2348304493554",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true,
+    "Tutor": {
+      "BioNote": "I am software engineer with 10 experience in writing Python",
+      "Price": 1500.00,
+      "UnitOfPrice":"hour"
+    }
+  },
+  {
+    "Id": "27e9e275-adde-4b6d-881c-6397b46a9020",
+    "FirstName": "Downs",
+    "LastName": "Grant",
+    "UserName": "downsgrant@baluba.com",
+    "Email": "downsgrant@baluba.com",
+    "PhoneNumber": "+2348914432180",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true,
+    "Tutor": {
+      "BioNote": "I am a devOP engineer with 10 experience in AWS, Azure and Google Cloud",
+      "Price": 2500.00,
+      "UnitOfPrice": "hour"
+    }
+  },
+  {
+    "Id": "f40276cc-ce31-474a-8a7e-a697ca82574b",
+    "FirstName": "Sharpe",
+    "LastName": "Woods",
+    "UserName": "sharpewoods@baluba.com",
+    "Email": "sharpewoods@baluba.com",
+    "PhoneNumber": "+2348884253365",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true,
+    "Tutor": {
+      "BioNote": "I am a Network Engineer with 10 experience",
+      "Price": 3500.00,
+      "UnitOfPrice": "hour"
+    }
+  },
+  {
+    "Id": "d7c29369-929b-4426-b54d-04b5f1560b50",
+    "FirstName": "Mindy",
+    "LastName": "Leon",
+    "UserName": "mindyleon@baluba.com",
+    "Email": "mindyleon@baluba.com",
+    "PhoneNumber": "+2348214403209",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true,
+    "Tutor": {
+      "BioNote": "I am a Database Administrator with 10 experience working with MsSQL, Oracle, MySQL",
+      "Price": 1500.00,
+      "UnitOfPrice": "hour"
+    }
+  },
+  {
+    "Id": "794d242b-7669-4c61-a5e2-b6ab35f4a8d6",
+    "FirstName": "Robertson",
+    "LastName": "Hart",
+    "UserName": "robertsonhart@baluba.com",
+    "Email": "robertsonhart@baluba.com",
+    "PhoneNumber": "+2348184123764",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  },
+  {
+    "Id": "2bf60ad0-f81b-4e9e-b9f6-5b7755d4d3f0",
+    "FirstName": "Deborah",
+    "LastName": "Dickerson",
+    "UserName": "katheryndickerson@paluba.com",
+    "Email": "katheryndickerson@paluba.com",
+    "PhoneNumber": "+2348304493774",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  },
+  {
+    "Id": "8dcc5008-7e40-496e-b81f-cb731c352d0c",
+    "FirstName": "Downson",
+    "LastName": "Grant",
+    "UserName": "downsgrant@laluba.com",
+    "Email": "downsgrant@laluba.com",
+    "PhoneNumber": "+2348914432111",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  },
+  {
+    "Id": "eacdea38-c41b-434b-8f4d-b0974f100ded",
+    "FirstName": "Sharpe",
+    "LastName": "John",
+    "UserName": "sharpewoods@waluba.com",
+    "Email": "sharpewoods@waluba.com",
+    "PhoneNumber": "+2348884893365",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  },
+  {
+    "Id": "0b2d859b-8de2-48b1-afc1-270679270ccf",
+    "FirstName": "Mendy",
+    "LastName": "Leon",
+    "UserName": "mindyleon@kaluba.com",
+    "Email": "mindyleon@kaluba.com",
+    "PhoneNumber": "+2348218503209",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  },
+  {
+    "Id": "2f05f94f-1d59-4078-ae13-0d39f068bb5d",
+    "FirstName": "Robertson",
+    "LastName": "Joe",
+    "UserName": "robertsonhart@daluba.com",
+    "Email": "robertsonhart@daluba.com",
+    "PhoneNumber": "+2348180023764",
+    "Avatar": "https://generated.photos/face-generator/62",
+    "IsActive": true
+  }
+]
+

@@ -8,7 +8,7 @@ namespace TutorBuddy.Core.DTOs
         public string? Email { get; set; }
         public string? AvatarUrl { get; set; }
 
-        public IEnumerable<string> Subjects { get; set; }
+        
 
     }
 }

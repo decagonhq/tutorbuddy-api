@@ -35,8 +35,8 @@ namespace TutorBuddy.Core.Services
                     LastName = user.LastName,
                     FirstName = user.FirstName,
                     Email = user.Email,
-                    AvatarUrl = user.AvatarUrl,
-                    Subjects = null ?? user.AreaOfInterests.Select(x => x.Subjects.Select(x => x.Topic).ToString())
+                    AvatarUrl = user.AvatarUrl
+                    
                 };
 
                 response.Data = result;

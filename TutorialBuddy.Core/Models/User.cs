@@ -12,9 +12,11 @@ namespace TutorBuddy.Core.Models
         public string? PublicUrl { get; set; }
         public bool IsActive { get; set; }
         public DateTime? RefreshTokenExpiryTime { get; set; }
-        public IEnumerable<Tutor> Tutors { get; set; }
-        public IEnumerable<Reminder> Reminders { get; set; }
-        public IEnumerable<AreaOfInterest> AreaOfInterests { get; set;}
+        public Tutor Tutors { get; set; }
+        public IEnumerable<Reminder>? Reminders { get; set; }
+        public IEnumerable<Notification>? Notifications { get; set; }
+        public IEnumerable<Session>? Sessions { get; set; }
+
 
     }
 }
