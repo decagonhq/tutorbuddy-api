@@ -2,7 +2,7 @@ name: .NET CI/CD
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "cicd-setup" ]
 
 env:
   ECS_CLUSTER: tutorbuddy-api  
