@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddyApi;
+using TutorialBuddy.Infastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,10 @@ using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider()
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     new DbBootstrapEx(roleManager);
 }
+
+//Options Bindings
+var cloudinaryOptions = new CloudinarySettings();
+configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
