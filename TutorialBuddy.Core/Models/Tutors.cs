@@ -15,6 +15,7 @@ namespace TutorBuddy.Core.Models
         public double? Price { get; set; }
         public string? UnitOfPrice { get; set; }
         public User User { get; set; }
-        public Availability Availability { get; set; }
+        public IEnumerable<Availability> Availability { get; set; }
+       
     }
 }
