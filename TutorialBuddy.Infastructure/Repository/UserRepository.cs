@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TutorBuddy.Core.Enums;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -34,27 +35,25 @@ namespace TutorBuddy.Infrastructure.Repository
             return user;
         }
 
-        public async Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects)
-        {
-            if (subjects.Any())
-            {
-                var userAreaOfInterest = new AreaOfInterest()
-                {
-                    User = user,
-                    Subjects = subjects
-                };
-                await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
-            }
-        }
+        //public async Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects)
+        //{
+        //    if (subjects.Any())
+        //    {
+        //        var userAreaOfInterest = new AreaOfInterest()
+        //        {
+        //            User = user,
+        //            Subjects = subjects
+        //        };
+        //        await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
+        //    }
+        //}
 
         public async Task<User> GetAUser(string Id, string role)
         {
-            if(role == "Student")
+            if(role == UserRole.Student.ToString())
             {
                 var user = await _appDbContext.Users
                         .Where(x => x.Id == Id)
-                        .Include(x => x.AreaOfInterests)
-                            .ThenInclude(x => x.Subjects)
                         .FirstOrDefaultAsync();
                 return user;
             }
