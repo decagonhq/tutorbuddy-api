@@ -1,24 +1,28 @@
 ﻿[
   {
     "ID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5",
-    "Day": "Monday",
-
+    "Day": "Monday"
+    
   },
   {
     "ID": "83585bec-a51e-41cf-9789-862365e8963c",
     "Day": "Tuesday"
+    
   },
   {
     "ID": "8541dc91-e125-4cc9-aeda-dd25678c5775",
     "Day": "Wednesday"
+    
   },
   {
     "ID": "cddc92bc-9403-48d4-b23f-f41fd7485a41",
     "Day": "Thursday"
+   
   },
   {
     "ID": "6284fb23-e480-4955-88d7-4eb8e4abc42f",
     "Day": "Friday"
+    
   }
 ]
 

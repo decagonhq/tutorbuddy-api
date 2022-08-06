@@ -25,8 +25,8 @@ namespace TutorBuddy.Infrastructure.Seeder
 
             await CreateUserRolesAsync(_roleManager);
             await SeedCategory(_dbContext);     // seed categories and its subject
-            await SeedAvalaibility(_dbContext);
             await SeedUser(_userManager, _dbContext);
+            await SeedAvalaibility(_dbContext);
 
         }
 
@@ -99,7 +99,7 @@ namespace TutorBuddy.Infrastructure.Seeder
                 var avaliability = SeederHelper<Availability>.GetData("Avaliability.json");
 
                 await dbContext.Availabilities.AddRangeAsync(avaliability);
-            }
+            }   
         }
     }
 }

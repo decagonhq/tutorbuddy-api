@@ -8,7 +8,7 @@ namespace TutorBuddy.Core.Models
 {
     public class TutorSubjects: BaseEntity
     {
-        public string SubjectID{ get; set; }
+        public string SubjectID { get; set; }
         public string TutorID { get; set; }
         public Subject Subject { get; set; }
         public Tutor Tutor { get; set; }
