@@ -282,7 +282,8 @@ namespace TutorBuddy.Infrastructure.Migrations
                     ID = table.Column<string>(type: "text", nullable: false),
                     CategoryID = table.Column<string>(type: "text", nullable: false),
                     Topic = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
+                    Thumbnail = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)

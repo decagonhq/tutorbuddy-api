@@ -475,7 +475,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<bool>("IsDepricated")
@@ -484,6 +483,9 @@ namespace TutorBuddy.Infrastructure.Migrations
                     b.Property<DateTime?>("LastModifiedOn")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Thumbnail")
+                        .HasColumnType("text");
 
                     b.Property<string>("Topic")
                         .IsRequired()
@@ -836,7 +838,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("TutorBuddy.Core.Models.Tutor", "Tutor")
-                        .WithMany()
+                        .WithMany("TutorSubjects")
                         .HasForeignKey("TutorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -849,6 +851,11 @@ namespace TutorBuddy.Infrastructure.Migrations
             modelBuilder.Entity("TutorBuddy.Core.Models.Category", b =>
                 {
                     b.Navigation("Subjects");
+                });
+
+            modelBuilder.Entity("TutorBuddy.Core.Models.Tutor", b =>
+                {
+                    b.Navigation("TutorSubjects");
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.TutorSubjects", b =>

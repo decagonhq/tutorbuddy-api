@@ -19,7 +19,8 @@ namespace TutorBuddy.Infrastructure.Seeder
                 await dbContext.Database.EnsureCreatedAsync();
 
                 await CreateUserRolesAsync(roleManager);
-               // await SeedUser(userManager, dbContext);
+                await SeedCategory(dbContext);     // seed categories and its subject
+                await SeedUser(userManager, dbContext);
                 
             }
 
@@ -27,6 +28,7 @@ namespace TutorBuddy.Infrastructure.Seeder
             {
                 var userRoles = new List<IdentityRole>
             {
+                new IdentityRole(UserRole.Admin.ToString()),
                 new IdentityRole(UserRole.Tutor.ToString()),
                 new IdentityRole(UserRole.Student.ToString()),
                
@@ -40,41 +42,49 @@ namespace TutorBuddy.Infrastructure.Seeder
                 }
             }
 
-            //private static async Task SeedUser(UserManager<User> userManager, TutorBuddyContext dbContext)
-            //{
-            //    if (!dbContext.Users.Any())
-            //    {
-            //        var users = SeederHelper<User>.GetData("User.json");
-            //        int count = 1;
-            //        foreach (var user in users)
-            //        {
-            //            if(count == 1)
-            //            {
-            //                user.EmailConfirmed = true;
-            //                var result = await userManager.CreateAsync(user, "Ja@125");
-            //                if (result.Succeeded)
-            //                {
-            //                    await userManager.AddToRoleAsync(user, UserRoles.Admin.ToString());
-            //                }
-            //            }
-            //            else if(count < 6)
-            //            {
-            //                user.EmailConfirmed = true;
-            //                await userManager.CreateAsync(user, "Ja@124");
-            //                await userManager.AddToRoleAsync(user, UserRoles.Dealer.ToString());
-            //            }
-            //            else
-            //            {
-            //                user.EmailConfirmed = true;
-            //                await userManager.CreateAsync(user, "Ja@123");
-            //                await userManager.AddToRoleAsync(user, UserRoles.Customer.ToString());
-            //            }
-            //            count++;
-            //        }
-            //    }
-            //}
+            private static async Task SeedUser(UserManager<User> userManager, TutorBuddyContext dbContext)
+            {
+                if (!dbContext.Users.Any())
+                {
+                    var users = SeederHelper<User>.GetData("Users.json");
+                    int count = 1;
+                    foreach (var user in users)
+                    {
+                        if (count == 1)
+                        {
+                            user.EmailConfirmed = true;
+                            var result = await userManager.CreateAsync(user, "Jan1@125");
+                            if (result.Succeeded)
+                            {
+                                await userManager.AddToRoleAsync(user, UserRole.Admin.ToString());
+                            }
+                        }
+                        else if (count < 6)
+                        {
+                            user.EmailConfirmed = true;
+                            await userManager.CreateAsync(user, "Jan2@124");
+                            await userManager.AddToRoleAsync(user, UserRole.Tutor.ToString());
+                        }
+                        else
+                        {
+                            user.EmailConfirmed = true;
+                            await userManager.CreateAsync(user, "Jan3@123");
+                            await userManager.AddToRoleAsync(user, UserRole.Student.ToString());
+                        }
+                        count++;
+                    }
+                }
+            }
 
-          
+            private static async Task SeedCategory(TutorBuddyContext dbContext)
+            {
+                if (!dbContext.Categories.Any())
+                {
+                    var categories = SeederHelper<Category>.GetData("Category.json");
+
+                    await dbContext.Categories.AddRangeAsync(categories);
+                }
+            }
         }
     }
 }

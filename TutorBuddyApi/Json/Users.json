@@ -27,6 +27,13 @@
         { "Day": "Monday" },
         { "Day": "Tuesday" },
         { "Day": "Friday" }
+      ],
+      "TutorSubjects": [
+        {
+          "ID": "949a3857-c570-4259-8bf8-ce41706899c4",
+          "SubjectId": "f3612fa3-5803-4a9b-a3a3-7162d7135b1e"
+        },
+        
       ]
     }
 
@@ -70,6 +77,20 @@
         { "Day": "Thursday" },
         { "Day": "Wednesday" },
         { "Day": "Friday" }
+      ],
+      "TutorSubjects": [
+        {
+          "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
+          "SubjectId": "e164871a-56e4-40a7-a9e8-5e8877cf7078"
+        },
+        {
+          "ID": "cb5982a7-8867-479e-bb7c-c566195decb8",
+          "SubjectId": "0b6fcccc-6418-4de5-9263-b591f5930ea4"
+        },
+        {
+          "ID": "20927614-f374-440e-baf4-90d7a64d47ae",
+          "SubjectId": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
+        }
       ]
     }
    
@@ -103,7 +124,32 @@
     "Email": "robertsonhart@baluba.com",
     "PhoneNumber": "+2348184123764",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Tutor": {
+      "BioNote": "I am a basic science tutor with 20 years experience",
+      "Price": 1500.00,
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "Day": "Monday" },
+        { "Day": "Tuesday" },
+        { "Day": "Wednesday" }
+      ],
+      "TutorSubjects": [
+        {
+          "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
+          "SubjectId": "e164871a-56e4-40a7-a9e8-5e8877cf7078"
+        },
+        {
+          "ID": "cb5982a7-8867-479e-bb7c-c566195decb8",
+          "SubjectId": "0b6fcccc-6418-4de5-9263-b591f5930ea4"
+        },
+        {
+          "ID": "20927614-f374-440e-baf4-90d7a64d47ae",
+          "SubjectId": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
+        }
+      ]
+    }
+    }
   },
   {
     "Id": "2bf60ad0-f81b-4e9e-b9f6-5b7755d4d3f0",

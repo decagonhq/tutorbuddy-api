@@ -16,6 +16,7 @@ namespace TutorBuddy.Core.Models
         public string? UnitOfPrice { get; set; }
         public User User { get; set; }
         public IEnumerable<Availability> Availability { get; set; }
-       
+        public IEnumerable<TutorSubjects> TutorSubjects { get; set; }
+
     }
 }
