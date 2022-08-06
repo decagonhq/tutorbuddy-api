@@ -13,6 +13,7 @@ using TutorialBuddy.Core;
 using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
+using TutorBuddy.Infrastructure.Seeder;
 
 namespace FindRApi.Extensions
 {
@@ -63,6 +64,8 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITutorRepository, TutorRepository>();
             builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+            builder.Services.AddScoped<Seeder>();
+
 
             builder.Services.AddAuthentication(auth =>
             {
