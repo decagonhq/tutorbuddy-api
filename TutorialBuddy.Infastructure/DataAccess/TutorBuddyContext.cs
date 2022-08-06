@@ -10,6 +10,26 @@ namespace TutorBuddy.Infrastructure.DataAccess
         {
         }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries<BaseEntity>())
+            {
+                switch (item.State)
+                {
+                    case EntityState.Modified:
+                        item.Entity.LastModifiedOn = DateTime.UtcNow;
+                        break;
+                    case EntityState.Added:
+                        item.Entity.ID = Guid.NewGuid().ToString();
+                        item.Entity.CreatedOn = DateTime.UtcNow;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

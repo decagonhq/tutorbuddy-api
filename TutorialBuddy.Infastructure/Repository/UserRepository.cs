@@ -62,7 +62,7 @@ namespace TutorBuddy.Infrastructure.Repository
             {
                 var user = await _appDbContext.Users
                         .Where(x => x.Id == Id)
-                        .Include(x => x.Tutors)
+                        .Include(x => x.Tutor)
                         .FirstOrDefaultAsync();
                 return user;
             }

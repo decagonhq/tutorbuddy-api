@@ -8,7 +8,7 @@
     "PhoneNumber": "+2348175023764",
     "Avatar": "https://generated.photos/face-generator/62",
     "IsActive": true
-    
+
   },
   {
     "Id": "7dfa1ecc-2230-444e-9c7e-955119e42ff5",
@@ -22,19 +22,8 @@
     "Tutor": {
       "BioNote": "I am software engineer with 10 experience in writing Python",
       "Price": 1500.00,
-      "UnitOfPrice": "hour",
-      "Availability": [
-        { "Day": "Monday" },
-        { "Day": "Tuesday" },
-        { "Day": "Friday" }
-      ],
-      "TutorSubjects": [
-        {
-          "ID": "949a3857-c570-4259-8bf8-ce41706899c4",
-          "SubjectId": "f3612fa3-5803-4a9b-a3a3-7162d7135b1e"
-        },
-        
-      ]
+      "UnitOfPrice": "hour"
+      
     }
 
 
@@ -51,14 +40,10 @@
     "Tutor": {
       "BioNote": "I am a devOP engineer with 10 experience in AWS, Azure and Google Cloud",
       "Price": 2500.00,
-      "UnitOfPrice": "hour",
-      "Availability": [
-        { "Day": "Monday" },
-        { "Day": "Wednesday" },
-        { "Day": "Friday" }
-      ]
+      "UnitOfPrice": "hour"
+      
     }
-   
+
   },
   {
     "Id": "f40276cc-ce31-474a-8a7e-a697ca82574b",
@@ -73,11 +58,7 @@
       "BioNote": "I am a Network Engineer with 10 experience",
       "Price": 3500.00,
       "UnitOfPrice": "hour",
-      "Availability": [
-        { "Day": "Thursday" },
-        { "Day": "Wednesday" },
-        { "Day": "Friday" }
-      ],
+     
       "TutorSubjects": [
         {
           "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
@@ -93,7 +74,7 @@
         }
       ]
     }
-   
+
   },
   {
     "Id": "d7c29369-929b-4426-b54d-04b5f1560b50",
@@ -107,14 +88,10 @@
     "Tutor": {
       "BioNote": "I am a Database Administrator with 10 experience working with MsSQL, Oracle, MySQL",
       "Price": 1500.00,
-      "UnitOfPrice": "hour",
-      "Availability": [
-        { "Day": "Monday" },
-        { "Day": "Tuesday" },
-        { "Day": "Wednesday" }
-      ]
+      "UnitOfPrice": "hour"
+      
     }
-    
+
   },
   {
     "Id": "794d242b-7669-4c61-a5e2-b6ab35f4a8d6",
@@ -129,11 +106,6 @@
       "BioNote": "I am a basic science tutor with 20 years experience",
       "Price": 1500.00,
       "UnitOfPrice": "hour",
-      "Availability": [
-        { "Day": "Monday" },
-        { "Day": "Tuesday" },
-        { "Day": "Wednesday" }
-      ],
       "TutorSubjects": [
         {
           "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
@@ -148,7 +120,6 @@
           "SubjectId": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
         }
       ]
-    }
     }
   },
   {
