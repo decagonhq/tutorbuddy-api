@@ -35,11 +35,6 @@ using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<Seeder>();
 db.Seed().GetAwaiter().GetResult();
 
-using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider())
-{
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    new DbBootstrapEx(roleManager);
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
