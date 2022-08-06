@@ -12,6 +12,7 @@ namespace TutorBuddy.Core.Models
         public string Topic { get; set; }
         public string? Thumbnail { get; set; }
         public string? Description { get; set; }
+        public IEnumerable<TutorSubjects> TutorSubjects { get; set; }
 
     }
 }

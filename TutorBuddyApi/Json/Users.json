@@ -22,8 +22,19 @@
     "Tutor": {
       "BioNote": "I am software engineer with 10 experience in writing Python",
       "Price": 1500.00,
-      "UnitOfPrice": "hour"
-      
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "AvailabilityID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5" },
+        { "AvailabilityID": "8541dc91-e125-4cc9-aeda-dd25678c5775" },
+        { "AvailabilityID": "83585bec-a51e-41cf-9789-862365e8963c" }
+      ],
+      "TutorSubjects": [
+        {
+          "ID": "ee626cbf-2626-4556-9d31-cac07a6f019f",
+          "SubjectID": "f3612fa3-5803-4a9b-a3a3-7162d7135b1e"
+        }
+       
+      ]
     }
 
 
@@ -40,8 +51,13 @@
     "Tutor": {
       "BioNote": "I am a devOP engineer with 10 experience in AWS, Azure and Google Cloud",
       "Price": 2500.00,
-      "UnitOfPrice": "hour"
-      
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "AvailabilityID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5" },
+        { "AvailabilityID": "8541dc91-e125-4cc9-aeda-dd25678c5775" },
+        { "AvailabilityID": "6284fb23-e480-4955-88d7-4eb8e4abc42f" }
+      ]
+
     }
 
   },
@@ -58,21 +74,12 @@
       "BioNote": "I am a Network Engineer with 10 experience",
       "Price": 3500.00,
       "UnitOfPrice": "hour",
-     
-      "TutorSubjects": [
-        {
-          "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
-          "SubjectId": "e164871a-56e4-40a7-a9e8-5e8877cf7078"
-        },
-        {
-          "ID": "cb5982a7-8867-479e-bb7c-c566195decb8",
-          "SubjectId": "0b6fcccc-6418-4de5-9263-b591f5930ea4"
-        },
-        {
-          "ID": "20927614-f374-440e-baf4-90d7a64d47ae",
-          "SubjectId": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
-        }
+      "Availability": [
+        { "AvailabilityID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5" },
+        { "AvailabilityID": "cddc92bc-9403-48d4-b23f-f41fd7485a41" },
+        { "AvailabilityID": "6284fb23-e480-4955-88d7-4eb8e4abc42f" }
       ]
+      
     }
 
   },
@@ -88,8 +95,13 @@
     "Tutor": {
       "BioNote": "I am a Database Administrator with 10 experience working with MsSQL, Oracle, MySQL",
       "Price": 1500.00,
-      "UnitOfPrice": "hour"
-      
+      "UnitOfPrice": "hour",
+      "Availability": [
+        { "AvailabilityID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5" },
+        { "AvailabilityID": "cddc92bc-9403-48d4-b23f-f41fd7485a41" },
+        { "AvailabilityID": "6284fb23-e480-4955-88d7-4eb8e4abc42f" }
+      ]
+
     }
 
   },
@@ -106,18 +118,23 @@
       "BioNote": "I am a basic science tutor with 20 years experience",
       "Price": 1500.00,
       "UnitOfPrice": "hour",
+      "Availability": [
+        { "AvailabilityID": "83585bec-a51e-41cf-9789-862365e8963c" },
+        { "AvailabilityID": "cddc92bc-9403-48d4-b23f-f41fd7485a41" },
+        { "AvailabilityID": "6284fb23-e480-4955-88d7-4eb8e4abc42f" }
+      ],
       "TutorSubjects": [
         {
           "ID": "e831925d-1cd1-4e37-9e57-bc29789cc6de",
-          "SubjectId": "e164871a-56e4-40a7-a9e8-5e8877cf7078"
+          "SubjectID": "e164871a-56e4-40a7-a9e8-5e8877cf7078"
         },
         {
           "ID": "cb5982a7-8867-479e-bb7c-c566195decb8",
-          "SubjectId": "0b6fcccc-6418-4de5-9263-b591f5930ea4"
+          "SubjectID": "0b6fcccc-6418-4de5-9263-b591f5930ea4"
         },
         {
           "ID": "20927614-f374-440e-baf4-90d7a64d47ae",
-          "SubjectId": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
+          "SubjectID": "e5015adb-58f0-4d81-91b1-475a1aa8d878"
         }
       ]
     }
