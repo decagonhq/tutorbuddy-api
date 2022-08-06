@@ -9,7 +9,7 @@ namespace TutorBuddy.Core.Models
     public class Availability: BaseEntity
     {
         public string Day { get; set; }
-        public IEnumerable<Tutor> Tutors { get; set; }
+        public IEnumerable<TutorAvaliability> TutorAvaliabilities { get; set; }
 
     }
 }
