@@ -107,7 +107,12 @@ namespace TutorBuddy.Infrastructure.Seeder
         {
             if (!dbContext.TutorSubjects.Any())
             {
-                var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
+                // var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
+                var tutorSubjects = new TutorSubject()
+                {
+                    SubjectID = "e164871a-56e4-40a7-a9e8-5e8877cf7078",
+                    TutorID = "7dfa1ecc-2230-444e-9c7e-955119e42ff5"
+                };
 
                 await dbContext.TutorSubjects.AddRangeAsync(tutorSubjects);
             }

@@ -10,8 +10,6 @@ namespace TutorBuddy.Core.Models
     {
         public string SubjectID { get; set; }
         public string TutorID { get; set; }
-        public Subject Subject { get; set; }
-        public Tutor Tutor { get; set; }
         public IEnumerable<Session>? Sessions { get; set; }
 
     }

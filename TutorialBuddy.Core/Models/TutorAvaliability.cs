@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TutorBuddy.Core.Models
 {
-	public class TutorAvaliability : BaseEntity
+	public class TutorAvaliability 
 	{
-       
-        public Tutor Tutor { get; set; }
+
+        public string AvailabilityID { get; set; }
+        public string TutorID { get; set; }
         
-        public Availability Availability { get; set; }
     }
 }
 
