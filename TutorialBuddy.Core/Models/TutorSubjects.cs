@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TutorBuddy.Core.Models
 {
-    public class TutorSubjects: BaseEntity
+    public class TutorSubject: BaseEntity
     {
         public string SubjectID { get; set; }
         public string TutorID { get; set; }

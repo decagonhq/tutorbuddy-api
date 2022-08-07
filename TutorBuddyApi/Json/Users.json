@@ -23,7 +23,14 @@
       "BioNote": "I am software engineer with 10 experience in writing Python",
       "Price": 1500.00,
       "UnitOfPrice": "hour"
-    }
+    },
+    "Notifications": [
+      {
+        "SenderId": "8dcc5008-7e40-496e-b81f-cb731c352d0c",
+        "Message": "Request for Session",
+        "Isread": true
+      }
+    ]
 
 
   },
@@ -40,7 +47,14 @@
       "BioNote": "I am a devOP engineer with 10 experience in AWS, Azure and Google Cloud",
       "Price": 2500.00,
       "UnitOfPrice": "hour"
-    }
+    },
+    "Notifications": [
+      {
+        "SenderId": "eacdea38-c41b-434b-8f4d-b0974f100ded",
+        "Message": "Request for Session",
+        "Isread": true
+      }
+    ]
 
   },
   {
@@ -56,7 +70,14 @@
       "BioNote": "I am a Network Engineer with 10 experience",
       "Price": 3500.00,
       "UnitOfPrice": "hour"
-    }
+    },
+    "Notifications": [
+      {
+        "SenderId": "0b2d859b-8de2-48b1-afc1-270679270ccf",
+        "Message": "Request for Session",
+        "Isread": true
+      }
+    ]
 
   },
   {
@@ -73,7 +94,14 @@
       "Price": 1500.00,
       "UnitOfPrice": "hour"
 
-    }
+    },
+    "Notifications": [
+      {
+        "SenderId": "2f05f94f-1d59-4078-ae13-0d39f068bb5d",
+        "Message": "Request for Session",
+        "Isread": true
+      }
+    ]
 
   },
   {
@@ -89,8 +117,15 @@
       "BioNote": "I am a basic science tutor with 20 years experience",
       "Price": 1500.00,
       "UnitOfPrice": "hour"
-      
-    }
+
+    },
+    "Notifications": [
+      {
+        "SenderId": "2bf60ad0-f81b-4e9e-b9f6-5b7755d4d3f0",
+        "Message": "Request for Session",
+        "Isread": true
+      }
+    ]
   },
   {
     "Id": "2bf60ad0-f81b-4e9e-b9f6-5b7755d4d3f0",
@@ -100,7 +135,14 @@
     "Email": "katheryndickerson@paluba.com",
     "PhoneNumber": "+2348304493774",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Notifications": [
+      {
+        "SenderId": "7dfa1ecc-2230-444e-9c7e-955119e42ff5",
+        "Message": "Request for Session accepted",
+        "Isread": false
+      }
+    ]
   },
   {
     "Id": "8dcc5008-7e40-496e-b81f-cb731c352d0c",
@@ -110,7 +152,14 @@
     "Email": "downsgrant@laluba.com",
     "PhoneNumber": "+2348914432111",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Notifications": [
+      {
+        "SenderId": "27e9e275-adde-4b6d-881c-6397b46a9020",
+        "Message": "Request for Session accepted",
+        "Isread": false
+      }
+    ]
   },
   {
     "Id": "eacdea38-c41b-434b-8f4d-b0974f100ded",
@@ -120,7 +169,14 @@
     "Email": "sharpewoods@waluba.com",
     "PhoneNumber": "+2348884893365",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Notifications": [
+      {
+        "SenderId": "27e9e275-adde-4b6d-881c-6397b46a9020",
+        "Message": "Request for Session accepted",
+        "Isread": false
+      }
+    ]
   },
   {
     "Id": "0b2d859b-8de2-48b1-afc1-270679270ccf",
@@ -130,7 +186,14 @@
     "Email": "mindyleon@kaluba.com",
     "PhoneNumber": "+2348218503209",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Notifications": [
+      {
+        "SenderId": "f40276cc-ce31-474a-8a7e-a697ca82574b",
+        "Message": "Request for Session accepted",
+        "Isread": false
+      }
+    ]
   },
   {
     "Id": "2f05f94f-1d59-4078-ae13-0d39f068bb5d",
@@ -140,7 +203,14 @@
     "Email": "robertsonhart@daluba.com",
     "PhoneNumber": "+2348180023764",
     "Avatar": "https://generated.photos/face-generator/62",
-    "IsActive": true
+    "IsActive": true,
+    "Notifications": [
+      {
+        "SenderId": "d7c29369-929b-4426-b54d-04b5f1560b50",
+        "Message": "Request for Session accepted",
+        "Isread": false
+      }
+    ]
   }
 ]
 

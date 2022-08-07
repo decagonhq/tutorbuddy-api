@@ -41,8 +41,8 @@ namespace TutorBuddy.Infrastructure.DataAccess
         public DbSet<RateStudent> RateStudents { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<RateTutor> RateTutors { get; set; }
-        public DbSet<Tutor> Tutor { get; set; }
-        public DbSet<TutorSubjects> TutorSubjects { get; set; }
+        public DbSet<Tutor> Tutors { get; set; }
+        public DbSet<TutorSubject> TutorSubjects { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<TutorComment> TutorComments { get; set; }
@@ -51,5 +51,6 @@ namespace TutorBuddy.Infrastructure.DataAccess
         public DbSet<Category> Categories { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<TutorAvaliability> TutorAvaliabilities { get; set; }
+        
     }
 }
