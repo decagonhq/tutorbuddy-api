@@ -23,6 +23,7 @@
       "BioNote": "I am software engineer with 10 experience in writing Python",
       "Price": 1500.00,
       "UnitOfPrice": "hour"
+      
     },
     "Notifications": [
       {
@@ -70,6 +71,7 @@
       "BioNote": "I am a Network Engineer with 10 experience",
       "Price": 3500.00,
       "UnitOfPrice": "hour"
+      
     },
     "Notifications": [
       {

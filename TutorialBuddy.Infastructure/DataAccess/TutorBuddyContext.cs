@@ -20,8 +20,10 @@ namespace TutorBuddy.Infrastructure.DataAccess
                         item.Entity.LastModifiedOn = DateTime.UtcNow;
                         break;
                     case EntityState.Added:
-                        item.Entity.ID = Guid.NewGuid().ToString();
+                        if (item.Entity.ID == null)
+                            item.Entity.ID = Guid.NewGuid().ToString();
                         item.Entity.CreatedOn = DateTime.UtcNow;
+                        item.Entity.IsDepricated = false;
                         break;
                     default:
                         break;
@@ -34,6 +36,14 @@ namespace TutorBuddy.Infrastructure.DataAccess
         {
             base.OnModelCreating(builder);
             builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+
+            // Set up composite key on TutorAvaliability model 
+            builder.Entity<TutorAvaliability>().HasKey(table => new {
+                table.AvailabilityID,
+                table.TutorID
+            });
+
+
         }
 
        

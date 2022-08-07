@@ -27,7 +27,7 @@ namespace TutorBuddy.Infrastructure.Seeder
             await SeedCategory(_dbContext);     // seed categories and its subject
             await SeedAvalaibility(_dbContext);
             await SeedUser(_userManager, _dbContext);
-            await SeedTutorSubject(_dbContext);
+            //await SeedTutorSubject(_dbContext);
 
         }
 
@@ -103,19 +103,19 @@ namespace TutorBuddy.Infrastructure.Seeder
             }   
         }
 
-        private static async Task SeedTutorSubject(TutorBuddyContext dbContext)
-        {
-            if (!dbContext.TutorSubjects.Any())
-            {
-                // var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
-                var tutorSubjects = new TutorSubject()
-                {
-                    SubjectID = "e164871a-56e4-40a7-a9e8-5e8877cf7078",
-                    TutorID = "7dfa1ecc-2230-444e-9c7e-955119e42ff5"
-                };
+        //private static async Task SeedTutorSubject(TutorBuddyContext dbContext)
+        //{
+        //    if (!dbContext.TutorSubjects.Any())
+        //    {
+        //        //var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
+        //        var tutorSubjects = new TutorSubject()
+        //        {
+        //            SubjectID = "e164871a-56e4-40a7-a9e8-5e8877cf7078",
+        //            TutorID = "794d242b-7669-4c61-a5e2-b6ab35f4a8d6"
+        //        };
 
-                await dbContext.TutorSubjects.AddRangeAsync(tutorSubjects);
-            }
-        }
+        //        await dbContext.TutorSubjects.AddRangeAsync(tutorSubjects);
+        //    }
+        //}
     }
 }
