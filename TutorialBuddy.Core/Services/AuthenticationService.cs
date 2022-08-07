@@ -33,81 +33,58 @@ namespace TutorBuddy.Core.Services
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
         }
 
-        public async Task<ApiResponse<string>> AddStudent(AddStudentDTO addStudentDTO)
+        //public async Task<ApiResponse<string>> AddUser(RegisterDTO model)
+        //{
+        //    var response = new ApiResponse<string>();
+
+
+        //    using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+        //    {
+        //        var (emailResponse, registerResponse) = await Register(model);
+        //        if (registerResponse.Success)
+        //        {
+        //            if (emailResponse)
+        //            {
+        //                _logger.LogInformation("Mail sent successfully");
+        //                response.StatusCode = (int)HttpStatusCode.Created;
+        //                response.Success = true;
+        //                response.Data = registerResponse.Data.Id;
+        //                response.Message = "User created successfully! Please check your mail to verify your account.";
+        //                transaction.Complete();
+        //                return response;
+        //            }
+        //            _logger.LogInformation("Mail service failed");
+        //            transaction.Dispose();
+        //            response.StatusCode = (int)HttpStatusCode.BadRequest;
+        //            response.Success = false;
+        //            response.Message = "Registration failed. Please try again";
+        //            return response;
+        //        }
+
+        //        response.StatusCode = registerResponse.StatusCode;
+        //        response.Success = registerResponse.Success;
+        //        response.Data = string.Empty;
+        //        response.Message = registerResponse.Message;
+        //        transaction.Complete();
+        //        return response;
+        //    }
+        //}
+
+        public async Task<ApiResponse<string>> AddTutor(RegisterDTO model)
         {
             var response = new ApiResponse<string>();
-
-            var baseUser = new BaseRegisterDTO()
-            {
-                FirstName = addStudentDTO.FirstName,
-                LastName = addStudentDTO.LastName,
-                Email = addStudentDTO.Email,
-                Password = addStudentDTO.Password
-            };
-
+            
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                var (emailResponse, registerResponse) = await Register(baseUser, UserRole.Tutor.ToString());
+                var (emailResponse, registerResponse) = await Register(model);
                 if (registerResponse.Success)
                 {
                     if (emailResponse)
                     {
                         _logger.LogInformation("Mail sent successfully");
-                        var subjects = new List<Subject>();
-                        subjects.AddRange(addStudentDTO.AreaOfInterest.Select(s => new Subject()
-                        {
-                            Topic = s.Topic,
-                            Description = s.Description
-                        }));
-                        //await _unitOfWork.UserRepository.AddUserAreaOfInterestA(registerResponse.Data, subjects);
-                        //await _unitOfWork.Save();
-                        response.StatusCode = (int)HttpStatusCode.Created;
-                        response.Success = true;
-                        response.Data = registerResponse.Data.Id;
-                        response.Message = "User created successfully! Please check your mail to verify your account.";
-                        transaction.Complete();
-                        return response;
-                    }
-                    _logger.LogInformation("Mail service failed");
-                    transaction.Dispose();
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    response.Success = false;
-                    response.Message = "Registration failed. Please try again";
-                    return response;
-                }
-
-                response.StatusCode = registerResponse.StatusCode;
-                response.Success = registerResponse.Success;
-                response.Data = string.Empty;
-                response.Message = registerResponse.Message;
-                transaction.Complete();
-                return response;
-            }
-        }
-
-        public async Task<ApiResponse<string>> AddTutor(AddTutorDTO addTutorDTO)
-        {
-            var response = new ApiResponse<string>();
-
-            var baseUser = new BaseRegisterDTO()
-            {
-                FirstName = addTutorDTO.FirstName,
-                LastName = addTutorDTO.LastName,
-                Email = addTutorDTO.Email,
-                Password = addTutorDTO.Password
-            };
-
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var (emailResponse, registerResponse) = await Register(baseUser, UserRole.Tutor.ToString());
-                if (registerResponse.Success)
-                {
-                    if(emailResponse)
-                    {
-                        _logger.LogInformation("Mail sent successfully");
                         var tutor = new Tutor()
                         {
-                            BioNote = addTutorDTO.ShortBio,
+                            BioNote = model.Bio,
                             User = registerResponse.Data
                         };
                         await _unitOfWork.TutorRepository.Add(tutor);
@@ -117,13 +94,13 @@ namespace TutorBuddy.Core.Services
                             Topic = s.Topic,
                             Description = s.Description
                         }));
-                       // await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                        // await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
                         var availabilities = new List<Availability>();
                         availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
                         {
                             Day = a.Day
                         }));
-                       // await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
+                        // await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
                         await _unitOfWork.Save();
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
@@ -149,7 +126,9 @@ namespace TutorBuddy.Core.Services
             }
         }
 
-        private async Task<(bool, ApiResponse<User>)> Register(BaseRegisterDTO baseRegister, string userRole)
+
+
+        private async Task<(bool, ApiResponse<User>)> Register(RegisterDTO baseRegister)
         {
             var user = new User()
             {
@@ -163,7 +142,7 @@ namespace TutorBuddy.Core.Services
             var result = await _userManager.CreateAsync(user, baseRegister.Password);
             if (result.Succeeded)
             {
-                var addRoleResult = await _userManager.AddToRoleAsync(user, userRole);
+                var addRoleResult = await _userManager.AddToRoleAsync(user, baseRegister.Role);
                 if(!addRoleResult.Succeeded)
                 {
                     response.Message = GetErrors(result);
