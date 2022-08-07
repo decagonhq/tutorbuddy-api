@@ -10,5 +10,6 @@ namespace TutorBuddy.Core.Models
     {
         public string? Title { get; set; }
         public string? Note { get; set; }
+        public DateTime StartTime { get; set; }
     }
 }

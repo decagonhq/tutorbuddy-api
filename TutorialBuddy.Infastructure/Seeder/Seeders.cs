@@ -107,7 +107,7 @@ namespace TutorBuddy.Infrastructure.Seeder
         {
             if (!dbContext.TutorSubjects.Any())
             {
-                var tutorSubjects = SeederHelper<TutorSubjects>.GetData("TutorSubject.json");
+                var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
 
                 await dbContext.TutorSubjects.AddRangeAsync(tutorSubjects);
             }
