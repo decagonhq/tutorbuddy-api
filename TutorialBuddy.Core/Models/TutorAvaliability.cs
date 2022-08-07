@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TutorBuddy.Core.Models
 {
@@ -7,6 +8,8 @@ namespace TutorBuddy.Core.Models
 	{
         
         public string AvailabilityID { get; set; }
+
+        [ForeignKey("Tutor")]
         public string TutorID { get; set; }
         
     }

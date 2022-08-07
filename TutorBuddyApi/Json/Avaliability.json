@@ -1,27 +1,25 @@
 ﻿[
   {
-    "ID": "7dfa1ecc-2230-444e-9c7e-955119e42ff5",
+    "ID": "6984d4b5-8baf-4c37-aa6e-ae4f8958abb7",
     "Day": "Monday"
-    
-
   },
   {
-    "ID": "83585bec-a51e-41cf-9789-862365e8963c",
+    "ID": "9a44629e-4e34-4167-b6cd-26ce9ed51ccb",
     "Day": "Tuesday"
 
   },
   {
-    "ID": "8541dc91-e125-4cc9-aeda-dd25678c5775",
+    "ID": "3ea21e06-9aa3-4000-8651-315d89c413c0",
     "Day": "Wednesday"
-  
+
   },
   {
-    "ID": "cddc92bc-9403-48d4-b23f-f41fd7485a41",
+    "ID": "88dfe025-ed89-48bd-aeb1-5a28467a28db",
     "Day": "Thursday"
 
   },
   {
-    "ID": "6284fb23-e480-4955-88d7-4eb8e4abc42f",
+    "ID": "d71f82ac-1ecc-4e5e-a48a-9bd25a42286e",
     "Day": "Friday"
   }
 ]
