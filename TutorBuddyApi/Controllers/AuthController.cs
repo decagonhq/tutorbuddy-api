@@ -23,18 +23,19 @@ namespace TutorBuddyApi.Controllers
         //    return StatusCode(response.StatusCode, response);
         //}
 
-        //[HttpPost("register-tutor")]
-        //public async Task<IActionResult> TutorRegister([FromBody] AddTutorDTO addTutorDTO)
-        //{
-        //    var response = await _authService.AddTutor(addTutorDTO);
-        //    return StatusCode(response.StatusCode, response);
-        //}
+        [HttpPost("register-tutor")]
+        public async Task<IActionResult> TutorRegister([FromBody] RegisterDTO addTutorDTO)
+        {
+            var response = await _authService.AddTutor(addTutorDTO);
+            return StatusCode(response.StatusCode, response);
+        }
 
         [HttpGet("Register")]
         public async Task<IActionResult> Register()
         {
-            var response = await _authService.LoginUser(loginDTO);
+            var response = await _authService.GetRegisterResource();
             return StatusCode(response.StatusCode, response);
+
         }
 
         [HttpPost("login")]

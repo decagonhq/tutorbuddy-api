@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,18 +20,22 @@ namespace TutorBuddy.Core.Services
     {
         // COPIED
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenGeneratorService _tokenGenerator;
         private readonly INotificationService _notificationService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<AuthenticationService> _logger;
+        private readonly IMapper _mapper;
 
         public AuthenticationService(IServiceProvider provider)
         {
             _userManager = provider.GetRequiredService<UserManager<User>>();
+            _roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
             _tokenGenerator = provider.GetRequiredService<ITokenGeneratorService>();
             _notificationService = provider.GetRequiredService<INotificationService>();
             _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
 
         //public async Task<ApiResponse<string>> AddUser(RegisterDTO model)
@@ -70,6 +75,31 @@ namespace TutorBuddy.Core.Services
         //    }
         //}
 
+        public async Task<ApiResponse<GetRegisterResponseDTO>> GetRegisterResource()
+        {
+            var response = new ApiResponse<GetRegisterResponseDTO>();
+            var roles = _roleManager.Roles;
+            var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
+            var avaliabilities = await _unitOfWork.AvailabilityRepository.GetAllAvaliabilityAsync();
+
+            var result = new GetRegisterResponseDTO()
+            {
+                Roles = roles.Select(x => x.Name),
+                Avaliabilities = _mapper.Map<IEnumerable<AvailabilityDTO>>(avaliabilities),
+                Subjects = _mapper.Map<IEnumerable<SubjectDTO>>(subjects)
+                
+            };
+
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Success = true;
+            response.Data = result;
+            response.Message = "successfully!";
+
+            return response;
+
+        }
+
+
         public async Task<ApiResponse<string>> AddTutor(RegisterDTO model)
         {
             var response = new ApiResponse<string>();
@@ -82,26 +112,26 @@ namespace TutorBuddy.Core.Services
                     if (emailResponse)
                     {
                         _logger.LogInformation("Mail sent successfully");
+
+                       
                         var tutor = new Tutor()
                         {
                             BioNote = model.Bio,
-                            User = registerResponse.Data
+                            User = registerResponse.Data,
+                            Price = model.Price,
+                            UnitOfPrice = model.UnitOfPrice
+                            
                         };
-                        await _unitOfWork.TutorRepository.Add(tutor);
-                        var subjects = new List<Subject>();
-                        subjects.AddRange(addTutorDTO.Subjects.Select(s => new Subject()
-                        {
-                            Topic = s.Topic,
-                            Description = s.Description
-                        }));
-                        // await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
-                        var availabilities = new List<Availability>();
-                        availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
-                        {
-                            Day = a.Day
-                        }));
+                        //await _unitOfWork.TutorRepository.Add(tutor);
+                       
+                        //await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                        //var availabilities = new List<Availability>();
+                        //availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
+                        //{
+                        //    Day = a.Day
+                        //}));
                         // await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
-                        await _unitOfWork.Save();
+                        //await _unitOfWork.Save();
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
                         response.Data = registerResponse.Data.Id;

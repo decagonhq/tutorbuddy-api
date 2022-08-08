@@ -14,6 +14,8 @@ using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
 using TutorBuddy.Infrastructure.Seeder;
+using TutorBuddy.Core.Utilities;
+using AutoMapper;
 
 namespace FindRApi.Extensions
 {
@@ -66,6 +68,16 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
             builder.Services.AddScoped<Seeder>();
 
+
+            // Auto Mapper Registration
+            var configMap = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MapInitializer());
+            });
+​
+            var mapper = configMap.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+          
 
             builder.Services.AddAuthentication(auth =>
             {

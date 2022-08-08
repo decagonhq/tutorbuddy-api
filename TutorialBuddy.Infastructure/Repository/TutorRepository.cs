@@ -14,7 +14,7 @@ namespace TutorBuddy.Infrastructure.Repository
 
         //public async Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects)
         //{
-        //    if(subjects.Any())
+        //    if (subjects.Any())
         //    {
         //        var tutorSubjects = new TutorSubjects()
         //        {

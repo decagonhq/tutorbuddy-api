@@ -27,7 +27,7 @@ namespace TutorBuddy.Core.DTOs
         public double? Price { get; set; }
         public string? UnitOfPrice { get; set; }
 
-        public IEnumerable<string>? Subjects{ get; set; }
-        public IEnumerable<string>? Avaliabilities { get; set; }
+        public IEnumerable<SubjectDTO>? Subjects{ get; set; }
+        public IEnumerable<AvailabilityDTO>? Avaliabilities { get; set; }
     }
 }

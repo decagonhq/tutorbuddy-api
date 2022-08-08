@@ -8,6 +8,8 @@ namespace TutorBuddy.Infrastructure.Repository
         private readonly TutorBuddyContext _appDbContext;
         private IUserRepository _userRepository;
         private ITutorRepository _tutorRepository;
+        private ISubjectRepository _subjectRepository;
+        private IAvailabilityRepository _availabilityRepository;
         public UnitOfWork(TutorBuddyContext appDbContext)
         {
             _appDbContext = appDbContext;
@@ -15,7 +17,8 @@ namespace TutorBuddy.Infrastructure.Repository
 
         public IUserRepository UserRepository => _userRepository ??= new UserRepository(_appDbContext);
         public ITutorRepository TutorRepository => _tutorRepository ??= new TutorRepository(_appDbContext);
-
+        public ISubjectRepository SubjectRepository => _subjectRepository ??= new SubjectRepository(_appDbContext);
+        public IAvailabilityRepository AvailabilityRepository => _availabilityRepository ??= new AvaliabilityRepository(_appDbContext);
 
         public void Dispose()
         {
