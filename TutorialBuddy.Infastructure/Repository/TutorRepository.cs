@@ -12,30 +12,35 @@ namespace TutorBuddy.Infrastructure.Repository
             _context = dbContext;
         }
 
-        //public async Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects)
-        //{
-        //    if (subjects.Any())
-        //    {
-        //        var tutorSubjects = new TutorSubjects()
-        //        {
-        //            Tutor = tutor,
-        //            Subjects = subjects
-        //        };
-        //        await _context.TutorSubjects.AddAsync(tutorSubjects);
-        //    }
-        //}
+        public async Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects)
+        {
+            if (subjects.Any())
+            {
+                foreach (var item in subjects)
+                {
+                    var tutorSubjects = new TutorSubject()
+                    {
+                        SubjectID = item.ID,
+                        TutorID = tutor.UserId
 
-        //public async Task AddTutorAvailability(Tutor tutor, IEnumerable<Availability> availabilities)
-        //{
-        //    if (availabilities.Any())
-        //    {
-        //        var tutorAvailabilities = new TutorAvailability()
-        //        {
-        //            Tutor = tutor,
-        //            Availabilities = availabilities
-        //        };
-        //        await _context.TutorAvailabilities.AddAsync(tutorAvailabilities);
-        //    }
-        //}
+                    };
+                    await _context.TutorSubjects.AddAsync(tutorSubjects);
+                }
+            }
+        }
+
+        public async Task AddTutorAvailability(Tutor tutor, IEnumerable<Availability> availabilities)
+        {
+            foreach (var item in availabilities)
+            {
+                var tutorAvailable = new TutorAvaliability()
+                {
+                    AvailabilityID = item.ID,
+                    TutorID = tutor.UserId
+
+                };
+                await _context.TutorAvaliabilities.AddAsync(tutorAvailable);
+            }
+        }
     }
 }

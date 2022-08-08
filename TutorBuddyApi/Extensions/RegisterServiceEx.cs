@@ -70,14 +70,12 @@ namespace FindRApi.Extensions
 
 
             // Auto Mapper Registration
-            var configMap = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new MapInitializer());
+            var mapperConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new MapInitializer());
             });
-​
-            var mapper = configMap.CreateMapper();
+            IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
-          
+
 
             builder.Services.AddAuthentication(auth =>
             {

@@ -38,42 +38,7 @@ namespace TutorBuddy.Core.Services
             _mapper = provider.GetRequiredService<IMapper>();
         }
 
-        //public async Task<ApiResponse<string>> AddUser(RegisterDTO model)
-        //{
-        //    var response = new ApiResponse<string>();
-
-
-        //    using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-        //    {
-        //        var (emailResponse, registerResponse) = await Register(model);
-        //        if (registerResponse.Success)
-        //        {
-        //            if (emailResponse)
-        //            {
-        //                _logger.LogInformation("Mail sent successfully");
-        //                response.StatusCode = (int)HttpStatusCode.Created;
-        //                response.Success = true;
-        //                response.Data = registerResponse.Data.Id;
-        //                response.Message = "User created successfully! Please check your mail to verify your account.";
-        //                transaction.Complete();
-        //                return response;
-        //            }
-        //            _logger.LogInformation("Mail service failed");
-        //            transaction.Dispose();
-        //            response.StatusCode = (int)HttpStatusCode.BadRequest;
-        //            response.Success = false;
-        //            response.Message = "Registration failed. Please try again";
-        //            return response;
-        //        }
-
-        //        response.StatusCode = registerResponse.StatusCode;
-        //        response.Success = registerResponse.Success;
-        //        response.Data = string.Empty;
-        //        response.Message = registerResponse.Message;
-        //        transaction.Complete();
-        //        return response;
-        //    }
-        //}
+      
 
         public async Task<ApiResponse<GetRegisterResponseDTO>> GetRegisterResource()
         {
@@ -100,7 +65,7 @@ namespace TutorBuddy.Core.Services
         }
 
 
-        public async Task<ApiResponse<string>> AddTutor(RegisterDTO model)
+        public async Task<ApiResponse<string>> RegisterUser(RegisterDTO model)
         {
             var response = new ApiResponse<string>();
             
@@ -122,16 +87,17 @@ namespace TutorBuddy.Core.Services
                             UnitOfPrice = model.UnitOfPrice
                             
                         };
-                        //await _unitOfWork.TutorRepository.Add(tutor);
-                       
-                        //await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
-                        //var availabilities = new List<Availability>();
-                        //availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
-                        //{
-                        //    Day = a.Day
-                        //}));
-                        // await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
-                        //await _unitOfWork.Save();
+
+                        // Map back to Model
+                        var avaliabilities = _mapper.Map<IEnumerable<Availability>>(model.Avaliabilities);
+                        var subjects = _mapper.Map<IEnumerable<Subject>>(model.Subjects);
+                        await _unitOfWork.TutorRepository.Add(tutor);
+
+                        await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+
+                        await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, avaliabilities);
+                        await _unitOfWork.Save();
+
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
                         response.Data = registerResponse.Data.Id;
