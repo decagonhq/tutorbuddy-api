@@ -60,5 +60,12 @@ namespace TutorBuddyApi.Controllers
             var response = await _authService.ResetPassword(resetPasswordDTO);
             return StatusCode(response.StatusCode, response);
         }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDTO model)
+        {
+            var response = await _authService.RefreshTokenAsync(model);
+            return StatusCode(response.StatusCode, response);
+        }
     }
 }
