@@ -331,6 +331,38 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
+
+        public async Task<ApiResponse<RefreshTokenResponse>> RefreshTokenAsync(RefreshTokenRequestDTO token)
+        {
+            var response = new ApiResponse<RefreshTokenResponse>();
+            var refreshToken = token.RefreshToken;
+            var userId = token.UserId;
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime != DateTime.Now)
+            {
+                response.Data = null;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Message = "Bad Request";
+                response.Success = false;
+                return response;
+            }
+            var refreshMapping = new RefreshTokenResponse
+            {
+                NewAccessToken = await _tokenGenerator.GenerateToken(user),
+                NewRefreshToken = _tokenGenerator.GenerateRefreshToken().ToString()
+            };
+
+            user.RefreshToken = refreshMapping.NewRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            await _userManager.UpdateAsync(user);
+            response.Data = refreshMapping;
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Token Refresh Successfully";
+            response.Success = true;
+            return response;
+        }
+
         private static string GetErrors(IdentityResult result)
         {
             return result.Errors.Aggregate(string.Empty, (current, err) => current + err.Description + "\n");
