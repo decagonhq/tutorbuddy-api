@@ -11,7 +11,8 @@ namespace TutorBuddy.Core.Utilities
 		{
             //Authentication
             CreateMap<Availability, AvailabilityDTO>().ReverseMap();
-            CreateMap<Subject, SubjectDTO>().ReverseMap();
+            CreateMap<SubjectDTO, Subject>().ReverseMap()
+                .ForMember(x => x.Subject, opt => opt.MapFrom(src => src.Topic));
         }
 	}
 }
