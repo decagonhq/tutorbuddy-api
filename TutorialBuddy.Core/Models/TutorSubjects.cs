@@ -11,8 +11,6 @@ namespace TutorBuddy.Core.Models
     {
        
         public string SubjectID { get; set; }
-
-        [ForeignKey("Tutor")]
         public string TutorID { get; set; }
         public IEnumerable<Session>? Sessions { get; set; }
 
