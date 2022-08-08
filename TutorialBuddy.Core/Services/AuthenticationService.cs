@@ -78,25 +78,29 @@ namespace TutorBuddy.Core.Services
                     {
                         _logger.LogInformation("Mail sent successfully");
 
-                       
-                        var tutor = new Tutor()
+
+                        if (model.Role == UserRole.Tutor.ToString())
                         {
-                            BioNote = model.Bio,
-                            User = registerResponse.Data,
-                            Price = model.Price,
-                            UnitOfPrice = model.UnitOfPrice
-                            
-                        };
+                            var tutor = new Tutor()
+                            {
+                                BioNote = model.Bio,
+                                User = registerResponse.Data,
+                                Price = model.Price,
+                                UnitOfPrice = model.UnitOfPrice
 
-                        // Map back to Model
-                        var avaliabilities = _mapper.Map<IEnumerable<Availability>>(model.Avaliabilities);
-                        var subjects = _mapper.Map<IEnumerable<Subject>>(model.Subjects);
-                        await _unitOfWork.TutorRepository.Add(tutor);
+                            };
 
-                        await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                            // Map back to Model
+                            var avaliabilities = _mapper.Map<IEnumerable<Availability>>(model.Avaliabilities);
+                            var subjects = _mapper.Map<IEnumerable<Subject>>(model.Subjects);
+                            await _unitOfWork.TutorRepository.Add(tutor);
 
-                        await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, avaliabilities);
-                        await _unitOfWork.Save();
+                            await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+
+                            await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, avaliabilities);
+                            await _unitOfWork.Save();
+
+                        }
 
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;

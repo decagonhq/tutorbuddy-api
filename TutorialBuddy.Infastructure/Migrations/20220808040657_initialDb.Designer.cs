@@ -12,7 +12,7 @@ using TutorBuddy.Infrastructure.DataAccess;
 namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
-    [Migration("20220807122033_initialDb")]
+    [Migration("20220808040657_initialDb")]
     partial class initialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
