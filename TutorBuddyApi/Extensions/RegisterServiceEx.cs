@@ -16,6 +16,7 @@ using TutorialBuddy.Infastructure.Services;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddy.Core.Utilities;
 using AutoMapper;
+using TutorBuddy.Core.Enums;
 
 namespace FindRApi.Extensions
 {
@@ -76,7 +77,7 @@ namespace FindRApi.Extensions
             IMapper mapper = mapperConfig.CreateMapper();
             builder.Services.AddSingleton(mapper);
 
-
+            // Authentication 
             builder.Services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -96,6 +97,14 @@ namespace FindRApi.Extensions
                     ValidIssuer = Config["JWT:ValidIssuer"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
                 };
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminOnly", policy => policy.RequireRole(UserRole.Admin.ToString()));
+                options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
+                options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
+                options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
             });
         }
     }
