@@ -8,6 +8,7 @@ namespace TutorBuddy.Core.Enums
 {
     public enum UserRole
     {
+        Admin,
         Tutor,
         Student
     }

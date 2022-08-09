@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -19,48 +20,88 @@ namespace TutorBuddy.Core.Services
     {
         // COPIED
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ITokenGeneratorService _tokenGenerator;
         private readonly INotificationService _notificationService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<AuthenticationService> _logger;
+        private readonly IMapper _mapper;
 
         public AuthenticationService(IServiceProvider provider)
         {
             _userManager = provider.GetRequiredService<UserManager<User>>();
+            _roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
             _tokenGenerator = provider.GetRequiredService<ITokenGeneratorService>();
             _notificationService = provider.GetRequiredService<INotificationService>();
             _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
+            _mapper = provider.GetRequiredService<IMapper>();
         }
 
-        public async Task<ApiResponse<string>> AddStudent(AddStudentDTO addStudentDTO)
-        {
-            var response = new ApiResponse<string>();
+      
 
-            var baseUser = new BaseRegisterDTO()
+        public async Task<ApiResponse<GetRegisterResponseDTO>> GetRegisterResource()
+        {
+            var response = new ApiResponse<GetRegisterResponseDTO>();
+            var roles = _roleManager.Roles;
+            var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
+            var avaliabilities = await _unitOfWork.AvailabilityRepository.GetAllAvaliabilityAsync();
+
+            var result = new GetRegisterResponseDTO()
             {
-                FirstName = addStudentDTO.FirstName,
-                LastName = addStudentDTO.LastName,
-                Email = addStudentDTO.Email,
-                Password = addStudentDTO.Password
+                Roles = roles.Select(x => x.Name),
+                Avaliabilities = _mapper.Map<IEnumerable<AvailabilityDTO>>(avaliabilities),
+                Subjects = _mapper.Map<IEnumerable<SubjectDTO>>(subjects)
+                
             };
 
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Success = true;
+            response.Data = result;
+            response.Message = "successfully!";
+
+            return response;
+
+        }
+
+
+        public async Task<ApiResponse<string>> RegisterUser(RegisterDTO model)
+        {
+            var response = new ApiResponse<string>();
+            
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                var (emailResponse, registerResponse) = await Register(baseUser, UserRole.Tutor.ToString());
+                var (emailResponse, registerResponse) = await Register(model);
                 if (registerResponse.Success)
                 {
                     if (emailResponse)
                     {
                         _logger.LogInformation("Mail sent successfully");
-                        var subjects = new List<Subject>();
-                        subjects.AddRange(addStudentDTO.AreaOfInterest.Select(s => new Subject()
+
+
+                        if (model.Role == UserRole.Tutor.ToString())
                         {
-                            Topic = s.Topic,
-                            Description = s.Description
-                        }));
-                        await _unitOfWork.UserRepository.AddUserAreaOfInterestA(registerResponse.Data, subjects);
-                        await _unitOfWork.Save();
+                            var tutor = new Tutor()
+                            {
+                                BioNote = model.Bio,
+                                User = registerResponse.Data,
+                                Price = model.Price,
+                                UnitOfPrice = model.UnitOfPrice
+
+                            };
+
+                            // Map back to Model
+                            var avaliabilities = _mapper.Map<IEnumerable<Availability>>(model.Avaliabilities);
+                            var subjects = _mapper.Map<IEnumerable<Subject>>(model.Subjects);
+                            await _unitOfWork.TutorRepository.Add(tutor);
+
+                            await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+
+                            await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, avaliabilities);
+                            await _unitOfWork.Save();
+
+                        }
+
                         response.StatusCode = (int)HttpStatusCode.Created;
                         response.Success = true;
                         response.Data = registerResponse.Data.Id;
@@ -85,71 +126,9 @@ namespace TutorBuddy.Core.Services
             }
         }
 
-        public async Task<ApiResponse<string>> AddTutor(AddTutorDTO addTutorDTO)
-        {
-            var response = new ApiResponse<string>();
 
-            var baseUser = new BaseRegisterDTO()
-            {
-                FirstName = addTutorDTO.FirstName,
-                LastName = addTutorDTO.LastName,
-                Email = addTutorDTO.Email,
-                Password = addTutorDTO.Password
-            };
 
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                var (emailResponse, registerResponse) = await Register(baseUser, UserRole.Tutor.ToString());
-                if (registerResponse.Success)
-                {
-                    if(emailResponse)
-                    {
-                        _logger.LogInformation("Mail sent successfully");
-                        var tutor = new Tutor()
-                        {
-                            BioNote = addTutorDTO.ShortBio,
-                            User = registerResponse.Data
-                        };
-                        await _unitOfWork.TutorRepository.Add(tutor);
-                        var subjects = new List<Subject>();
-                        subjects.AddRange(addTutorDTO.Subjects.Select(s => new Subject()
-                        {
-                            Topic = s.Topic,
-                            Description = s.Description
-                        }));
-                        await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
-                        var availabilities = new List<Availability>();
-                        availabilities.AddRange(addTutorDTO.Availability.Select(a => new Availability()
-                        {
-                            Day = a.Day
-                        }));
-                        await _unitOfWork.TutorRepository.AddTutorAvailability(tutor, availabilities);
-                        await _unitOfWork.Save();
-                        response.StatusCode = (int)HttpStatusCode.Created;
-                        response.Success = true;
-                        response.Data = registerResponse.Data.Id;
-                        response.Message = "User created successfully! Please check your mail to verify your account.";
-                        transaction.Complete();
-                        return response;
-                    }
-                    _logger.LogInformation("Mail service failed");
-                    transaction.Dispose();
-                    response.StatusCode = (int)HttpStatusCode.BadRequest;
-                    response.Success = false;
-                    response.Message = "Registration failed. Please try again";
-                    return response;
-                }
-
-                response.StatusCode = registerResponse.StatusCode;
-                response.Success = registerResponse.Success;
-                response.Data = string.Empty;
-                response.Message = registerResponse.Message;
-                transaction.Complete();
-                return response;
-            }
-        }
-
-        private async Task<(bool, ApiResponse<User>)> Register(BaseRegisterDTO baseRegister, string userRole)
+        private async Task<(bool, ApiResponse<User>)> Register(RegisterDTO baseRegister)
         {
             var user = new User()
             {
@@ -163,7 +142,7 @@ namespace TutorBuddy.Core.Services
             var result = await _userManager.CreateAsync(user, baseRegister.Password);
             if (result.Succeeded)
             {
-                var addRoleResult = await _userManager.AddToRoleAsync(user, userRole);
+                var addRoleResult = await _userManager.AddToRoleAsync(user, baseRegister.Role);
                 if(!addRoleResult.Succeeded)
                 {
                     response.Message = GetErrors(result);
@@ -352,6 +331,38 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
+
+        public async Task<ApiResponse<RefreshTokenResponse>> RefreshTokenAsync(RefreshTokenRequestDTO token)
+        {
+            var response = new ApiResponse<RefreshTokenResponse>();
+            var refreshToken = token.RefreshToken;
+            var userId = token.UserId;
+
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime != DateTime.Now)
+            {
+                response.Data = null;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Message = "Bad Request";
+                response.Success = false;
+                return response;
+            }
+            var refreshMapping = new RefreshTokenResponse
+            {
+                NewAccessToken = await _tokenGenerator.GenerateToken(user),
+                NewRefreshToken = _tokenGenerator.GenerateRefreshToken().ToString()
+            };
+
+            user.RefreshToken = refreshMapping.NewRefreshToken;
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+            await _userManager.UpdateAsync(user);
+            response.Data = refreshMapping;
+            response.StatusCode = (int)HttpStatusCode.OK;
+            response.Message = "Token Refresh Successfully";
+            response.Success = true;
+            return response;
+        }
+
         private static string GetErrors(IdentityResult result)
         {
             return result.Errors.Aggregate(string.Empty, (current, err) => current + err.Description + "\n");
@@ -368,7 +379,7 @@ namespace TutorBuddy.Core.Services
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return response;
             }
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user) || !user.IsActive)
             {
                 response.Message = "Account not activated";
                 response.Success = false;

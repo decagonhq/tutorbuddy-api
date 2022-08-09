@@ -16,18 +16,21 @@ namespace TutorBuddyApi.Controllers
             _authService = provider.GetRequiredService<IAuthenticationService>();
         }
 
-        [HttpPost("register-student")]
-        public async Task<IActionResult> StudentRegister([FromBody] AddStudentDTO addStudentDTO)
+       
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDTO addTutorDTO)
         {
-            var response = await _authService.AddStudent(addStudentDTO);
+            var response = await _authService.RegisterUser(addTutorDTO);
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPost("register-tutor")]
-        public async Task<IActionResult> TutorRegister([FromBody] AddTutorDTO addTutorDTO)
+        [HttpGet("Register")]
+        public async Task<IActionResult> Register()
         {
-            var response = await _authService.AddTutor(addTutorDTO);
+            var response = await _authService.GetRegisterResource();
             return StatusCode(response.StatusCode, response);
+
         }
 
         [HttpPost("login")]
@@ -55,6 +58,13 @@ namespace TutorBuddyApi.Controllers
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDTO resetPasswordDTO)
         {
             var response = await _authService.ResetPassword(resetPasswordDTO);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpPost("refresh-token")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDTO model)
+        {
+            var response = await _authService.RefreshTokenAsync(model);
             return StatusCode(response.StatusCode, response);
         }
     }

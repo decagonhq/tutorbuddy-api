@@ -14,27 +14,32 @@ namespace TutorBuddy.Infrastructure.Repository
 
         public async Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects)
         {
-            if(subjects.Any())
+            if (subjects.Any())
             {
-                var tutorSubjects = new TutorSubjects()
+                foreach (var item in subjects)
                 {
-                    Tutor = tutor,
-                    Subjects = subjects
-                };
-                await _context.TutorSubjects.AddAsync(tutorSubjects);
+                    var tutorSubjects = new TutorSubject()
+                    {
+                        SubjectID = item.ID,
+                        TutorID = tutor.UserId
+
+                    };
+                    await _context.TutorSubjects.AddAsync(tutorSubjects);
+                }
             }
         }
 
         public async Task AddTutorAvailability(Tutor tutor, IEnumerable<Availability> availabilities)
         {
-            if (availabilities.Any())
+            foreach (var item in availabilities)
             {
-                var tutorAvailabilities = new TutorAvailability()
+                var tutorAvailable = new TutorAvaliability()
                 {
-                    Tutor = tutor,
-                    Availabilities = availabilities
+                    AvailabilityID = item.ID,
+                    TutorID = tutor.UserId
+
                 };
-                await _context.TutorAvailabilities.AddAsync(tutorAvailabilities);
+                await _context.TutorAvaliabilities.AddAsync(tutorAvailable);
             }
         }
     }

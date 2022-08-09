@@ -10,24 +10,57 @@ namespace TutorBuddy.Infrastructure.DataAccess
         {
         }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var item in ChangeTracker.Entries<BaseEntity>())
+            {
+                switch (item.State)
+                {
+                    case EntityState.Modified:
+                        item.Entity.LastModifiedOn = DateTime.UtcNow;
+                        break;
+                    case EntityState.Added:
+                        if (item.Entity.ID == null)
+                            item.Entity.ID = Guid.NewGuid().ToString();
+                        item.Entity.CreatedOn = DateTime.UtcNow;
+                        item.Entity.IsDepricated = false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+
+            // Set up composite key on TutorAvaliability model 
+            builder.Entity<TutorAvaliability>().HasKey(table => new {
+                table.AvailabilityID,
+                table.TutorID
+            });
+
+
         }
 
-        public DbSet<AreaOfInterest> AreaOfInterests { get; set; }
+       
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<RateStudent> RateStudents { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<RateTutor> RateTutors { get; set; }
-        public DbSet<Tutor> Tutor { get; set; }
-        public DbSet<TutorSubjects> TutorSubjects { get; set; }
-        public DbSet<TutorAvailability> TutorAvailabilities { get; set; }
+        public DbSet<Tutor> Tutors { get; set; }
+        public DbSet<TutorSubject> TutorSubjects { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<StudentComment> StudentComments { get; set; }
         public DbSet<TutorComment> TutorComments { get; set; }
         public DbSet<Session> Sessions { get; set; }
         public DbSet<ImageMeta> ImageMeta { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<TutorAvaliability> TutorAvaliabilities { get; set; }
+        
     }
 }

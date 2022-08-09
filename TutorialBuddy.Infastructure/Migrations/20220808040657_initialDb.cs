@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TutorBuddy.Infrastructure.Migrations
 {
-    public partial class Newmodellingrelationships : Migration
+    public partial class initialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,6 +33,8 @@ namespace TutorBuddy.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "text", nullable: true),
                     RefreshToken = table.Column<string>(type: "text", nullable: true),
                     AvatarUrl = table.Column<string>(type: "text", nullable: true),
+                    PublicUrl = table.Column<string>(type: "text", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     RefreshTokenExpiryTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -52,6 +54,37 @@ namespace TutorBuddy.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Availabilities",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    Day = table.Column<string>(type: "text", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Availabilities", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -90,26 +123,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AreaOfInterests",
-                columns: table => new
-                {
-                    ID = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AreaOfInterests", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_AreaOfInterests_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -198,10 +211,36 @@ namespace TutorBuddy.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "text", nullable: false),
+                    SenderId = table.Column<string>(type: "text", nullable: false),
+                    Message = table.Column<string>(type: "text", nullable: false),
+                    Isread = table.Column<bool>(type: "boolean", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Notifications_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reminders",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Note = table.Column<string>(type: "text", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     UserId = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -218,44 +257,70 @@ namespace TutorBuddy.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tutor",
+                name: "Tutors",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "text", nullable: false),
-                    BioNote = table.Column<string>(type: "text", nullable: false),
-                    UserId = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    BioNote = table.Column<string>(type: "text", nullable: true),
+                    Price = table.Column<double>(type: "double precision", nullable: true),
+                    UnitOfPrice = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tutor", x => x.ID);
+                    table.PrimaryKey("PK_Tutors", x => x.UserId);
                     table.ForeignKey(
-                        name: "FK_Tutor_AspNetUsers_UserId",
+                        name: "FK_Tutors_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TutorAvailabilities",
+                name: "Subjects",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
-                    TutorID = table.Column<string>(type: "text", nullable: false),
+                    CategoryID = table.Column<string>(type: "text", nullable: false),
+                    Topic = table.Column<string>(type: "text", nullable: false),
+                    Thumbnail = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TutorAvailabilities", x => x.ID);
+                    table.PrimaryKey("PK_Subjects", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_TutorAvailabilities_Tutor_TutorID",
-                        column: x => x.TutorID,
-                        principalTable: "Tutor",
+                        name: "FK_Subjects_Categories_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Categories",
                         principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TutorAvaliabilities",
+                columns: table => new
+                {
+                    AvailabilityID = table.Column<string>(type: "text", nullable: false),
+                    TutorID = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TutorAvaliabilities", x => new { x.AvailabilityID, x.TutorID });
+                    table.ForeignKey(
+                        name: "FK_TutorAvaliabilities_Availabilities_AvailabilityID",
+                        column: x => x.AvailabilityID,
+                        principalTable: "Availabilities",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TutorAvaliabilities_Tutors_TutorID",
+                        column: x => x.TutorID,
+                        principalTable: "Tutors",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -264,6 +329,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
+                    SubjectID = table.Column<string>(type: "text", nullable: false),
                     TutorID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -273,60 +339,17 @@ namespace TutorBuddy.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_TutorSubjects", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_TutorSubjects_Tutor_TutorID",
-                        column: x => x.TutorID,
-                        principalTable: "Tutor",
+                        name: "FK_TutorSubjects_Subjects_SubjectID",
+                        column: x => x.SubjectID,
+                        principalTable: "Subjects",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Availabilities",
-                columns: table => new
-                {
-                    ID = table.Column<string>(type: "text", nullable: false),
-                    Day = table.Column<string>(type: "text", nullable: false),
-                    TutorAvailabilityID = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Availabilities", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Availabilities_TutorAvailabilities_TutorAvailabilityID",
-                        column: x => x.TutorAvailabilityID,
-                        principalTable: "TutorAvailabilities",
-                        principalColumn: "ID");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Subjects",
-                columns: table => new
-                {
-                    ID = table.Column<string>(type: "text", nullable: false),
-                    Topic = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false),
-                    AreaOfInterestID = table.Column<string>(type: "text", nullable: true),
-                    TutorSubjectsID = table.Column<string>(type: "text", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    IsDepricated = table.Column<bool>(type: "boolean", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subjects", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Subjects_AreaOfInterests_AreaOfInterestID",
-                        column: x => x.AreaOfInterestID,
-                        principalTable: "AreaOfInterests",
-                        principalColumn: "ID");
-                    table.ForeignKey(
-                        name: "FK_Subjects_TutorSubjects_TutorSubjectsID",
-                        column: x => x.TutorSubjectsID,
-                        principalTable: "TutorSubjects",
-                        principalColumn: "ID");
+                        name: "FK_TutorSubjects_Tutors_TutorID",
+                        column: x => x.TutorID,
+                        principalTable: "Tutors",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -334,8 +357,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
-                    SubjectID = table.Column<string>(type: "text", nullable: true),
-                    TutorID = table.Column<string>(type: "text", nullable: true),
+                    TutorSubjectID = table.Column<string>(type: "text", nullable: true),
                     StudentId = table.Column<string>(type: "text", nullable: true),
                     Startime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     EndTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -353,14 +375,9 @@ namespace TutorBuddy.Infrastructure.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Sessions_Subjects_SubjectID",
-                        column: x => x.SubjectID,
-                        principalTable: "Subjects",
-                        principalColumn: "ID");
-                    table.ForeignKey(
-                        name: "FK_Sessions_Tutor_TutorID",
-                        column: x => x.TutorID,
-                        principalTable: "Tutor",
+                        name: "FK_Sessions_TutorSubjects_TutorSubjectID",
+                        column: x => x.TutorSubjectID,
+                        principalTable: "TutorSubjects",
                         principalColumn: "ID");
                 });
 
@@ -411,7 +428,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
-                    Comment = table.Column<string>(type: "text", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: true),
                     SessionID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -433,7 +450,7 @@ namespace TutorBuddy.Infrastructure.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "text", nullable: false),
-                    Comment = table.Column<string>(type: "text", nullable: false),
+                    Comment = table.Column<string>(type: "text", nullable: true),
                     SessiomID = table.Column<string>(type: "text", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     LastModifiedOn = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
@@ -449,11 +466,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AreaOfInterests_UserId",
-                table: "AreaOfInterests",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -487,15 +499,21 @@ namespace TutorBuddy.Infrastructure.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Availabilities_TutorAvailabilityID",
-                table: "Availabilities",
-                column: "TutorAvailabilityID");
+                name: "IX_Notifications_UserId",
+                table: "Notifications",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RateStudents_SessionID",
@@ -518,14 +536,9 @@ namespace TutorBuddy.Infrastructure.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessions_SubjectID",
+                name: "IX_Sessions_TutorSubjectID",
                 table: "Sessions",
-                column: "SubjectID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sessions_TutorID",
-                table: "Sessions",
-                column: "TutorID");
+                column: "TutorSubjectID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentComments_SessionID",
@@ -533,29 +546,24 @@ namespace TutorBuddy.Infrastructure.Migrations
                 column: "SessionID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subjects_AreaOfInterestID",
+                name: "IX_Subjects_CategoryID",
                 table: "Subjects",
-                column: "AreaOfInterestID");
+                column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Subjects_TutorSubjectsID",
-                table: "Subjects",
-                column: "TutorSubjectsID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tutor_UserId",
-                table: "Tutor",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TutorAvailabilities_TutorID",
-                table: "TutorAvailabilities",
+                name: "IX_TutorAvaliabilities_TutorID",
+                table: "TutorAvaliabilities",
                 column: "TutorID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TutorComments_SessiomID",
                 table: "TutorComments",
                 column: "SessiomID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TutorSubjects_SubjectID",
+                table: "TutorSubjects",
+                column: "SubjectID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TutorSubjects_TutorID",
@@ -581,10 +589,10 @@ namespace TutorBuddy.Infrastructure.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Availabilities");
+                name: "ImageMeta");
 
             migrationBuilder.DropTable(
-                name: "ImageMeta");
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "RateStudents");
@@ -599,28 +607,31 @@ namespace TutorBuddy.Infrastructure.Migrations
                 name: "StudentComments");
 
             migrationBuilder.DropTable(
+                name: "TutorAvaliabilities");
+
+            migrationBuilder.DropTable(
                 name: "TutorComments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "TutorAvailabilities");
+                name: "Availabilities");
 
             migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
-                name: "Subjects");
-
-            migrationBuilder.DropTable(
-                name: "AreaOfInterests");
-
-            migrationBuilder.DropTable(
                 name: "TutorSubjects");
 
             migrationBuilder.DropTable(
-                name: "Tutor");
+                name: "Subjects");
+
+            migrationBuilder.DropTable(
+                name: "Tutors");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

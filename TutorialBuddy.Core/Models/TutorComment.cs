@@ -8,7 +8,7 @@ namespace TutorBuddy.Core.Models
 {
     public class TutorComment: BaseEntity
     {
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
         public Session Sessiom { get; set; }
     }
 }

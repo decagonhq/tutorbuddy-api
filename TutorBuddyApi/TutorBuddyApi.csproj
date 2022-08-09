@@ -35,4 +35,10 @@
     <ProjectReference Include="..\TutorialBuddy.Infastructure\TutorBuddy.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Json\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Json\" />
+  </ItemGroup>
 </Project>

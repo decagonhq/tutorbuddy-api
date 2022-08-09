@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TutorBuddy.Core.DTOs
 {
-    public class BaseRegisterDTO
+    public class RegisterDTO
     {
         [Required]
         public string FirstName { get; set; }
@@ -19,5 +19,15 @@ namespace TutorBuddy.Core.DTOs
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Required]
+        public string Role { get; set; }
+        public string? Bio { get; set; }
+
+        public double? Price { get; set; }
+        public string? UnitOfPrice { get; set; }
+
+        public IEnumerable<SubjectDTO>? Subjects{ get; set; }
+        public IEnumerable<AvailabilityDTO>? Avaliabilities { get; set; }
     }
 }
