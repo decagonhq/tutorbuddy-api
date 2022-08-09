@@ -379,7 +379,7 @@ namespace TutorBuddy.Core.Services
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return response;
             }
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            if (!await _userManager.IsEmailConfirmedAsync(user) || !user.IsActive)
             {
                 response.Message = "Account not activated";
                 response.Success = false;

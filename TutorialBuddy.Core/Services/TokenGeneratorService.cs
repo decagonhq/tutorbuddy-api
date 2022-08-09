@@ -37,12 +37,12 @@ namespace TutorBuddy.Core.Services
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, role));
             }
-            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Secret"]));
+            var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             // Specifying JWTSecurityToken Parameters
             var token = new JwtSecurityToken
-            (audience: _configuration["JwtSettings:ValidAudience"],
-             issuer: _configuration["JwtSettings:ValidIssuer"],
+            (audience: _configuration["JWT:ValidAudience"],
+             issuer: _configuration["JWT:ValidIssuer"],
              claims: authClaims,
              expires: user.RefreshTokenExpiryTime,
              signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
