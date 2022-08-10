@@ -5,6 +5,7 @@ using Serilog;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
+using TutorBuddyApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,16 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
+// global cors policy
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 
 app.MapControllers();

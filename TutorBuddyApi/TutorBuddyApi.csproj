@@ -39,8 +39,10 @@
   <ItemGroup>
     <None Remove="Json\" />
     <None Remove="Google.Apis" />
+    <None Remove="Middleware\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Json\" />
+    <Folder Include="Middleware\" />
   </ItemGroup>
 </Project>
