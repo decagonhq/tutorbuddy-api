@@ -24,7 +24,7 @@
     {
         //var url2 = $"User ID=postgres;Password=tutorbuddy-pword;Host=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Port=5432;" +
         //       $"Database=tutorbuddy_db;Server=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
-        return configuration.GetValue<string>("ConnectionStrings/ConnectionStr")
+        return configuration.GetValue<string>("ConnectionStrings/ConnectionStr");
     }
 
     /// <summary>
