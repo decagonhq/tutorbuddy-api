@@ -4,14 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-using Serilog;
 using System.Text;
 using TutorBuddy.Core.Interface;
+using TutorBuddy.Core.Models;
 using TutorBuddy.Core.Services;
+using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Repository;
 using TutorialBuddy.Core;
-using TutorBuddy.Core.Models;
-using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddy.Core.Utilities;
@@ -47,7 +46,7 @@ namespace FindRApi.Extensions
 
             builder.Services.AddStackExchangeRedisCache(opt =>
             {
-                opt.Configuration = Config["RedisCacheUrl"];
+                opt.Configuration = Config.GetValue<string>("RedisCacheUrl");
                 opt.InstanceName = "master";
             });
 
@@ -93,9 +92,9 @@ namespace FindRApi.Extensions
                     ValidateAudience = false,
 
                     ValidateIssuerSigningKey = true,
-                    ValidAudience = Config["JWT:ValidAudience"],
-                    ValidIssuer = Config["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
+                    ValidAudience = Config.GetValue<string>("JWT/ValidAudience"),
+                    ValidIssuer = Config.GetValue<string>("JWT/ValidIssuer"),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings/Secret")))
                 };
             });
 

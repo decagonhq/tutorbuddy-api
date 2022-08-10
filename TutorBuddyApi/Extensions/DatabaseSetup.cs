@@ -20,11 +20,11 @@
     /// Gets the Heroku Postgres Connection string for Production environment
     /// </summary>
     /// <returns>string</returns>
-    private static string GetConnectionString()
+    private static string GetConnectionString(IConfiguration configuration)
     {
-        var url2 = $"User ID=postgres;Password=tutorbuddy-pword;Host=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Port=5432;" +
-               $"Database=tutorbuddy_db;Server=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
-        return url2;
+        //var url2 = $"User ID=postgres;Password=tutorbuddy-pword;Host=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Port=5432;" +
+        //       $"Database=tutorbuddy_db;Server=tutorbuddy-api-db.crwrzhnx1ugs.us-east-2.rds.amazonaws.com;Pooling=true;SSL Mode=Require;Trust Server Certificate=True;";
+        return configuration.GetValue<string>("ConnectionStrings/ConnectionStr")
     }
 
     /// <summary>
@@ -35,6 +35,6 @@
     {
         return webHostEnvironment.IsDevelopment()
             ? configuration.GetConnectionString("ConnectionStr")
-            : GetConnectionString();
+            : GetConnectionString(configuration);
     }
 }
