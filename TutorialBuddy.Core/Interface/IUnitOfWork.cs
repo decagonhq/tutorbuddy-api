@@ -4,6 +4,8 @@
 	{
         IUserRepository UserRepository { get; }
         ITutorRepository TutorRepository { get; }
+        ISubjectRepository SubjectRepository { get; }
+        IAvailabilityRepository AvailabilityRepository { get; }
         Task<bool> Save();
     }
 }

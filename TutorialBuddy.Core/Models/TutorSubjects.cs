@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TutorBuddy.Core.Models
 {
-    public class TutorSubjects: BaseEntity
+    public class TutorSubject: BaseEntity
     {
-        public IEnumerable<Subject> Subjects { get; set; }
-        public Tutor Tutor { get; set; }
+       
+        public string SubjectID { get; set; }
+        public string TutorID { get; set; }
+        public IEnumerable<Session>? Sessions { get; set; }
 
     }
 }

@@ -8,5 +8,8 @@ namespace TutorBuddy.Core.Models
 {
      public class Reminder: BaseEntity
     {
+        public string? Title { get; set; }
+        public string? Note { get; set; }
+        public DateTime StartTime { get; set; }
     }
 }
