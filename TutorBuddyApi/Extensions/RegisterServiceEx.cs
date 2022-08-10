@@ -84,7 +84,13 @@ namespace FindRApi.Extensions
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(auth =>
+            })
+            .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Config["Google:ClientId"];
+                googleOptions.ClientSecret = Config["Google:ClientSecret"];
+            })
+            .AddJwtBearer(auth =>
             {
                 auth.SaveToken = true;
                 auth.TokenValidationParameters = new TokenValidationParameters()
