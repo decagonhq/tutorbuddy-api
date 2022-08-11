@@ -1,3 +1,4 @@
+using Amazon.Extensions.NETCore.Setup;
 using FindRApi.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +41,13 @@ db.Seed().GetAwaiter().GetResult();
 //Options Bindings
 var cloudinaryOptions = new CloudinarySettings();
 configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
+
+//aws secrets
+
+builder.Configuration.AddSystemsManager("/development/", new AWSOptions
+{
+    Region = Amazon.RegionEndpoint.USWest2
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
