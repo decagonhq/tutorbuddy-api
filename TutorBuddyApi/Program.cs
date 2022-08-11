@@ -6,6 +6,8 @@ using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
 using TutorBuddyApi.Middleware;
+using TutorialBuddy.Infastructure.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +38,10 @@ using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<Seeder>();
 db.Seed().GetAwaiter().GetResult();
 
+
+//Options Bindings
+var cloudinaryOptions = new CloudinarySettings();
+configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
