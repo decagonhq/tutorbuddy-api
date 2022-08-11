@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace TutorBuddy.Core.Models
 {
-    public class AreaOfInterest: BaseEntity
+    public class Availability: BaseEntity
     {
-        public IEnumerable<Subject> Subjects { get; set; }
-        public User User { get; set; }
+        public string Day { get; set; }
+        public IEnumerable<TutorAvaliability> TutorAvaliabilities { get; set; }
+
     }
 }

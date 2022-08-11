@@ -1,8 +1,10 @@
+using Amazon.Extensions.NETCore.Setup;
 using FindRApi.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using TutorBuddy.Infrastructure.DataAccess;
+using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
 using TutorialBuddy.Infastructure.Services;
 
@@ -32,32 +34,35 @@ builder.Logging.AddSerilog(logger);
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
-var db = scope.ServiceProvider.GetRequiredService<TutorBuddyContext>();
-db.Database.Migrate();
+var db = scope.ServiceProvider.GetRequiredService<Seeder>();
+db.Seed().GetAwaiter().GetResult();
 
-using (ServiceProvider serviceProvider = builder.Services.BuildServiceProvider())
-{
-    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-    new DbBootstrapEx(roleManager);
-}
 
 //Options Bindings
 var cloudinaryOptions = new CloudinarySettings();
 configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
 
+//aws secrets
+
+builder.Configuration.AddSystemsManager("/development/", new AWSOptions
+{
+    Region = Amazon.RegionEndpoint.USWest2
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(); 
 }
-
+ 
 app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
 
 app.MapControllers();
 

@@ -4,15 +4,18 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-using Serilog;
 using System.Text;
 using TutorBuddy.Core.Interface;
+using TutorBuddy.Core.Models;
 using TutorBuddy.Core.Services;
+using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Repository;
 using TutorialBuddy.Core;
-using TutorBuddy.Core.Models;
-using TutorBuddy.Infrastructure.DataAccess;
 using TutorialBuddy.Infastructure.Services;
+using TutorBuddy.Infrastructure.Seeder;
+using TutorBuddy.Core.Utilities;
+using AutoMapper;
+using TutorBuddy.Core.Enums;
 
 namespace FindRApi.Extensions
 {
@@ -43,7 +46,7 @@ namespace FindRApi.Extensions
 
             builder.Services.AddStackExchangeRedisCache(opt =>
             {
-                opt.Configuration = Config["RedisCacheUrl"];
+                opt.Configuration = Config.GetValue<string>("RedisCacheUrl");
                 opt.InstanceName = "master";
             });
 
@@ -63,7 +66,17 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITutorRepository, TutorRepository>();
             builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+            builder.Services.AddScoped<Seeder>();
 
+
+            // Auto Mapper Registration
+            var mapperConfig = new MapperConfiguration(mc => {
+                mc.AddProfile(new MapInitializer());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
+
+            // Authentication 
             builder.Services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -79,10 +92,18 @@ namespace FindRApi.Extensions
                     ValidateAudience = false,
 
                     ValidateIssuerSigningKey = true,
-                    ValidAudience = Config["JWT:ValidAudience"],
-                    ValidIssuer = Config["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
+                    ValidAudience = Config.GetValue<string>("JWT/ValidAudience"),
+                    ValidIssuer = Config.GetValue<string>("JWT/ValidIssuer"),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings/Secret")))
                 };
+            });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminOnly", policy => policy.RequireRole(UserRole.Admin.ToString()));
+                options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
+                options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
+                options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
             });
         }
     }

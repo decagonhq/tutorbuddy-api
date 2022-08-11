@@ -1,0 +1,65 @@
+﻿[
+  {
+    "ID": "3daf7c13-795a-4ac1-bad8-e40bf9e1c56b",
+    "Title": "Basic Science",
+    "Description": "For Basic Science like Physics Math etc.",
+    "Subjects": [
+      {
+        "ID": "e164871a-56e4-40a7-a9e8-5e8877cf7078",
+        "Topic": "Physics",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757361/physics_enyhwj.jpg",
+        "Description": "the branch of science concerned with the nature and properties of matter and energy"
+      },
+      {
+        "ID": "0b6fcccc-6418-4de5-9263-b591f5930ea4",
+        "Topic": "Chemistry",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757361/python_fgruae.png",
+        "Description": "the branch of science concerned with the substances of which matter is composed, the investigation of their properties and reactions, and the use of such reactions to form new substances."
+      },
+      {
+        
+        "ID": "e5015adb-58f0-4d81-91b1-475a1aa8d878",
+        "Topic": "Biology",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757361/Biology_jvwau8.png",
+        "Description": "he study of living organisms, divided into many specialized fields that cover their morphology, physiology, anatomy, behaviour, origin, and distribution"
+      }
+    ]
+  },
+  {
+    "ID": "328b1bee-6ad0-4751-926c-0a61a741ed23",
+    "Title": "Programming Language",
+    "Description": "For all Programming Language",
+    "Subjects": [
+      {
+        "ID": "62e7df55-47aa-4ad7-a23c-f211da08081c",
+        "Topic": "Java",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757360/Java_a73d1o.jpg",
+        "Description": "Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible."
+      },
+      {
+        "ID": "35b06658-473b-4f7a-8047-1a0bec8f1bf2",
+        "Topic": "C#",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757360/C-.net__tpxaqj.jpg",
+        "Description": "C# is a general-purpose, multi-paradigm programming language. C# encompasses static typing, strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines."
+      },
+      {
+        "ID": "f3612fa3-5803-4a9b-a3a3-7162d7135b1e",
+        "Topic": "Python",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757361/python_fgruae.png",
+        "Description": "Python is a high-level, interpreted, general-purpose programming language. Its design philosophy emphasizes code readability with the use of significant indentation. Python is dynamically-typed and garbage-collected."
+      },
+      {
+        "ID": "5df22200-86aa-4f30-a5b7-e0461a86f600",
+        "Topic": "iOS",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757360/iOS-Apple_kans4s.jpg",
+        "Description": "iOS is a mobile operating system created and developed by Apple Inc. exclusively for its hardware. It is the operating system that powers many of the company's mobile devices, including the iPhone"
+      },
+      {
+        "ID": "3b432ea2-b67a-40aa-828b-d68a5fb64e86",
+        "Topic": "Android",
+        "Thumbnail": "https://res.cloudinary.com/djrjrb0a4/image/upload/v1659757590/Android_Logo_09_y7ikru.png",
+        "Description": "Android is a mobile operating system based on a modified version of the Linux kernel and other open source software, designed primarily for touchscreen mobile devices such as smartphones and tablets."
+      }
+    ]
+  }
+]
