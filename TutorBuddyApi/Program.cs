@@ -33,6 +33,13 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
+//aws secrets
+
+builder.Configuration.AddSystemsManager("/development/", new AWSOptions
+{
+    Region = Amazon.RegionEndpoint.USEast2
+});
+
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
@@ -44,12 +51,7 @@ db.Seed().GetAwaiter().GetResult();
 var cloudinaryOptions = new CloudinarySettings();
 configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
 
-//aws secrets
 
-builder.Configuration.AddSystemsManager("/development/", new AWSOptions
-{
-    Region = Amazon.RegionEndpoint.USWest2
-});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -31,6 +31,9 @@
     <PackageReference Include="StackExchange.Redis" Version="2.6.48" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Google.Apis" Version="1.57.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="AWSSDK.SimpleSystemsManagement" Version="3.7.17.37" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +44,9 @@
     <None Remove="Json\" />
     <None Remove="Google.Apis" />
     <None Remove="Middleware\" />
+    <None Remove="Microsoft.Extensions.Hosting" />
+    <None Remove="Microsoft.AspNetCore.Hosting" />
+    <None Remove="AWSSDK.SimpleSystemsManagement" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Json\" />
