@@ -22,6 +22,7 @@ namespace TutorBuddyApi.Controllers
         public async Task<IActionResult> Register([FromBody] RegisterDTO addTutorDTO)
         {
             var response = await _authService.RegisterUser(addTutorDTO);
+
             return StatusCode(response.StatusCode, response);
         }
 
