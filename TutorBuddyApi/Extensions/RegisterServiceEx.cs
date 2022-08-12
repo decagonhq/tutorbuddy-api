@@ -16,6 +16,7 @@ using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddy.Core.Utilities;
 using AutoMapper;
 using TutorBuddy.Core.Enums;
+using Microsoft.OpenApi.Models;
 
 namespace FindRApi.Extensions
 {
@@ -82,7 +83,13 @@ namespace FindRApi.Extensions
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(auth =>
+            })
+            .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Config["Google:ClientId"];
+                googleOptions.ClientSecret = Config["Google:ClientSecret"];
+            })
+            .AddJwtBearer(auth =>
             {
                 auth.SaveToken = true;
                 auth.TokenValidationParameters = new TokenValidationParameters()
@@ -92,9 +99,12 @@ namespace FindRApi.Extensions
                     ValidateAudience = false,
 
                     ValidateIssuerSigningKey = true,
-                    ValidAudience = Config.GetValue<string>("JWT/ValidAudience"),
-                    ValidIssuer = Config.GetValue<string>("JWT/ValidIssuer"),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings/Secret")))
+                    ValidAudience = Config["JWT:ValidAudience"],
+                    ValidIssuer = Config["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
+                    //ValidAudience = Config.GetValue<string>("JWT/ValidAudience"),
+                    //ValidIssuer = Config.GetValue<string>("JWT/ValidIssuer"),
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings/Secret")))
                 };
             });
 
@@ -104,6 +114,38 @@ namespace FindRApi.Extensions
                 options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
                 options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
                 options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
+            });
+
+
+
+            // Swagger Configuration
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TutorBuddyApi", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid token in the input below. \r\n\r\n Example :'Bearer 124fsfs' "
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
         }
     }

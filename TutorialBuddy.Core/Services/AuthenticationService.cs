@@ -67,11 +67,13 @@ namespace TutorBuddy.Core.Services
 
         public async Task<ApiResponse<string>> RegisterUser(RegisterDTO model)
         {
+
             var response = new ApiResponse<string>();
             
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 var (emailResponse, registerResponse) = await Register(model);
+
                 if (registerResponse.Success)
                 {
                     if (emailResponse)

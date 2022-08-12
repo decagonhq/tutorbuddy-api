@@ -7,6 +7,11 @@ namespace TutorBuddyApi.Controllers
     [Route("heartbeat")]
     public class HealthController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        public HealthController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         /// <summary>
         /// Health Check for Cloud
         /// </summary>
@@ -18,5 +23,20 @@ namespace TutorBuddyApi.Controllers
         {
             return Ok(new { status = "UP" });
         }
+
+
+
+        [HttpGet]
+        public IActionResult GetConfiguration()
+        {
+            var constr = _configuration.GetValue<string>("FluentEmail:SendGridPKey");
+            var config = _configuration.GetSection("ConnectionStrings/ConnectionStr").Value;
+            string[] str = { constr, config };
+            return Ok(str);
+        }
+
+
+
+
     }
 }

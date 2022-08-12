@@ -6,7 +6,9 @@ using Serilog;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
+using TutorBuddyApi.Middleware;
 using TutorialBuddy.Infastructure.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,7 @@ builder.RegisterServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
 
 //Registering Serilog as a log provider
 var logger = new LoggerConfiguration()
@@ -30,6 +32,13 @@ var logger = new LoggerConfiguration()
   .CreateLogger();
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
+
+//aws secrets
+
+builder.Configuration.AddSystemsManager("/development/", new AWSOptions
+{
+    Region = Amazon.RegionEndpoint.USEast2
+});
 
 var app = builder.Build();
 
@@ -42,12 +51,7 @@ db.Seed().GetAwaiter().GetResult();
 var cloudinaryOptions = new CloudinarySettings();
 configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
 
-//aws secrets
 
-builder.Configuration.AddSystemsManager("/development/", new AWSOptions
-{
-    Region = Amazon.RegionEndpoint.USWest2
-});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -61,7 +65,18 @@ app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+
+// global cors policy
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
+// global error handler
+app.UseMiddleware<ErrorHandlerMiddleware>();
 
 
 app.MapControllers();
