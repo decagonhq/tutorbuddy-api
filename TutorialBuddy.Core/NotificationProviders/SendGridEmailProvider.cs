@@ -1,4 +1,5 @@
-﻿using SendGrid;
+﻿using Microsoft.Extensions.Configuration;
+using SendGrid;
 using SendGrid.Helpers.Mail;
 using TutorialBuddy.Infastructure.NotificationProviders;
 
@@ -8,8 +9,8 @@ namespace FindR.Integrations.NotificationProviders
     {
         public async Task<bool> SendAsync(NotificationContext nctx)
         {
-            //var apikey = nctx.Config["FluentEmail:SendGridPkey"];
-            var client = new SendGridClient("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");
+            var apikey = nctx.Config.GetValue<string>("FluentEmail:SendGridPKey"); ;
+            var client = new SendGridClient(apikey);
 
             var msg = new SendGridMessage
             {

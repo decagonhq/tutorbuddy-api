@@ -27,10 +27,11 @@ namespace TutorBuddyApi.Controllers
 
 
         [HttpGet]
+        [Route("get-parameter-store")]
         public IActionResult GetConfiguration()
         {
             var constr = _configuration.GetValue<string>("FluentEmail:SendGridPKey");
-            var config = _configuration.GetSection("ConnectionStrings/ConnectionStr").Value;
+            var config = _configuration.GetValue<string>("ConnectionStrings:ConnectionStr"); 
             string[] str = { constr, config };
             return Ok(str);
         }
