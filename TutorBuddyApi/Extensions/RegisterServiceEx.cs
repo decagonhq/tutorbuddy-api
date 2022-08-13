@@ -86,8 +86,8 @@ namespace FindRApi.Extensions
             })
             .AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Config["Google:ClientId"];
-                googleOptions.ClientSecret = Config["Google:ClientSecret"];
+                googleOptions.ClientId = Config.GetValue<string>("Google:ClientId");
+                googleOptions.ClientSecret = Config.GetValue<string>("Google:ClientSecret");
             })
             .AddJwtBearer(auth =>
             {
@@ -99,12 +99,12 @@ namespace FindRApi.Extensions
                     ValidateAudience = false,
 
                     ValidateIssuerSigningKey = true,
-                    ValidAudience = Config["JWT:ValidAudience"],
-                    ValidIssuer = Config["JWT:ValidIssuer"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
-                    //ValidAudience = Config.GetValue<string>("JWT/ValidAudience"),
-                    //ValidIssuer = Config.GetValue<string>("JWT/ValidIssuer"),
-                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings/Secret")))
+                    //ValidAudience = Config["JWT:ValidAudience"],
+                    //ValidIssuer = Config["JWT:ValidIssuer"],
+                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
+                    ValidAudience = Config.GetValue<string>("JWT:ValidAudience"),
+                    ValidIssuer = Config.GetValue<string>("JWT:ValidIssuer"),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings:Secret")))
                 };
             });
 
