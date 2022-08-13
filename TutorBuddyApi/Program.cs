@@ -44,7 +44,7 @@ var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 var db = scope.ServiceProvider.GetRequiredService<Seeder>();
-db.Seed().GetAwaiter().GetResult();
+//db.Seed().GetAwaiter().GetResult();
 
 
 
