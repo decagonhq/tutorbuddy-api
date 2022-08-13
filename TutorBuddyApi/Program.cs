@@ -19,6 +19,14 @@ var services = builder.Services;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
+//aws secrets
+
+builder.Configuration.AddSystemsManager("/development/", new AWSOptions
+{
+    Region = Amazon.RegionEndpoint.USEast2
+});
+
+
 builder.RegisterServices();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -33,12 +41,6 @@ var logger = new LoggerConfiguration()
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
 
-//aws secrets
-
-builder.Configuration.AddSystemsManager("/development/", new AWSOptions
-{
-    Region = Amazon.RegionEndpoint.USEast2
-});
 
 var app = builder.Build();
 

@@ -31,6 +31,7 @@ namespace FindRApi.Extensions
             var Config = builder.Configuration;
 
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
+            //var connStr = Config.GetValue<string>("ConnectionStrings:ConnectionStr");
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr);
 
             builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
