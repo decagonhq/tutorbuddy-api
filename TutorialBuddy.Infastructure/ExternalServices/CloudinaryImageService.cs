@@ -17,12 +17,12 @@ namespace TutorialBuddy.Infastructure.Services
         private readonly Cloudinary _cloudinary;
         private CloudinarySettings _cloudinaryOptions;
 
-        public ImageUploadService(IServiceProvider provider, IOptions<CloudinarySettings> cloudinaryOptions, IConfiguration configuration)
+        public ImageUploadService(IServiceProvider provider, IConfiguration configuration)
         {
             _context = provider.GetRequiredService<TutorBuddyContext>();
             _configuration = configuration;
-            _cloudinaryOptions = cloudinaryOptions.Value;
-            _cloudinary = new Cloudinary(new Account(_cloudinaryOptions.CloudName, _cloudinaryOptions.ApiKey, _cloudinaryOptions.ApiSecret));
+            _cloudinary = new Cloudinary(new Account(_configuration.GetValue<string>("CloudinarySettings:CloudName"),
+               _configuration.GetValue<string>("CloudinarySettings:ApiKey"), _configuration.GetValue<string>("CloudinarySettings:ApiSecret")));
         }
 
         public int ValidateImage(IFormFile image)
