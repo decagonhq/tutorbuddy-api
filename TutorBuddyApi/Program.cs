@@ -47,10 +47,6 @@ var db = scope.ServiceProvider.GetRequiredService<Seeder>();
 db.Seed().GetAwaiter().GetResult();
 
 
-//Options Bindings
-var cloudinaryOptions = new CloudinarySettings();
-configuration.GetSection("CloudinarySettings").Bind(cloudinaryOptions);
-
 
 
 // Configure the HTTP request pipeline.

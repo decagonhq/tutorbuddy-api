@@ -2034,3 +2034,6 @@ System.ArgumentNullException: String reference not set to an instance of a Strin
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
 08/13/2022 04:14:23 Invalid password for user.
 08/13/2022 04:14:23 Login operation failed
+08/13/2022 12:04:58 Change password failed for user.
+08/13/2022 12:08:02 Change password failed for user.
+08/13/2022 12:09:28 User password validation failed: "PasswordTooShort".

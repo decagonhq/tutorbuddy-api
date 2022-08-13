@@ -99,9 +99,6 @@ namespace FindRApi.Extensions
                     ValidateAudience = false,
 
                     ValidateIssuerSigningKey = true,
-                    //ValidAudience = Config["JWT:ValidAudience"],
-                    //ValidIssuer = Config["JWT:ValidIssuer"],
-                    //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config["AppSettings:Secret"]))
                     ValidAudience = Config.GetValue<string>("JWT:ValidAudience"),
                     ValidIssuer = Config.GetValue<string>("JWT:ValidIssuer"),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings:Secret")))
