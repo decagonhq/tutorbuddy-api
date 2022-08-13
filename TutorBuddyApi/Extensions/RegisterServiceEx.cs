@@ -86,8 +86,8 @@ namespace FindRApi.Extensions
             })
             .AddGoogle(googleOptions =>
             {
-                googleOptions.ClientId = Config["Google:ClientId"];
-                googleOptions.ClientSecret = Config["Google:ClientSecret"];
+                googleOptions.ClientId = Config.GetValue<string>("Google:ClientId");
+                googleOptions.ClientSecret = Config.GetValue<string>("Google:ClientSecret");
             })
             .AddJwtBearer(auth =>
             {
