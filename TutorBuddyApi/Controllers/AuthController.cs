@@ -48,7 +48,7 @@ namespace TutorBuddyApi.Controllers
             return StatusCode(response.StatusCode, response); ;
         }
 
-        [HttpGet("forgot-password")]
+        [HttpPost("forgot-password")]
         public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordDTO forgotPasswordDTO)
         {
             var response = await _authService.ForgotPassword(forgotPasswordDTO);
