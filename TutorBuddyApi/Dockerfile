@@ -19,7 +19,5 @@ RUN dotnet publish "TutorBuddyApi.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-COPY --from=publish /app/publish/TutorBuddyApi/StaticFiles/HTML/ConfirmEmail.html ./
-COPY --from=publish /app/publish/TutorBuddyApi/StaticFiles/HTML/ForgotPassword.html ./
-COPY --from=publish /app/publish/TutorBuddyApi/StaticFiles/SVG/tutorbuddy.svg ./
+
 ENTRYPOINT ["dotnet", "TutorBuddyApi.dll"]

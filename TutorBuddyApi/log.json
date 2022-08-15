@@ -61,3 +61,4 @@
 {"Timestamp":"2022-08-15T06:10:55.7719530+01:00","Level":"Information","MessageTemplate":"Lets the ball role..."}
 {"Timestamp":"2022-08-15T07:05:36.5012710+01:00","Level":"Verbose","MessageTemplate":"Lets the ball role..."}
 {"Timestamp":"2022-08-15T07:06:46.4610340+01:00","Level":"Information","MessageTemplate":"Successfull enter the image upload service","Properties":{"ActionId":"106a998f-1c24-42cc-8aba-e514c2eca979","ActionName":"TutorBuddyApi.Controllers.UserController.UploadImage (TutorBuddyApi)","RequestId":"0HMJUGGM2JC7S:00000004","RequestPath":"/api/v1/User/Id/upload-image","ConnectionId":"0HMJUGGM2JC7S"}}
+{"Timestamp":"2022-08-15T07:51:07.0076020+01:00","Level":"Verbose","MessageTemplate":"Lets the ball role..."}
