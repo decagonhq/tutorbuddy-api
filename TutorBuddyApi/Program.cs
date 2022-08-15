@@ -1,8 +1,10 @@
+using Amazon.CloudWatchLogs;
 using Amazon.Extensions.NETCore.Setup;
 using FindRApi.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Serilog.Sinks.AwsCloudWatch;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
@@ -34,12 +36,24 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 //Registering Serilog as a log provider
+var client = new AmazonCloudWatchLogsClient();
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
   .Enrich.FromLogContext()
+  .MinimumLevel.Verbose()
+  .WriteTo.AmazonCloudWatch(
+        // The name of the log group to log to
+        logGroup: "/ecs/tutorbuddy-api-td",
+        // A string that our log stream names should be prefixed with. We are just specifying the
+        // start timestamp as the log stream prefix
+        logStreamPrefix: DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+        // The AWS CloudWatch client to use
+        cloudWatchClient: client)
+  .WriteTo.Console()
   .CreateLogger();
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
+
 
 
 var app = builder.Build();
@@ -79,6 +93,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.MapControllers();
 
-logger.Information("Lets the ball role...");
+logger.Verbose("Lets the ball role...");
+Log.Logger = logger;
 
 app.Run();

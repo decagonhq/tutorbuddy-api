@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Net;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Logging;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Enums;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
+using Serilog;
 
 namespace TutorBuddy.Core.Services
 {
@@ -14,11 +16,13 @@ namespace TutorBuddy.Core.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
         private readonly IImageUploadService _imageUpload;
+        private readonly ILogger<UserService> _logger;
         public UserService(IUnitOfWork unitOfWork, IImageUploadService imageUpload, UserManager<User> userManager)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _imageUpload = imageUpload;
+           
 
         }
 
@@ -132,14 +136,16 @@ namespace TutorBuddy.Core.Services
 
         public async Task<ApiResponse<string>> UploadUserAvatarAsync(string Id, UploadImageDTO imageDto)
         {
+            Log.Information("Successfull enter the image upload service");
             var user = await _userManager.FindByIdAsync(Id);
             var response = new ApiResponse<string>();
 
             if (user != null)
             {
+                Log.Information("User is found");
                 var upload = await _imageUpload.UploadSingleImage(imageDto.ImageToUpload, "Avatar");
 
-
+                Log.Information("Successful upload the image");
                 user.AvatarUrl = upload.Url.ToString();
                 user.PublicUrl = upload.PublicId;
                 await _userManager.UpdateAsync(user);
