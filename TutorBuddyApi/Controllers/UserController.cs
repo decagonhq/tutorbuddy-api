@@ -38,6 +38,7 @@ namespace TutorBuddyApi.Controllers
         [HttpPatch("Id/upload-image")]
         public async Task<IActionResult> UploadImage(string Id, [FromForm] UploadImageDTO imageDto)
         {
+
             var result = await _userService.UploadUserAvatarAsync(Id, imageDto);
             return StatusCode(result.StatusCode, result);
         }
