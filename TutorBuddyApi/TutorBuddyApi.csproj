@@ -54,4 +54,15 @@
     <Folder Include="Json\" />
     <Folder Include="Middleware\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="StaticFiles\HTML\ConfirmEmail.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\HTML\ForgotPassword.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="StaticFiles\HTML\SVG\tutorbuddy.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
