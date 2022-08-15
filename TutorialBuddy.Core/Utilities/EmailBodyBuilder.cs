@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using Serilog;
 using TutorBuddy.Core.Enums;
 using TutorBuddy.Core.Models;
 
@@ -23,8 +24,9 @@ namespace TutorBuddy.Core.Utilities
                     link = $"http://www.example.com/{linkName}/{token}/{user.Email}";
                 }
             }
-
+            Log.Information("About to get the static email file");
             var temp = await File.ReadAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), emailTempPath));
+            Log.Information($"Successfull get email path: {temp}");
             var newTemp = temp.Replace("**link**", link);
             var emailBody = newTemp.Replace("**user**", userName);
             return emailBody;
