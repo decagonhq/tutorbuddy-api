@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
+
+
+
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,6 +21,7 @@ namespace TutorBuddyApi.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     //[Authorize(AuthenticationSchemes = "Bearer")]
+   
     public class UserController : ControllerBase
     {
 
