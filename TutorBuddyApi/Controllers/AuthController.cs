@@ -70,11 +70,12 @@ namespace TutorBuddyApi.Controllers
         }
 
 
-        [HttpPost("oogle")]
+        [HttpPost("google")]
         [ProducesDefaultResponseType]
-        public async Task<JsonResult> GoogleLogin(GoogleLoginRequest request)
+        public async Task<IActionResult> GoogleLogin(GoogleLoginRequestDTO request)
         {
-            
+            var response = await _authService.VerifyGoogleToken(request);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }
