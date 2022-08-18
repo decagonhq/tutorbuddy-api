@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization.Policy;
+using Microsoft.AspNetCore.Authorization;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
@@ -20,9 +20,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize()]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
-   
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : ControllerBase
     {
 
