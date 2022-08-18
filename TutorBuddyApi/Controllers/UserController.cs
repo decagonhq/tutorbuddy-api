@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Policy;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
@@ -20,6 +20,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize()]
     //[Authorize(AuthenticationSchemes = "Bearer")]
    
     public class UserController : ControllerBase
@@ -55,6 +56,7 @@ namespace TutorBuddyApi.Controllers
         /// <returns></returns>
         
         [HttpPatch("UpdatePassword")]
+        
         public async Task<IActionResult> UpdatePassword(UpdatePasswordDTO model)
         {
             var result = await _userService.UpdatePasswordAsync(model);
@@ -64,6 +66,7 @@ namespace TutorBuddyApi.Controllers
 
 
         [HttpGet("Id")]
+        
         public async Task<IActionResult> GetUser(string Id)
         {
             var result = await _userService.GetUser(Id);

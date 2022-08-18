@@ -22,7 +22,6 @@ var services = builder.Services;
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //aws secrets
-
 builder.Configuration.AddSystemsManager("/development/", new AWSOptions
 {
     Region = Amazon.RegionEndpoint.USEast2

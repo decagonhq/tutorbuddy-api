@@ -28,6 +28,7 @@ namespace TutorBuddyApi.Controllers
 
         [HttpGet]
         [Route("get-parameter-store")]
+        [Authorize]
         public IActionResult GetConfiguration()
         {
             var constr = _configuration.GetValue<string>("FluentEmail:SendGridPKey");
