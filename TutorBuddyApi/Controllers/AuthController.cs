@@ -26,7 +26,7 @@ namespace TutorBuddyApi.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpGet("Register")]
+        [HttpGet("register")]
         public async Task<IActionResult> Register()
         {
             var response = await _authService.GetRegisterResource();

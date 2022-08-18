@@ -55,7 +55,7 @@ namespace TutorBuddyApi.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         
-        [HttpPatch("UpdatePassword")]
+        [HttpPatch("update-password")]
         
         public async Task<IActionResult> UpdatePassword(UpdatePasswordDTO model)
         {
