@@ -14,6 +14,7 @@ using TutorBuddy.Core.Utilities;
 using TutorialBuddy.Core;
 using TutorialBuddy.Core.Enums;
 using TutorialBuddy.Infastructure.NotificationProviders;
+using Google.Apis.Auth;
 
 namespace TutorBuddy.Core.Services
 {
@@ -397,14 +398,81 @@ namespace TutorBuddy.Core.Services
         }
 
 
-        public async Task<ApiResponse<string>> VerifyGoogleToken(GoogleLoginRequestDTO google)
+        public async Task<ApiResponse<CredentialResponseDTO>> VerifyGoogleToken(GoogleLoginRequestDTO google)
         {
+            var response = new ApiResponse<CredentialResponseDTO>();
             var settings = new GoogleJsonWebSignature.ValidationSettings()
             {
-                Audience = new List<string>() { _goolgeSettings.GetSection("clientId").Value }
+                Audience = new List<string>() { _configuration.GetValue<string>("Google:ClientId") }
+        
             };
-            var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
-            return payload;
+            var payload = await GoogleJsonWebSignature.ValidateAsync(google.IdToken, settings);
+
+            if (payload == null)
+            {
+                _logger.LogError("Invalid External Authentication.");
+                response.Message = "Invalid External Authentication.";
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Success = false;
+                return response;
+            }
+
+            
+            var info = new UserLoginInfo(google.Provider, payload.Subject, google.Provider);
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(payload.Email);
+                if (user == null)
+                {
+                    user = new User { Email = payload.Email, UserName = payload.Email };
+                    await _userManager.CreateAsync(user);
+                    //prepare and send an email for the email confirmation
+                    await _userManager.AddToRoleAsync(user, google.Role);
+                    await _userManager.AddLoginAsync(user, info);
+                }
+                else
+                {
+                    await _userManager.AddLoginAsync(user, info);
+                }
+            }
+            if (user == null)
+            {
+                _logger.LogError("Invalid External Authentication.");
+                response.Message = "Invalid External Authentication.";
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Success = false;
+                return response;
+            }
+
+            //GET NEW USER DETAILS
+            user.RefreshToken = _tokenGenerator.GenerateRefreshToken().ToString();
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); //sets refresh token for 7 days
+
+            var credentialResponse = new CredentialResponseDTO()
+            {
+                Id = user.Id,
+                Token = await _tokenGenerator.GenerateToken(user),
+                RefreshToken = user.RefreshToken
+            };
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User successfully logged in");
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Message = "Login Successfully";
+                response.Data = credentialResponse;
+                response.Success = true;
+                return response;
+            }
+
+            response.StatusCode = StatusCodes.Status400BadRequest;
+            response.Message = GetErrors(result);
+            response.Success = false;
+            return response;
+
         }
     }
 }
