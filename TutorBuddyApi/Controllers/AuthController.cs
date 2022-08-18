@@ -68,5 +68,13 @@ namespace TutorBuddyApi.Controllers
             var response = await _authService.RefreshTokenAsync(model);
             return StatusCode(response.StatusCode, response);
         }
+
+
+        [HttpPost("oogle")]
+        [ProducesDefaultResponseType]
+        public async Task<JsonResult> GoogleLogin(GoogleLoginRequest request)
+        {
+            
+        }
     }
 }

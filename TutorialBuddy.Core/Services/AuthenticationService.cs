@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -26,8 +27,9 @@ namespace TutorBuddy.Core.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<AuthenticationService> _logger;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public AuthenticationService(IServiceProvider provider)
+        public AuthenticationService(IServiceProvider provider, IConfiguration configuration)
         {
             _userManager = provider.GetRequiredService<UserManager<User>>();
             _roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -36,6 +38,7 @@ namespace TutorBuddy.Core.Services
             _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
             _mapper = provider.GetRequiredService<IMapper>();
+            _configuration = configuration;
         }
 
       
@@ -391,6 +394,17 @@ namespace TutorBuddy.Core.Services
             }
             response.Success = true;
             return response;
+        }
+
+
+        public async Task<ApiResponse<string>> VerifyGoogleToken(GoogleLoginRequestDTO google)
+        {
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string>() { _goolgeSettings.GetSection("clientId").Value }
+            };
+            var payload = await GoogleJsonWebSignature.ValidateAsync(externalAuth.IdToken, settings);
+            return payload;
         }
     }
 }
