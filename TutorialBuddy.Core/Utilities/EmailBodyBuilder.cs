@@ -32,12 +32,6 @@ namespace TutorBuddy.Core.Utilities
             return emailBody;
         }
 
-        //public static async Task<string> GetEmailBody(string emailTempPath, string token, string email)
-        //{
-        //    var link = $"https://tutorbuddyapi.herokuapp.com/Manager/RegisterManager?email={email}&token={token}";
-        //    var temp = await File.ReadAllTextAsync(Path.Combine(Directory.GetCurrentDirectory(), emailTempPath));
-        //    var emailBody = temp.Replace("**link**", link);
-        //    return emailBody;
-        //}
+        
     }
 }

@@ -16,7 +16,6 @@ namespace TutorBuddyApi.Controllers
             _authService = provider.GetRequiredService<IAuthenticationService>();
         }
 
-       
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO addTutorDTO)
@@ -41,7 +40,7 @@ namespace TutorBuddyApi.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [HttpPost("confirm-email")]
+        [HttpPost("verify-email")]
         public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailDTO confirmEmailDTO)
         {
             var response = await _authService.ConfirmEmail(confirmEmailDTO);
