@@ -115,12 +115,8 @@ namespace FindRApi.Extensions
                 options.AddPolicy("RequireAdminOnly", policy => policy.RequireRole(UserRole.Admin.ToString()));
                 options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
                 options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
-                options.AddPolicy("RequireTutorAndStudent", policy => {
-                    policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString());
-                    policy.AuthenticationSchemes.Add(JwtBearerDefaults.AuthenticationScheme);
-
-                    }
-                 );
+                options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
+                  
             });
 
 

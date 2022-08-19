@@ -39,7 +39,9 @@ namespace TutorBuddyApi.Controllers
         /// <param name="Id"></param>
         /// <param name="imageDto"></param>
         /// <returns></returns>
-        [HttpPatch("Id/upload-image")]
+        /// 
+        [HttpPatch]
+        [Route("{Id}/upload-image")]
         public async Task<IActionResult> UploadImage(string Id, [FromForm] UploadImageDTO imageDto)
         {
 
@@ -52,9 +54,9 @@ namespace TutorBuddyApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        
+
         [HttpPatch("update-password")]
-        
+
         public async Task<IActionResult> UpdatePassword(UpdatePasswordDTO model)
         {
             var result = await _userService.UpdatePasswordAsync(model);
@@ -62,9 +64,9 @@ namespace TutorBuddyApi.Controllers
 
         }
 
-
-        [HttpGet("Id")]
-        
+        [Authorize(Policy = "RequireTutorAndStudent")]
+        [HttpGet]
+        [Route("{Id}")]
         public async Task<IActionResult> GetUser(string Id)
         {
             var result = await _userService.GetUser(Id);
