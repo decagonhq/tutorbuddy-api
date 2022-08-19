@@ -22,7 +22,6 @@ var services = builder.Services;
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 //aws secrets
-
 builder.Configuration.AddSystemsManager("/development/", new AWSOptions
 {
     Region = Amazon.RegionEndpoint.USEast2
@@ -66,20 +65,22 @@ db.Seed().GetAwaiter().GetResult();
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(); 
-}
+
  
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tutor Buddy Api v1");
+    
+});
 
+app.UseStaticFiles();
+app.UseRouting();
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseStaticFiles();
+
 
 // global cors policy
 app.UseCors(x => x

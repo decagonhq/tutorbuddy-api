@@ -5,10 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
+
+
+
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -16,7 +20,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : ControllerBase
     {
 
@@ -35,7 +39,9 @@ namespace TutorBuddyApi.Controllers
         /// <param name="Id"></param>
         /// <param name="imageDto"></param>
         /// <returns></returns>
-        [HttpPatch("Id/upload-image")]
+        /// 
+        [HttpPatch]
+        [Route("{Id}/upload-image")]
         public async Task<IActionResult> UploadImage(string Id, [FromForm] UploadImageDTO imageDto)
         {
 
@@ -48,8 +54,9 @@ namespace TutorBuddyApi.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        
-        [HttpPatch("UpdatePassword")]
+
+        [HttpPatch("update-password")]
+
         public async Task<IActionResult> UpdatePassword(UpdatePasswordDTO model)
         {
             var result = await _userService.UpdatePasswordAsync(model);
@@ -57,8 +64,9 @@ namespace TutorBuddyApi.Controllers
 
         }
 
-
-        [HttpGet("Id")]
+        [Authorize(Policy = "RequireTutorAndStudent")]
+        [HttpGet]
+        [Route("{Id}")]
         public async Task<IActionResult> GetUser(string Id)
         {
             var result = await _userService.GetUser(Id);

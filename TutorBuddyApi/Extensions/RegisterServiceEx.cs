@@ -31,7 +31,7 @@ namespace FindRApi.Extensions
             var Config = builder.Configuration;
 
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
-            //var connStr = Config.GetValue<string>("ConnectionStrings:ConnectionStr");
+           
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr);
 
             builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
@@ -111,10 +111,12 @@ namespace FindRApi.Extensions
 
             builder.Services.AddAuthorization(options =>
             {
+     
                 options.AddPolicy("RequireAdminOnly", policy => policy.RequireRole(UserRole.Admin.ToString()));
                 options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
                 options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
                 options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
+                  
             });
 
 
