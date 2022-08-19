@@ -162,7 +162,7 @@ namespace TutorBuddy.Core.Services
                 var encodedToken = TokenConverter.EncodeToken(token);
                 var userRoles = await _userManager.GetRolesAsync(user);
                     
-                var mailBody = await EmailBodyBuilder.GetEmailBody(user, userRoles.ToList(), emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmEmail", encodedToken, controllerName: "Auth");
+                var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmPassword", encodedToken);
                 NotificationContext notificationContext = new NotificationContext()
                 {
                     Address = baseRegister.Email,
@@ -227,7 +227,7 @@ namespace TutorBuddy.Core.Services
             var encodedToken = TokenConverter.EncodeToken(token);
             var userRole = await _userManager.GetRolesAsync(user);
 
-            var mailBody = await EmailBodyBuilder.GetEmailBody(user, userRole.ToList(), emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", encodedToken, controllerName: "Auth");
+            var mailBody = await EmailBodyBuilder.GetEmailBody(user,  emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", encodedToken);
 
             NotificationContext notificationContext = new NotificationContext()
             {
