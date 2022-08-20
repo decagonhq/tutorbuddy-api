@@ -18,5 +18,6 @@ namespace TutorBuddy.Core.Interface
         Task<ApiResponse<string>> ResetPassword(ResetPasswordDTO resetPasswordDTO);
         Task<ApiResponse<string>> ConfirmEmail(ConfirmEmailDTO confirmEmailDTO);
         Task<ApiResponse<RefreshTokenResponse>> RefreshTokenAsync(RefreshTokenRequestDTO token);
+        Task<ApiResponse<CredentialResponseDTO>> VerifyGoogleToken(GoogleLoginRequestDTO google);
     }
 }

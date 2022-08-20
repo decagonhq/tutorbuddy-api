@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Net;
@@ -13,6 +14,7 @@ using TutorBuddy.Core.Utilities;
 using TutorialBuddy.Core;
 using TutorialBuddy.Core.Enums;
 using TutorialBuddy.Infastructure.NotificationProviders;
+using Google.Apis.Auth;
 
 namespace TutorBuddy.Core.Services
 {
@@ -26,8 +28,10 @@ namespace TutorBuddy.Core.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<AuthenticationService> _logger;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
+        private readonly FourDigitTokenProvider _fourDigitToken;
 
-        public AuthenticationService(IServiceProvider provider)
+        public AuthenticationService(IServiceProvider provider, IConfiguration configuration)
         {
             _userManager = provider.GetRequiredService<UserManager<User>>();
             _roleManager = provider.GetRequiredService<RoleManager<IdentityRole>>();
@@ -36,6 +40,8 @@ namespace TutorBuddy.Core.Services
             _unitOfWork = provider.GetRequiredService<IUnitOfWork>();
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
             _mapper = provider.GetRequiredService<IMapper>();
+            _configuration = configuration;
+            _fourDigitToken = new FourDigitTokenProvider();
         }
 
       
@@ -43,7 +49,7 @@ namespace TutorBuddy.Core.Services
         public async Task<ApiResponse<GetRegisterResponseDTO>> GetRegisterResource()
         {
             var response = new ApiResponse<GetRegisterResponseDTO>();
-            var roles = _roleManager.Roles;
+            var roles = _roleManager.Roles.Where(x => x.Name != UserRole.Admin.ToString());
             var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
             var avaliabilities = await _unitOfWork.AvailabilityRepository.GetAllAvaliabilityAsync();
 
@@ -154,11 +160,11 @@ namespace TutorBuddy.Core.Services
                     return (false, response);
                 }
 
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var encodedToken = TokenConverter.EncodeToken(token);
-                var userRoles = await _userManager.GetRolesAsync(user);
+                var purpose = UserManager<User>.ConfirmEmailTokenPurpose;
+                var token = await _fourDigitToken.GenerateAsync(purpose, _userManager, user);
+               
                     
-                var mailBody = await EmailBodyBuilder.GetEmailBody(user, userRoles.ToList(), emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmEmail", encodedToken, controllerName: "Auth");
+                var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmPassword", token);
                 NotificationContext notificationContext = new NotificationContext()
                 {
                     Address = baseRegister.Email,
@@ -188,18 +194,23 @@ namespace TutorBuddy.Core.Services
                 response.StatusCode = (int)HttpStatusCode.NotFound;
                 return response;
             }
-            var decodedToken = TokenConverter.DecodeToken(confirmEmailDTO.Token);
-            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
-            if (result.Succeeded)
+            var purpose = UserManager<User>.ConfirmEmailTokenPurpose;
+            var result = await _fourDigitToken.ValidateAsync(purpose, confirmEmailDTO.Token, _userManager, user);
+            if (result)
             {
-                response.StatusCode = (int)HttpStatusCode.OK;
-                response.Message = "Email Confirmation successful";
-                response.Data = user.Id;
-                response.Success = true;
-                return response;
+                user.EmailConfirmed = true;
+                var update = await _userManager.UpdateAsync(user);
+                if (update.Succeeded)
+                {
+                    response.StatusCode = (int)HttpStatusCode.OK;
+                    response.Message = "Email Confirmation successful";
+                    response.Data = user.Id;
+                    response.Success = true;
+                    return response;
+                }
             }
             response.StatusCode = (int)HttpStatusCode.BadRequest;
-            response.Message = GetErrors(result);
+            response.Message = "Email Confirmation not successful";
             response.Data = string.Empty;
             response.Success = false;
             return response;
@@ -219,11 +230,12 @@ namespace TutorBuddy.Core.Services
                 return response;
             }
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var encodedToken = TokenConverter.EncodeToken(token);
-            var userRole = await _userManager.GetRolesAsync(user);
+            
+            var purpose = UserManager<User>.ResetPasswordTokenPurpose;
+            var token = await _fourDigitToken.GenerateAsync(purpose, _userManager, user);
 
-            var mailBody = await EmailBodyBuilder.GetEmailBody(user, userRole.ToList(), emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", encodedToken, controllerName: "Auth");
+
+            var mailBody = await EmailBodyBuilder.GetEmailBody(user,  emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", token);
 
             NotificationContext notificationContext = new NotificationContext()
             {
@@ -307,16 +319,19 @@ namespace TutorBuddy.Core.Services
                 return response;
             }
 
-            var decodedToken = TokenConverter.DecodeToken(resetPasswordDTO.Token);
-
             var purpose = UserManager<User>.ResetPasswordTokenPurpose;
-            var tokenProvider = _userManager.Options.Tokens.PasswordResetTokenProvider;
 
-            var isValidToken = await _userManager.VerifyUserTokenAsync(user, tokenProvider, purpose, decodedToken);
+            var isValidToken = await _fourDigitToken.ValidateAsync(purpose, resetPasswordDTO.Token, _userManager, user);
 
             var result = new IdentityResult();
+            var hasher = new PasswordHasher<User>();
             if (isValidToken)
-                result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDTO.NewPassword);
+            {
+                var hash = hasher.HashPassword(user, resetPasswordDTO.NewPassword);
+                user.PasswordHash = hash;
+                result = await _userManager.UpdateAsync(user);
+            }
+                
 
             if(result.Succeeded)
             {
@@ -392,5 +407,84 @@ namespace TutorBuddy.Core.Services
             response.Success = true;
             return response;
         }
+
+
+        public async Task<ApiResponse<CredentialResponseDTO>> VerifyGoogleToken(GoogleLoginRequestDTO google)
+        {
+            var response = new ApiResponse<CredentialResponseDTO>();
+            var settings = new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new List<string>() { _configuration.GetValue<string>("Google:ClientId") }
+        
+            };
+            var payload = await GoogleJsonWebSignature.ValidateAsync(google.IdToken, settings);
+
+            if (payload == null)
+            {
+                _logger.LogError("Invalid External Authentication.");
+                response.Message = "Invalid External Authentication.";
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Success = false;
+                return response;
+            }
+
+            
+            var info = new UserLoginInfo(google.Provider, payload.Subject, google.Provider);
+            var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+            if (user == null)
+            {
+                user = await _userManager.FindByEmailAsync(payload.Email);
+                if (user == null)
+                {
+                    user = new User { Email = payload.Email, UserName = payload.Email };
+                    await _userManager.CreateAsync(user);
+                    //prepare and send an email for the email confirmation
+                    await _userManager.AddToRoleAsync(user, google.Role);
+                    await _userManager.AddLoginAsync(user, info);
+                }
+                else
+                {
+                    await _userManager.AddLoginAsync(user, info);
+                }
+            }
+            if (user == null)
+            {
+                _logger.LogError("Invalid External Authentication.");
+                response.Message = "Invalid External Authentication.";
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Success = false;
+                return response;
+            }
+
+            //GET NEW USER DETAILS
+            user.RefreshToken = _tokenGenerator.GenerateRefreshToken().ToString();
+            user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); //sets refresh token for 7 days
+
+            var credentialResponse = new CredentialResponseDTO()
+            {
+                Id = user.Id,
+                Token = await _tokenGenerator.GenerateToken(user),
+                RefreshToken = user.RefreshToken
+            };
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User successfully logged in");
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Message = "Login Successfully";
+                response.Data = credentialResponse;
+                response.Success = true;
+                return response;
+            }
+
+            response.StatusCode = StatusCodes.Status400BadRequest;
+            response.Message = GetErrors(result);
+            response.Success = false;
+            return response;
+
+        }
     }
 }
+

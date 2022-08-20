@@ -31,7 +31,7 @@ namespace FindRApi.Extensions
             var Config = builder.Configuration;
 
             var connStr = DatabaseSetup.DatabaseConnectionString(builder.Environment, Config);
-            //var connStr = Config.GetValue<string>("ConnectionStrings:ConnectionStr");
+           
             var dbBuilder = new NpgsqlConnectionStringBuilder(connStr);
 
             builder.Services.AddDbContext<TutorBuddyContext>(opt => opt.UseNpgsql(connStr));
@@ -44,6 +44,7 @@ namespace FindRApi.Extensions
                     x.SignIn.RequireConfirmedEmail = true;
                 })
                 .AddEntityFrameworkStores<TutorBuddyContext>()
+                .AddTokenProvider<FourDigitTokenProvider>(FourDigitTokenProvider.FourDigitEmail)
                 .AddDefaultTokenProviders();
 
             builder.Services.AddStackExchangeRedisCache(opt =>
@@ -67,7 +68,10 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<ITutorRepository, TutorRepository>();
+            builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
             builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
+            builder.Services.AddScoped<ISessionRepository, SessionRepository>();
+            builder.Services.AddScoped<ISessionService, SessionService>();
             builder.Services.AddScoped<Seeder>();
 
 
@@ -108,10 +112,12 @@ namespace FindRApi.Extensions
 
             builder.Services.AddAuthorization(options =>
             {
+     
                 options.AddPolicy("RequireAdminOnly", policy => policy.RequireRole(UserRole.Admin.ToString()));
                 options.AddPolicy("RequireTutorOnly", policy => policy.RequireRole(UserRole.Tutor.ToString()));
                 options.AddPolicy("RequireStudentOnly", policy => policy.RequireRole(UserRole.Student.ToString()));
                 options.AddPolicy("RequireTutorAndStudent", policy => policy.RequireRole(UserRole.Tutor.ToString(), UserRole.Student.ToString()));
+                  
             });
 
 
