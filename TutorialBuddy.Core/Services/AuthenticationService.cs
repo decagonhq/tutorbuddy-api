@@ -29,6 +29,7 @@ namespace TutorBuddy.Core.Services
         private readonly ILogger<AuthenticationService> _logger;
         private readonly IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly FourDigitTokenProvider _fourDigitToken;
 
         public AuthenticationService(IServiceProvider provider, IConfiguration configuration)
         {
@@ -40,6 +41,7 @@ namespace TutorBuddy.Core.Services
             _logger = provider.GetRequiredService<ILogger<AuthenticationService>>();
             _mapper = provider.GetRequiredService<IMapper>();
             _configuration = configuration;
+            _fourDigitToken = new FourDigitTokenProvider();
         }
 
       
@@ -158,11 +160,12 @@ namespace TutorBuddy.Core.Services
                     return (false, response);
                 }
 
-                var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var encodedToken = TokenConverter.EncodeToken(token);
-                var userRoles = await _userManager.GetRolesAsync(user);
+               
+                var token = await _fourDigitToken.GenerateAsync("confirmEmail", _userManager, user);
+                //var encodedToken = TokenConverter.EncodeToken(token);
+                //var userRoles = await _userManager.GetRolesAsync(user);
                     
-                var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmPassword", encodedToken);
+                var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmPassword", token);
                 NotificationContext notificationContext = new NotificationContext()
                 {
                     Address = baseRegister.Email,
@@ -192,18 +195,23 @@ namespace TutorBuddy.Core.Services
                 response.StatusCode = (int)HttpStatusCode.NotFound;
                 return response;
             }
-            var decodedToken = TokenConverter.DecodeToken(confirmEmailDTO.Token);
-            var result = await _userManager.ConfirmEmailAsync(user, decodedToken);
-            if (result.Succeeded)
+            
+            var result = await _fourDigitToken.ValidateAsync("confirmEmail", confirmEmailDTO.Token, _userManager, user);
+            if (result)
             {
-                response.StatusCode = (int)HttpStatusCode.OK;
-                response.Message = "Email Confirmation successful";
-                response.Data = user.Id;
-                response.Success = true;
-                return response;
+                user.EmailConfirmed = true;
+                var update = await _userManager.UpdateAsync(user);
+                if (update.Succeeded)
+                {
+                    response.StatusCode = (int)HttpStatusCode.OK;
+                    response.Message = "Email Confirmation successful";
+                    response.Data = user.Id;
+                    response.Success = true;
+                    return response;
+                }
             }
             response.StatusCode = (int)HttpStatusCode.BadRequest;
-            response.Message = GetErrors(result);
+            response.Message = "Email Confirmation not successful";
             response.Data = string.Empty;
             response.Success = false;
             return response;
@@ -223,11 +231,12 @@ namespace TutorBuddy.Core.Services
                 return response;
             }
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var encodedToken = TokenConverter.EncodeToken(token);
-            var userRole = await _userManager.GetRolesAsync(user);
+            
+            var purpose = UserManager<User>.ResetPasswordTokenPurpose;
+            var token = await _fourDigitToken.GenerateAsync(purpose, _userManager, user);
 
-            var mailBody = await EmailBodyBuilder.GetEmailBody(user,  emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", encodedToken);
+
+            var mailBody = await EmailBodyBuilder.GetEmailBody(user,  emailTempPath: "StaticFiles/HTML/ForgotPassword.html", linkName: "ResetPassword", token);
 
             NotificationContext notificationContext = new NotificationContext()
             {
@@ -311,16 +320,19 @@ namespace TutorBuddy.Core.Services
                 return response;
             }
 
-            var decodedToken = TokenConverter.DecodeToken(resetPasswordDTO.Token);
-
             var purpose = UserManager<User>.ResetPasswordTokenPurpose;
-            var tokenProvider = _userManager.Options.Tokens.PasswordResetTokenProvider;
 
-            var isValidToken = await _userManager.VerifyUserTokenAsync(user, tokenProvider, purpose, decodedToken);
+            var isValidToken = await _fourDigitToken.ValidateAsync(purpose, resetPasswordDTO.Token, _userManager, user);
 
             var result = new IdentityResult();
+            var hasher = new PasswordHasher<User>();
             if (isValidToken)
-                result = await _userManager.ResetPasswordAsync(user, decodedToken, resetPasswordDTO.NewPassword);
+            {
+                var hash = hasher.HashPassword(user, resetPasswordDTO.NewPassword);
+                user.PasswordHash = hash;
+                result = await _userManager.UpdateAsync(user);
+            }
+                
 
             if(result.Succeeded)
             {

@@ -2193,3 +2193,75 @@ System.ArgumentNullException: String reference not set to an instance of a Strin
 08/19/2022 09:36:30 Login Attempt
 08/19/2022 09:36:32 User successfully logged in
 08/19/2022 10:03:07 Lets the ball role...
+08/19/2022 23:55:39 Lets the ball role...
+08/19/2022 23:59:16 Lets the ball role...
+08/20/2022 01:20:47 Lets the ball role...
+08/20/2022 01:58:15 Lets the ball role...
+08/20/2022 01:59:44 About to get the static email file
+08/20/2022 01:59:44 Successfull get email path: <!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Password Reset Email Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+          rel="stylesheet" />
+</head>
+
+<body style=" height: 100%; width: 100%; margin: 0; padding: 0; font-family: sans-serif; font-size: 16px; background-color: #F6FCFF;">
+    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse: collapse; width: 100%; max-width: 600px; font-size: inherit; margin-top: 40px;">
+        <thead>
+            <tr>
+                <th style="height: 60px; padding: 10px 20px;">
+                    <img width="100"
+                         src="./SVG/tutorbuddy.svg"
+                         alt="TutorBuddy logo" />
+
+                </th>
+            </tr>
+        </thead>
+        <tbody style="border-top: 3px solid #2067A1; background-color: #ffffff;">
+            <tr>
+                <td style="font-size: 14px; line-height: 1.8; padding: 10px 20px; text-align: center">
+                    <h2>Reset Password</h2>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 14px; line-height: 1.8; padding: 10px 20px">Hi **user**,</td>
+            </tr>
+            <tr>
+                <td style="font-size: 14px; line-height: 1.8; padding: 10px 20px; text-align: center;">
+                    There was a request to change your password. To proceed with the
+                    reset, kindly use the code below.
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 14px; line-height: 1.8; padding: 10px 20px; text-align: center; padding-top: 40px;
+        padding-bottom: 40px;">
+                    <span style="font-size:36px; font-family:Arial, Helvetica, sans-serif; font-stretch:expanded">
+                        CODE : **code**
+                    </span>
+
+                </td>
+            </tr>
+            <tr align="center">
+                <td style="font-size: 14px; line-height: 1.8; padding: 10px 20px; color: #8898aa; font-size: 12px;">
+                    <p style="width: 50%">
+                        If you did not make this request then please ignore this email.
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td align="center" style="font-size: 14px; line-height: 1.8; padding: 10px 20px; ">
+                    <address style="font-style: normal;">
+                        <p>6, Decagon Institute, Sangotedo, Eti-Osa, Lagos State</p>
+                    </address>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+08/20/2022 02:04:52 Reset password attempt
+08/20/2022 02:05:37 VerifyUserTokenAsync() failed with purpose: "ResetPassword" for user.
+08/20/2022 02:07:08 Reset password attempt

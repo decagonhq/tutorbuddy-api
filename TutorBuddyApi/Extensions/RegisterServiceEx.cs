@@ -44,6 +44,7 @@ namespace FindRApi.Extensions
                     x.SignIn.RequireConfirmedEmail = true;
                 })
                 .AddEntityFrameworkStores<TutorBuddyContext>()
+                .AddTokenProvider<FourDigitTokenProvider>(FourDigitTokenProvider.FourDigitEmail)
                 .AddDefaultTokenProviders();
 
             builder.Services.AddStackExchangeRedisCache(opt =>
