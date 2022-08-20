@@ -49,7 +49,7 @@ namespace TutorBuddy.Core.Services
         public async Task<ApiResponse<GetRegisterResponseDTO>> GetRegisterResource()
         {
             var response = new ApiResponse<GetRegisterResponseDTO>();
-            var roles = _roleManager.Roles;
+            var roles = _roleManager.Roles.Where(x => x.Name != UserRole.Admin.ToString());
             var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
             var avaliabilities = await _unitOfWork.AvailabilityRepository.GetAllAvaliabilityAsync();
 
@@ -160,10 +160,9 @@ namespace TutorBuddy.Core.Services
                     return (false, response);
                 }
 
+                var purpose = UserManager<User>.ConfirmEmailTokenPurpose;
+                var token = await _fourDigitToken.GenerateAsync(purpose, _userManager, user);
                
-                var token = await _fourDigitToken.GenerateAsync("confirmEmail", _userManager, user);
-                //var encodedToken = TokenConverter.EncodeToken(token);
-                //var userRoles = await _userManager.GetRolesAsync(user);
                     
                 var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: "ConfirmPassword", token);
                 NotificationContext notificationContext = new NotificationContext()
@@ -195,8 +194,8 @@ namespace TutorBuddy.Core.Services
                 response.StatusCode = (int)HttpStatusCode.NotFound;
                 return response;
             }
-            
-            var result = await _fourDigitToken.ValidateAsync("confirmEmail", confirmEmailDTO.Token, _userManager, user);
+            var purpose = UserManager<User>.ConfirmEmailTokenPurpose;
+            var result = await _fourDigitToken.ValidateAsync(purpose, confirmEmailDTO.Token, _userManager, user);
             if (result)
             {
                 user.EmailConfirmed = true;
