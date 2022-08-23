@@ -73,7 +73,7 @@ namespace TutorBuddy.Core.Services
 
         public async Task<ApiResponse<string>> RegisterUser(RegisterDTO model)
         {
-
+            _logger.LogInformation("Successful into register services");
             var response = new ApiResponse<string>();
             
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
