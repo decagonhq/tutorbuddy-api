@@ -41,6 +41,8 @@ var logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
   .MinimumLevel.Verbose()
   .WriteTo.AmazonCloudWatch(
+        // the main formatter of the log event  
+         //TextFormatter = formatter,
         // The name of the log group to log to
         logGroup: "/ecs/tutorbuddy-api-td",
         // A string that our log stream names should be prefixed with. We are just specifying the

@@ -75,6 +75,17 @@ namespace TutorBuddy.Core.Services
         {
             _logger.LogInformation("Successful into register services");
             var response = new ApiResponse<string>();
+            var checkUser = await _userManager.FindByEmailAsync(model.Email);
+
+            if(checkUser != null)
+            {
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                response.Success = false;
+                response.Data = null;
+                response.Message = "Email already exit";
+                return response;
+            }
+          
             
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
@@ -223,10 +234,10 @@ namespace TutorBuddy.Core.Services
             var user = await _userManager.FindByEmailAsync(forgotPasswordDTO.EmailAddress);
             if (user == null)
             {
-                response.Message = $"An email has been sent to {forgotPasswordDTO.EmailAddress} if it exists";
-                response.Success = true;
+                response.Message = $"This email does not exist on this app";
+                response.Success = false;
                 response.Data = string.Empty;
-                response.StatusCode = (int)HttpStatusCode.OK;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return response;
             }
 

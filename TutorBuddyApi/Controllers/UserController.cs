@@ -20,7 +20,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : ControllerBase
     {
 
@@ -64,7 +64,7 @@ namespace TutorBuddyApi.Controllers
 
         }
 
-        [Authorize(Policy = "RequireTutorAndStudent")]
+        //[Authorize(Policy = "RequireTutorAndStudent")]
         [HttpGet]
         [Route("{Id}")]
         public async Task<IActionResult> GetUser(string Id)
