@@ -58,19 +58,20 @@ namespace FindRApi.Extensions
             //);
 
             //Add To DI
-            builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped<INotificationService, NotificationService>();
-            builder.Services.AddScoped<IImageUploadService, ImageUploadService>();
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<ITutorRepository, TutorRepository>();
-            builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
-            builder.Services.AddScoped<ITokenGeneratorService, TokenGeneratorService>();
-            builder.Services.AddScoped<ISessionRepository, SessionRepository>();
-            builder.Services.AddScoped<ISessionService, SessionService>();
+            builder.Services.AddScoped<IAuthService,                    AuthService>();
+            builder.Services.AddScoped<INotificationService,            NotificationService>();
+            builder.Services.AddScoped<IImageUploadService,             ImageUploadService>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>),    typeof(GenericRepository<>));
+            builder.Services.AddScoped<IUnitOfWork,                     UnitOfWork>();
+            builder.Services.AddScoped<IUserService,                    UserService>();
+            builder.Services.AddScoped<IAuthenticationService,          AuthenticationService>();
+            builder.Services.AddScoped<IUserRepository,                 UserRepository>();
+            builder.Services.AddScoped<ITutorRepository,                TutorRepository>();
+            builder.Services.AddScoped<ISubjectRepository,              SubjectRepository>();
+            builder.Services.AddScoped<ITokenGeneratorService,          TokenGeneratorService>();
+            builder.Services.AddScoped<ITutorSubjectRepository,         TutorSubjectRepository>();
+            builder.Services.AddScoped<ISessionRepository,              SessionRepository>();
+            builder.Services.AddScoped<ISessionService,                 SessionService>();
             builder.Services.AddScoped<Seeder>();
 
 
