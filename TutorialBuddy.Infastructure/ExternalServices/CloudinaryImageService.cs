@@ -81,7 +81,7 @@ namespace TutorialBuddy.Infastructure.Services
         /// <returns></returns>
         public async Task<UploadResult> UploadSingleImage(IFormFile file, string tag)
         {
-            Log.Information("Enter the upload image service");
+            Log.Information("Decagon Enter the upload image service");
             //Runtime Complexity Check needed.
             var result = ValidateImage(file);
             var uploadResult = new ImageUploadResult();
@@ -97,9 +97,9 @@ namespace TutorialBuddy.Infastructure.Services
                 PublicId = fileName,
                 Tags = tag
             };
-            Log.Information("Finish Image upload Setup, about load to cloundinary ");
+            Log.Information("Decagon Finish Image upload Setup, about load to cloundinary ");
             uploadResult = await _cloudinary.UploadAsync(parameters);
-            Log.Information("Upload done to cloudinary successfully");
+            Log.Information("Decagon Upload done to cloudinary successfully");
             return uploadResult;
         }
 
