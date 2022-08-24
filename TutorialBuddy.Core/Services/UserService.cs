@@ -136,7 +136,7 @@ namespace TutorBuddy.Core.Services
 
         public async Task<ApiResponse<string>> UploadUserAvatarAsync(string Id, UploadImageDTO imageDto)
         {
-            Log.Information("Decagon Successfull enter the image upload service");
+            Log.Information("Successfull enter the image upload service");
             var user = await _userManager.FindByIdAsync(Id);
             var response = new ApiResponse<string>();
 
@@ -145,7 +145,7 @@ namespace TutorBuddy.Core.Services
                 Log.Information("User is found");
                 var upload = await _imageUpload.UploadSingleImage(imageDto.ImageToUpload, "Avatar");
 
-                Log.Information("Decagon Successful upload the image");
+                Log.Information("Successful upload the image");
                 user.AvatarUrl = upload.Url.ToString();
                 user.PublicUrl = upload.PublicId;
                 await _userManager.UpdateAsync(user);
