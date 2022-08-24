@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Sinks.AwsCloudWatch;
+using TutorBuddy.Core.Utilities;
 using TutorBuddy.Infrastructure.DataAccess;
 using TutorBuddy.Infrastructure.Seeder;
 using TutorBuddyApi;
@@ -36,10 +37,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 //Registering Serilog as a log provider
 var client = new AmazonCloudWatchLogsClient();
+var formatter = new CustomLogFormatter();
 var logger = new LoggerConfiguration()
   .ReadFrom.Configuration(builder.Configuration)
   .Enrich.FromLogContext()
-  .MinimumLevel.Verbose()
+  .MinimumLevel.Information()
   .WriteTo.AmazonCloudWatch(
         // the main formatter of the log event  
          //TextFormatter = formatter,
@@ -47,7 +49,8 @@ var logger = new LoggerConfiguration()
         logGroup: "/ecs/tutorbuddy-api-td",
         // A string that our log stream names should be prefixed with. We are just specifying the
         // start timestamp as the log stream prefix
-        logStreamPrefix: DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+        logStreamPrefix: "Decagon" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+        textFormatter: formatter,
         // The AWS CloudWatch client to use
         cloudWatchClient: client)
   .WriteTo.Console()
