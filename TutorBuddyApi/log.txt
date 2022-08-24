@@ -2788,3 +2788,4 @@ System.InvalidOperationException: An exception has been raised that is likely du
    at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
 08/20/2022 08:21:27 Login Attempt
 08/20/2022 08:21:31 User successfully logged in
+08/23/2022 21:22:12 Lets the ball role...
