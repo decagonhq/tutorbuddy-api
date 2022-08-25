@@ -30,7 +30,7 @@ namespace TutorialBuddy.Infastructure.Services
         {
             // validate the image size and extension type using settings from appsettings
             var status = -1;
-            var listOfextensions = _configuration.GetSection("PhotoSettings:Extensions").Get<List<string>>();
+            var listOfextensions = _configuration.GetValue<List<string>>("PhotoSettings:Extensions");
             for (int i = 0; i < listOfextensions.Count; i++)
             {
                 if (image.FileName.EndsWith(listOfextensions[i]))
@@ -39,7 +39,7 @@ namespace TutorialBuddy.Infastructure.Services
                     break;
                 }
             }
-            var pixSize = Convert.ToInt64(_configuration.GetSection("PhotoSettings:Size").Get<string>());
+            var pixSize = Convert.ToInt64(_configuration.GetValue<string>("PhotoSettings:Size"));
             if (image == null || image.Length > pixSize)
                 return _ = -1;
             if (status != 0)
@@ -84,6 +84,7 @@ namespace TutorialBuddy.Infastructure.Services
             Log.Information("Enter the upload image service");
             //Runtime Complexity Check needed.
             var result = ValidateImage(file);
+            Log.Information($"Check result {result}");
             var uploadResult = new ImageUploadResult();
             if (result != 0)
             {
@@ -91,6 +92,8 @@ namespace TutorialBuddy.Infastructure.Services
             }
             var fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
             await using var imageStream = file.OpenReadStream();
+
+            Log.Information($"Check the imageStream {imageStream}");
             var parameters = new ImageUploadParams()
             {
                 File = new FileDescription(fileName, imageStream),
