@@ -2789,3 +2789,7 @@ System.InvalidOperationException: An exception has been raised that is likely du
 08/20/2022 08:21:27 Login Attempt
 08/20/2022 08:21:31 User successfully logged in
 08/23/2022 21:22:12 Lets the ball role...
+08/24/2022 05:21:17 Login Attempt
+08/24/2022 05:21:19 User successfully logged in
+08/24/2022 05:25:03 Login Attempt
+08/24/2022 05:25:05 User successfully logged in

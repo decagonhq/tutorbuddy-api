@@ -20,7 +20,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class UserController : ControllerBase
     {
 
