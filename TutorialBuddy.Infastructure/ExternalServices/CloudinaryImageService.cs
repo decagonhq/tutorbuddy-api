@@ -30,8 +30,8 @@ namespace TutorialBuddy.Infastructure.Services
         {
             // validate the image size and extension type using settings from appsettings
             var status = -1;
-            var listOfextensions = _configuration.GetValue<List<string>>("PhotoSettings:Extensions");
-            for (int i = 0; i < listOfextensions.Count; i++)
+            string[]  listOfextensions = { ".jpg", ".jpeg", ".png" };
+            for (int i = 0; i < listOfextensions.Length; i++)
             {
                 if (image.FileName.EndsWith(listOfextensions[i]))
                 {
