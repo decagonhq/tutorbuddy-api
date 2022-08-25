@@ -97,17 +97,16 @@ namespace FindRApi.Extensions
             })
             .AddJwtBearer(auth =>
             {
-                auth.SaveToken = true;
                 auth.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ClockSkew = TokenValidationParameters.DefaultClockSkew,
-                    ValidateIssuer = false,
+                    ValidateIssuer = true,
                     ValidateAudience = false,
-
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ValidAudience = Config.GetValue<string>("JWT:ValidAudience"),
                     ValidIssuer = Config.GetValue<string>("JWT:ValidIssuer"),
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("AppSettings:Secret")))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Config.GetValue<string>("JWT:Secret")))
                 };
             });
 
