@@ -15,5 +15,6 @@ namespace TutorBuddy.Core.Interface
         Task DeleteSession(Session session, bool mode = false);
         Task<IEnumerable<Session>> GetAllSessions(string studentId);
         Task<Session> FindSessionByIdAsync(string id);
+        Task<ApiResponse<bool>> SaveComments(StudentComment comment);
     }
 }

@@ -10,5 +10,6 @@ namespace TutorBuddy.Core.Models
     {
         public string? Comment { get; set; }
         public Session Session { get; set; }
+        public string Author { get; internal set; }
     }
 }

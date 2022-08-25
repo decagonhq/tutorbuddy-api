@@ -1,4 +1,6 @@
-﻿using TutorBuddy.Core.DTOs;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
+using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
@@ -10,16 +12,19 @@ namespace TutorBuddy.Core.Services
         private readonly ISessionRepository sessionRepository;
         private readonly IUserRepository userRepository;
         private readonly ITutorSubjectRepository tutorSubjectRepository;
+        private readonly UserManager<User> userManager;
 
         public SessionService(ISessionRepository sessionRepository,
             IUserRepository userRepository,
             ISubjectRepository subjectRepository,
-            ITutorSubjectRepository tutorSubjectRepository
+            ITutorSubjectRepository tutorSubjectRepository,
+            UserManager<User> userManager
             )
         {
             this.sessionRepository = sessionRepository;
             this.userRepository = userRepository;
             this.tutorSubjectRepository = tutorSubjectRepository;
+            this.userManager = userManager;
         }
 
         public async Task<ApiResponse<bool>> AddSession(CreateSessionDTO createSession)
@@ -36,13 +41,43 @@ namespace TutorBuddy.Core.Services
                 Startime = createSession.StartTime,
                 EndTime = createSession.EndTime,
                 Status = TutorialBuddy.Core.Enums.SessionStatus.pending,
-                TutorSubject = await  tutorSubjectRepository.GetDetail(createSession.TutorSubjectId!),
+                TutorSubject = await tutorSubjectRepository.GetDetail(createSession.TutorSubjectId!),
                 Student = student,
             };
 
             var res = await sessionRepository.AddSession(session, student);
 
             response.Success = res;
+            return response;
+        }
+
+        public async Task<ApiResponse<bool>> CommentOnSession(string sessionId, CreateCommentDTO createComment, ClaimsPrincipal claimsPrincipal)
+        {
+            var response = new ApiResponse<bool>();
+            var user = await userManager.GetUserAsync(claimsPrincipal);
+            var student = await userRepository.GetAUser(user.Id, "student");
+            var session = await sessionRepository.FindSessionByIdAsync(sessionId);
+
+            response.Message = "Session not found";
+            if (session == null) return response;
+
+            response.Message = "Student not found";
+            if (student == null) return response;
+
+            var comment = new StudentComment
+            {
+                Author = $"{user.FirstName} {user.LastName}",
+                Comment = createComment.Comment,
+                Session = session,
+            };
+
+            var result = await sessionRepository.SaveComments(comment);
+
+            response.Success = true;
+            response.Message = "Comment created successfully";
+            if (result.Success) return response;
+            response.Success = true;
+            response.Message = "Failed to create comment";
             return response;
         }
 

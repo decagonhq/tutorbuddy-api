@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using TutorBuddy.Core.DTOs;
@@ -13,8 +14,8 @@ namespace TutorBuddy.Core.Interface
     {
         Task<ApiResponse<bool>> AddSession(CreateSessionDTO createSession);
         Task RemoveSession(string sessionId);
-
         Task<IEnumerable<Session>> GetAllSession(string studentId);
         Task<ApiResponse<bool>> UpdateSession(UpdateSessionDTO session);
+        Task<ApiResponse<bool>> CommentOnSession(string sessionId, CreateCommentDTO createComment, ClaimsPrincipal claimsPrincipal);
     }
 }

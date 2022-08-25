@@ -53,5 +53,19 @@ namespace TutorBuddyApi.Controllers
             var result = await sessionService.GetAllSession(id);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Comment on a session
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="commentDTO"></param>
+        /// <returns></returns>
+        [Route("{id}/comment-student")]
+        [HttpPost]
+        public async Task<IActionResult> CommentOnSession([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
+        {
+            var result = await sessionService.CommentOnSession(id,commentDTO, User);
+            return Ok(result);
+        }
     }
 }
