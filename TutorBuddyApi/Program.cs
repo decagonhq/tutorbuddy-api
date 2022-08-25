@@ -79,6 +79,13 @@ app.UseSwaggerUI(c =>
     
 });
 
+
+// global cors policy
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 app.UseStaticFiles();
 app.UseRouting();
 app.UseHttpsRedirection();
@@ -87,11 +94,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-// global cors policy
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+
 
 // global error handler
 app.UseMiddleware<ErrorHandlerMiddleware>();

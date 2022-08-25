@@ -41,10 +41,11 @@ namespace TutorBuddy.Core.Services
 
             // Specifying JWTSecurityToken Parameters
             var token = new JwtSecurityToken
-            (audience: _configuration.GetValue<string>("JWT:ValidAudience"),
+            (
+             audience: _configuration.GetValue<string>("JWT:ValidAudience"),
              issuer: _configuration.GetValue<string>("JWT:ValidIssuer"),
              claims: authClaims,
-             expires: user.RefreshTokenExpiryTime,
+             expires: DateTime.UtcNow.AddMinutes(30),
              signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
