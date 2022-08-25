@@ -46,10 +46,22 @@ var logger = new LoggerConfiguration()
         // the main formatter of the log event  
          //TextFormatter = formatter,
         // The name of the log group to log to
-        logGroup: "/ecs/tutorbuddy-api-td",
+        logGroup: "/ecs/tutorbuddy-api-reviews",
         // A string that our log stream names should be prefixed with. We are just specifying the
         // start timestamp as the log stream prefix
         logStreamPrefix: "Decagon" + DateTime.UtcNow.ToString("yyyyMMddHHmmssfff"),
+        // (Optional) Maximum number of log events that should be sent in a batch to AWS CloudWatch
+        batchSizeLimit: 100,
+        // (Optional) The maximum number of log messages that are stored locally before being sent
+        // to AWS Cloudwatch
+        queueSizeLimit: 10000,
+        // (Optional) Similar to above, except the maximum amount of time that should pass before
+        // log events must be sent to AWS CloudWatch
+        batchUploadPeriodInSeconds: 15,
+        // (Optional) If the log group does not exists, should we try create it?
+        createLogGroup: true,
+        // (Optional) The number of attempts we should make when logging log events that fail
+        maxRetryAttempts: 3,
         textFormatter: formatter,
         // The AWS CloudWatch client to use
         cloudWatchClient: client)
