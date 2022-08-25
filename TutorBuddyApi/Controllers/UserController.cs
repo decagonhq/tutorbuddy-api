@@ -64,7 +64,7 @@ namespace TutorBuddyApi.Controllers
 
         }
 
-        [Authorize(Policy = "RequireTutorAndStudent")]
+       
         [HttpGet]
         [Route("{Id}")]
         public async Task<IActionResult> GetUser(string Id)

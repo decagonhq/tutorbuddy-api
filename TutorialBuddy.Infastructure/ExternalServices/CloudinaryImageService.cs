@@ -97,9 +97,9 @@ namespace TutorialBuddy.Infastructure.Services
                 PublicId = fileName,
                 Tags = tag
             };
-            Log.Information("Finish Image upload Setup, about load to cloundinary ");
+            Log.Information(" Finish Image upload Setup, about load to cloundinary ");
             uploadResult = await _cloudinary.UploadAsync(parameters);
-            Log.Information("Upload done to cloudinary successfully");
+            Log.Information(" Upload done to cloudinary successfully");
             return uploadResult;
         }
 

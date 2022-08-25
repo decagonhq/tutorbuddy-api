@@ -28,11 +28,11 @@ namespace TutorBuddyApi.Controllers
 
         [HttpGet]
         [Route("get-parameter-store")]
-        [Authorize]
+        
         public IActionResult GetConfiguration()
         {
-            var constr = _configuration.GetValue<string>("FluentEmail:SendGridPKey");
-            var config = _configuration.GetValue<string>("ConnectionStrings:ConnectionStr"); 
+            var constr = _configuration.GetValue<string>("AppSettings:Secret");
+            var config = _configuration.GetValue<string>("JWT:ValidAudience"); 
             string[] str = { constr, config };
             return Ok(str);
         }

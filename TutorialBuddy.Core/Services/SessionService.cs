@@ -9,16 +9,17 @@ namespace TutorBuddy.Core.Services
     {
         private readonly ISessionRepository sessionRepository;
         private readonly IUserRepository userRepository;
-        
+        private readonly ITutorSubjectRepository tutorSubjectRepository;
 
         public SessionService(ISessionRepository sessionRepository,
             IUserRepository userRepository,
-            ISubjectRepository subjectRepository
+            ISubjectRepository subjectRepository,
+            ITutorSubjectRepository tutorSubjectRepository
             )
         {
             this.sessionRepository = sessionRepository;
             this.userRepository = userRepository;
-          
+            this.tutorSubjectRepository = tutorSubjectRepository;
         }
 
         public async Task<ApiResponse<bool>> AddSession(CreateSessionDTO createSession)
@@ -35,7 +36,7 @@ namespace TutorBuddy.Core.Services
                 Startime = createSession.StartTime,
                 EndTime = createSession.EndTime,
                 Status = TutorialBuddy.Core.Enums.SessionStatus.pending,
-                TutorSubject = null,
+                TutorSubject = await  tutorSubjectRepository.GetDetail(createSession.TutorSubjectId!),
                 Student = student,
             };
 
