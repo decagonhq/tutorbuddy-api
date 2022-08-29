@@ -16,5 +16,7 @@ namespace TutorBuddy.Core.Interface
         Task<IEnumerable<Session>> GetAllSessions(string studentId);
         Task<Session> FindSessionByIdAsync(string id);
         Task<ApiResponse<bool>> SaveComments(StudentComment comment);
+
+        Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId);
     }
 }

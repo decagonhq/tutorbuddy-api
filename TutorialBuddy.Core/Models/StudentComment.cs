@@ -9,6 +9,8 @@ namespace TutorBuddy.Core.Models
     public class StudentComment: BaseEntity
     {
         public string? Comment { get; set; }
+
+        public string SessionId { get; set; }
         public Session Session { get; set; }
         public string Author { get; internal set; }
     }

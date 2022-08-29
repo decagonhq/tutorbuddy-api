@@ -1,5 +1,7 @@
+
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 
@@ -18,7 +20,7 @@ namespace TutorBuddyApi.Controllers
         }
 
         /// <summary>
-        /// Add a session
+        /// Create a session
         /// </summary>
         /// <param name="createSession"></param>
         /// <returns></returns>
@@ -44,11 +46,11 @@ namespace TutorBuddyApi.Controllers
         }
 
         /// <summary>
-        /// Update a session
+        /// Get all session for a student
         /// </summary>
-        /// <param name="updateSession"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        [Route("{id}")]
+        [Route("{id}/student")]
         [HttpGet]
         public async Task<IActionResult> GetAllSession([FromRoute] string id)
         {
@@ -57,17 +59,78 @@ namespace TutorBuddyApi.Controllers
         }
 
         /// <summary>
-        /// Comment on a session
+        /// Get all session for tutor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("{id}/tutor")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllSessionTutor([FromRoute] string id)
+        {
+            var result = await sessionService.GetAllSessionTutor(id);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Students comments on a session
         /// </summary>
         /// <param name="id"></param>
         /// <param name="commentDTO"></param>
         /// <returns></returns>
-        [Route("{id}/comment-student")]
+        [Route("{id}/student-comment")]
         [HttpPost]
         public async Task<IActionResult> CommentOnSession([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
         {
-            var result = await sessionService.CommentOnSession(id,commentDTO, User);
+            var result = await sessionService.CommentOnSession(id, commentDTO, User);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Tutor comments on a session
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="commentDTO"></param>
+        /// <returns></returns>
+        [Route("{id}/tutor-comment")]
+        [HttpPost]
+        public async Task<IActionResult> CommentOnSessionTutor([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
+        {
+            var result = await sessionService.CommentOnSessionTutor(id, commentDTO, User);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Rate a session for tutor
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ratings"></param>
+        /// <returns></returns>
+        [Route("session/{id}/rate-tutor")]
+        [HttpPost]
+        public async Task<IActionResult> RateSession([FromRoute] string id, [FromBody] RatingsDTO ratings)
+        {
+            var result = await sessionService.RateSession(id, ratings.Ratings, "tutor");
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Rate a session for student
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="ratings"></param>
+        /// <returns></returns>
+        [Route("session/{id}/rate-student")]
+        [HttpPost]
+        public async Task<IActionResult> RateSessionStudent([FromRoute] string id, [FromBody] RatingsDTO ratings)
+        {
+            var result = await sessionService.RateSession(id, ratings.Ratings, "student");
+            return Ok(result);
+        }
+
+        public class RatingsDTO
+        {
+            [Range(0, 5)]
+            public int Ratings { get; set; }
         }
     }
 }
