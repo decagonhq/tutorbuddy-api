@@ -2811,3 +2811,135 @@ System.InvalidOperationException: An exception has been raised that is likely du
 08/25/2022 07:57:25 User successfully logged in
 08/25/2022 08:00:13 Login Attempt
 08/25/2022 08:00:14 User successfully logged in
+08/28/2022 12:41:17 Failed executing DbCommand ("9,835"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\"
+FROM \"Tutors\" AS t"
+08/28/2022 12:41:17 Connection id ""0HMK8T8H4HKMS"", Request id ""0HMK8T8H4HKMS:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+08/28/2022 12:41:17 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+08/28/2022 15:33:15 Failed executing DbCommand ("21,929"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\"
+FROM \"Tutors\" AS t"
+08/28/2022 15:33:15 Connection id ""0HMK908HJ817M"", Request id ""0HMK908HJ817M:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+08/28/2022 15:33:15 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+08/28/2022 15:51:37 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/28/2022 16:22:44 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/28/2022 16:51:01 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/28/2022 16:59:40 Collection navigations are only considered null if their parent entity is null. Use 'Any' to check whether collection navigation '"Session.RateTutors"' is empty.
+08/28/2022 16:59:41 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/28/2022 23:04:13 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 00:26:16 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 00:29:06 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 01:07:30 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 01:09:10 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.

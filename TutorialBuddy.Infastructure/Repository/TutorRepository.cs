@@ -1,4 +1,6 @@
-﻿using TutorBuddy.Core.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using TutorBuddy.Core.DTOs;
+using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
 
@@ -42,5 +44,27 @@ namespace TutorBuddy.Infrastructure.Repository
                 await _context.TutorAvaliabilities.AddAsync(tutorAvailable);
             }
         }
+
+        public async Task<IEnumerable<Tutor>> GetFeatureTutors(int num)
+        {
+            var tutors =  _context.Tutors
+                         .Include(x => x.TutorSubjects)
+                            .ThenInclude(x => x.Sessions)
+                        .Include(x => x.User)
+                        .ToList();
+            List<FeatureTutorDTO> res = new List<FeatureTutorDTO>();
+
+            var rates = _context.Sessions.Select(x => x.RateTutors.Sum(x => x.Rate));
+
+            foreach (var item in tutors)
+            {
+                foreach (var x in item.TutorSubjects)
+                {
+                    //var txt = x.Sessions.Where(x => x.TutorSubject.ID == );
+                }
+            }
+            return tutors;
+        }
+
     }
 }

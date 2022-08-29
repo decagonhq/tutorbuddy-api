@@ -14,5 +14,9 @@ namespace TutorBuddy.Core.Models
         public DateTime Startime { get; set; }
         public DateTime EndTime { get; set; }
         public SessionStatus Status { get; set; }
+        public IEnumerable<TutorComment> TutorComments { get; set; }
+        public IEnumerable<RateTutor> RateTutors { get; set; }
+        public IEnumerable<StudentComment> StudentComments { get; set; }
+        public IEnumerable<RateStudent> RateStudents { get; set; }
     }
 }
