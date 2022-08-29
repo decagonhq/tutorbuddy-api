@@ -1,4 +1,5 @@
-﻿using TutorBuddy.Core.Models;
+﻿using TutorBuddy.Core.DTOs;
+using TutorBuddy.Core.Models;
 
 namespace TutorBuddy.Core.Interface
 {
@@ -6,6 +7,6 @@ namespace TutorBuddy.Core.Interface
     {
         Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects);
         Task AddTutorAvailability(Tutor tutor, IEnumerable<Availability> availabilities);
-        Task<IEnumerable<Tutor>> GetFeatureTutors(int num);
+        IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num);
     }
 }

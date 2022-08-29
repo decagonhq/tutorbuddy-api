@@ -1,11 +1,12 @@
 ﻿using System;
+using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Models;
 
 namespace TutorBuddy.Core.Interface
 {
 	public interface ITutorService
 	{
-        Task<IEnumerable<Tutor>> GetFeatureTutors(int num);
+        IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num);
 
     }
 }

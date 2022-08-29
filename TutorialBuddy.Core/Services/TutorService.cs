@@ -1,4 +1,5 @@
 ﻿using System;
+using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 
@@ -14,9 +15,9 @@ namespace TutorBuddy.Core.Services
 
 
 
-        public async Task<IEnumerable<Tutor>> GetFeatureTutors(int num)
+        public IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num)
         {
-            var tutors = await _unitOfWork.TutorRepository.GetFeatureTutors(num);
+            var tutors = _unitOfWork.TutorRepository.GetFeatureTutors(num);
 
             return tutors;
         }

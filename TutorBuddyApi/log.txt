@@ -2943,3 +2943,110 @@ System.ObjectDisposedException: The CancellationTokenSource has been disposed.
 08/29/2022 00:29:06 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
 08/29/2022 01:07:30 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
 08/29/2022 01:09:10 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 16:03:38 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+08/29/2022 16:03:38 Failed executing DbCommand ("247"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\", a.\"Id\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\", t0.\"ID0\", t0.\"CreatedOn0\", t0.\"EndTime\", t0.\"IsDepricated0\", t0.\"LastModifiedOn0\", t0.\"RateStudent\", t0.\"RateTutor\", t0.\"RatingStudentCount\", t0.\"Startime\", t0.\"Status\", t0.\"StudentId\", t0.\"TutorSubjectID\", t0.\"TutorUserId\", a.\"AccessFailedCount\", a.\"AvatarUrl\", a.\"ConcurrencyStamp\", a.\"Email\", a.\"EmailConfirmed\", a.\"FirstName\", a.\"IsActive\", a.\"LastName\", a.\"LockoutEnabled\", a.\"LockoutEnd\", a.\"NormalizedEmail\", a.\"NormalizedUserName\", a.\"PasswordHash\", a.\"PhoneNumber\", a.\"PhoneNumberConfirmed\", a.\"PublicUrl\", a.\"RefreshToken\", a.\"RefreshTokenExpiryTime\", a.\"SecurityStamp\", a.\"TwoFactorEnabled\", a.\"UserName\"
+FROM \"Tutors\" AS t
+INNER JOIN \"AspNetUsers\" AS a ON t.\"UserId\" = a.\"Id\"
+LEFT JOIN (
+    SELECT t1.\"ID\", t1.\"CreatedOn\", t1.\"IsDepricated\", t1.\"LastModifiedOn\", t1.\"SubjectID\", t1.\"TutorID\", s.\"ID\" AS \"ID0\", s.\"CreatedOn\" AS \"CreatedOn0\", s.\"EndTime\", s.\"IsDepricated\" AS \"IsDepricated0\", s.\"LastModifiedOn\" AS \"LastModifiedOn0\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\"
+    FROM \"TutorSubjects\" AS t1
+    LEFT JOIN \"Sessions\" AS s ON t1.\"ID\" = s.\"TutorSubjectID\"
+) AS t0 ON t.\"UserId\" = t0.\"TutorID\"
+ORDER BY t.\"UserId\", a.\"Id\", t0.\"ID\""
+08/29/2022 16:03:38 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 1141
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 1141
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 1141
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 1141
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+08/29/2022 16:04:35 Failed executing DbCommand ("307"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\", a.\"Id\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\", t0.\"ID0\", t0.\"CreatedOn0\", t0.\"EndTime\", t0.\"IsDepricated0\", t0.\"LastModifiedOn0\", t0.\"RateStudent\", t0.\"RateTutor\", t0.\"RatingStudentCount\", t0.\"Startime\", t0.\"Status\", t0.\"StudentId\", t0.\"TutorSubjectID\", t0.\"TutorUserId\", a.\"AccessFailedCount\", a.\"AvatarUrl\", a.\"ConcurrencyStamp\", a.\"Email\", a.\"EmailConfirmed\", a.\"FirstName\", a.\"IsActive\", a.\"LastName\", a.\"LockoutEnabled\", a.\"LockoutEnd\", a.\"NormalizedEmail\", a.\"NormalizedUserName\", a.\"PasswordHash\", a.\"PhoneNumber\", a.\"PhoneNumberConfirmed\", a.\"PublicUrl\", a.\"RefreshToken\", a.\"RefreshTokenExpiryTime\", a.\"SecurityStamp\", a.\"TwoFactorEnabled\", a.\"UserName\"
+FROM \"Tutors\" AS t
+INNER JOIN \"AspNetUsers\" AS a ON t.\"UserId\" = a.\"Id\"
+LEFT JOIN (
+    SELECT t1.\"ID\", t1.\"CreatedOn\", t1.\"IsDepricated\", t1.\"LastModifiedOn\", t1.\"SubjectID\", t1.\"TutorID\", s.\"ID\" AS \"ID0\", s.\"CreatedOn\" AS \"CreatedOn0\", s.\"EndTime\", s.\"IsDepricated\" AS \"IsDepricated0\", s.\"LastModifiedOn\" AS \"LastModifiedOn0\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\"
+    FROM \"TutorSubjects\" AS t1
+    LEFT JOIN \"Sessions\" AS s ON t1.\"ID\" = s.\"TutorSubjectID\"
+) AS t0 ON t.\"UserId\" = t0.\"TutorID\"
+ORDER BY t.\"UserId\", a.\"Id\", t0.\"ID\""
+08/29/2022 16:04:35 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 1141
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 1141
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 1141
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.NextResult()
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReader(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.InitializeReader(Enumerator enumerator)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.Enumerator.MoveNext()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 1141
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn

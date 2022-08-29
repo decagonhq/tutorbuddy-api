@@ -45,25 +45,32 @@ namespace TutorBuddy.Infrastructure.Repository
             }
         }
 
-        public async Task<IEnumerable<Tutor>> GetFeatureTutors(int num)
+        public IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num)
         {
             var tutors =  _context.Tutors
-                         .Include(x => x.TutorSubjects)
-                            .ThenInclude(x => x.Sessions)
-                        .Include(x => x.User)
-                        .ToList();
-            List<FeatureTutorDTO> res = new List<FeatureTutorDTO>();
+                         .Include(x => x.TutorSubjects.Where(x => x.TutorID != null))
+                         .Include(x => x.User)
+                         .ToList();
+            List<FeatureTutorDTO> result = new List<FeatureTutorDTO>();
 
-            var rates = _context.Sessions.Select(x => x.RateTutors.Sum(x => x.Rate));
-
-            foreach (var item in tutors)
-            {
-                foreach (var x in item.TutorSubjects)
+           foreach(var item in tutors)
+           {
+                FeatureTutorDTO res = new FeatureTutorDTO();
+                res.Id = item.UserId;
+                res.Fullname = item.User.FirstName + " " + item.User.LastName;
+                res.Avatar = item.User.AvatarUrl;
+                foreach (var element in item.TutorSubjects)
                 {
-                    //var txt = x.Sessions.Where(x => x.TutorSubject.ID == );
+                    int rateSum = element.Sessions.Sum(x => x.RateTutor);
+                    int rateCount = element.Sessions.Count();
+                    double calrate = rateSum / rateCount;
+                    res.Rate = (int)Math.Round(calrate, 1);
+
                 }
-            }
-            return tutors;
+
+               
+           }
+            return result.OrderByDescending(x => x.Rate).Take(num);
         }
 
     }
