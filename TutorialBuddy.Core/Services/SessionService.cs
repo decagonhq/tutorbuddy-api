@@ -4,6 +4,7 @@ using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
+using TutorialBuddy.Core.Enums;
 
 namespace TutorBuddy.Core.Services
 {
@@ -64,6 +65,48 @@ namespace TutorBuddy.Core.Services
             response.Message = "Student not found";
             if (student == null) return response;
 
+            if(session.Status != SessionStatus.completed)
+            {
+                response.Message = "You can't comment at this point";
+                return response;
+            }
+
+            var comment = new StudentComment
+            {
+                Author = $"{user.FirstName} {user.LastName}",
+                Comment = createComment.Comment,
+                Session = session,
+            };
+
+            var result = await sessionRepository.SaveComments(comment);
+
+            response.Success = true;
+            response.Message = "Comment created successfully";
+            if (result.Success) return response;
+            response.Success = true;
+            response.Message = "Failed to create comment";
+            return response;
+        }
+
+        public async Task<ApiResponse<bool>> CommentOnSessionTutor(string sessionId, CreateCommentDTO createComment, ClaimsPrincipal claimsPrincipal)
+        {
+            var response = new ApiResponse<bool>();
+            var user = await userManager.GetUserAsync(claimsPrincipal);
+            var tutor = await userRepository.GetAUser(user.Id, "tutor");
+            var session = await sessionRepository.FindSessionByIdAsync(sessionId);
+
+            response.Message = "Session not found";
+            if (session == null) return response;
+
+            response.Message = "Tutor not found";
+            if (tutor == null) return response;
+
+            if (session.Status != SessionStatus.completed)
+            {
+                response.Message = "You can't comment at this point";
+                return response;
+            }
+
             var comment = new StudentComment
             {
                 Author = $"{user.FirstName} {user.LastName}",
@@ -83,8 +126,36 @@ namespace TutorBuddy.Core.Services
 
         public async Task<IEnumerable<Session>> GetAllSession(string studentId)
         {
-            var result = await sessionRepository.GetAllSessions(studentId);
-            return result;
+            return await sessionRepository.GetAllSessions(studentId);
+            
+        }
+
+        public async Task<IEnumerable<Session>> GetAllSessionTutor(string tutorId)
+        {
+            return await sessionRepository.GetAllSessionsForTutor(tutorId);
+        }
+
+        public async Task<ApiResponse<bool>> RateSession(string sessionId, int ratings, string ratingsFor = "tutor")
+        {
+            var response = new ApiResponse<bool>();
+            var session = await sessionRepository.FindSessionByIdAsync(sessionId);
+            response.Message = "Session not found";
+            if (session == null) return response;
+
+            switch (ratingsFor)
+            {
+                case "student":
+                    session.RateStudent = ratings;
+                    break;
+                default:
+                    session.RateTutor = ratings;
+                    break;
+            }
+
+            await sessionRepository.UpdateSession(session);
+            response.Success = true;
+            response.Message = "Ratings updated";
+            return response;
         }
 
         public Task RemoveSession(string sessionId)
@@ -106,7 +177,7 @@ namespace TutorBuddy.Core.Services
             sessionRes.EndTime = sessionDto.EndTime;
             sessionRes.Startime = sessionDto.StartTime;
             sessionRes.Status = sessionDto.Status;
-
+            
             var _res = await sessionRepository.UpdateSession(sessionRes);
 
             res.Success = true;
