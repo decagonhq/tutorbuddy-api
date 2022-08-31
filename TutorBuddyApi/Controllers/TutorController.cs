@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
+using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,6 +29,15 @@ namespace TutorBuddyApi.Controllers
         {
             var tutors = _tutor.GetFeatureTutors(num);
             return Ok(tutors);
+        }
+
+
+        [Route("{Id}/add-subject")]
+        [HttpPost]
+        public async Task<IActionResult> AddSubjectForATutors(string Id, [FromBody] IEnumerable<SubjectDTO> Subjects)
+        {
+            var response = await _tutor.AddSubjectForATutor(Id, Subjects);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

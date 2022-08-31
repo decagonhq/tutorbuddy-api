@@ -287,12 +287,14 @@ namespace TutorBuddy.Core.Services
             }
 
             var user = await _userManager.FindByEmailAsync(loginUserDTO.EmailAddress);
+            var roles = await _userManager.GetRolesAsync(user);
             user.RefreshToken = _tokenGenerator.GenerateRefreshToken().ToString();
             user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7); //sets refresh token for 7 days
 
             var credentialResponse = new CredentialResponseDTO()
             {
                 Id = user.Id,
+                Roles = roles,
                 Token = await _tokenGenerator.GenerateToken(user),
                 RefreshToken = user.RefreshToken
             };
