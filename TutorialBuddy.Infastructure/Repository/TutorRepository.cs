@@ -73,5 +73,8 @@ namespace TutorBuddy.Infrastructure.Repository
             return result.OrderByDescending(x => x.Rate).Take(num);
         }
 
+
+
+
     }
 }

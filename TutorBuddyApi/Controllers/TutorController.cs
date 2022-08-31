@@ -49,6 +49,14 @@ namespace TutorBuddyApi.Controllers
             var response = await _tutor.AddAvaliabilityForATutor(Id, availabilities);
             return StatusCode(response.StatusCode, response);
         }
+
+        [Route("get-all-subject-with-categories/{pageNumber}")]
+        [HttpGet]
+        public IActionResult GetAllSubjectWithCategories(int pageNumber)
+        {
+            var tutors = _tutor.GetFeatureTutors(pageNumber);
+            return Ok(tutors);
+        }
     }
 }
 
