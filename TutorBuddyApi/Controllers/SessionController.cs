@@ -1,3 +1,5 @@
+
+﻿using Microsoft.AspNetCore.Authorization;
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using TutorBuddy.Core.DTOs;
@@ -5,8 +7,9 @@ using TutorBuddy.Core.Interface;
 
 namespace TutorBuddyApi.Controllers
 {
+    [Route("api/v1/[controller]")]
     [ApiController]
-    [Route("session")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class SessionController : ControllerBase
     {
         private readonly ISessionService sessionService;
@@ -21,7 +24,7 @@ namespace TutorBuddyApi.Controllers
         /// </summary>
         /// <param name="createSession"></param>
         /// <returns></returns>
-        [Route("session")]
+       
         [HttpPost]
         public async Task<IActionResult> AddSession([FromBody] CreateSessionDTO createSession)
         {

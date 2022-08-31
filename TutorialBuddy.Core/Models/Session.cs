@@ -20,5 +20,6 @@ namespace TutorBuddy.Core.Models
         public DateTime EndTime { get; set; }
         public SessionStatus Status { get; set; }
         public int RatingStudentCount { get; internal set; }
+
     }
 }
