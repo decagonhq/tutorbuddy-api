@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using TutorBuddy.Core.Interface;
 
 namespace TutorBuddyApi.Controllers
 {
@@ -8,9 +9,11 @@ namespace TutorBuddyApi.Controllers
     public class HealthController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        public HealthController(IConfiguration configuration)
+        private readonly IUnitOfWork _unitOfWork;
+        public HealthController(IConfiguration configuration, IUnitOfWork unitOfWork)
         {
             _configuration = configuration;
+             _unitOfWork = unitOfWork;
         }
         /// <summary>
         /// Health Check for Cloud
