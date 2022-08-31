@@ -61,10 +61,18 @@ namespace TutorBuddy.Infrastructure.Repository
                 res.Avatar = item.User.AvatarUrl;
                 foreach (var element in item.TutorSubjects)
                 {
-                    int rateSum = element.Sessions.Sum(x => x.RateTutor);
-                    int rateCount = element.Sessions.Count();
-                    double calrate = rateSum / rateCount;
-                    res.Rate = (int)Math.Round(calrate, 1);
+                    if(element.Sessions != null)
+                    {
+                        int rateSum = element.Sessions.Sum(x => x.RateTutor);
+                        int rateCount = element.Sessions.Count();
+                        double calrate = rateSum / rateCount;
+                        res.Rate = (int)Math.Round(calrate, 1);
+                    }
+                    else
+                    {
+                        res.Rate = 0;
+                    }
+
 
                 }
 
@@ -72,6 +80,9 @@ namespace TutorBuddy.Infrastructure.Repository
            }
             return result.OrderByDescending(x => x.Rate).Take(num);
         }
+
+
+
 
     }
 }

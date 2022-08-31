@@ -14,7 +14,7 @@ namespace TutorBuddyApi.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class TutorController : ControllerBase
     {
         private readonly ITutorService _tutor;
@@ -33,11 +33,29 @@ namespace TutorBuddyApi.Controllers
 
 
         [Route("{Id}/add-subject")]
+        [Authorize(Policy = "RequireTutorOnly")]
         [HttpPost]
         public async Task<IActionResult> AddSubjectForATutors(string Id, [FromBody] IEnumerable<SubjectDTO> Subjects)
         {
             var response = await _tutor.AddSubjectForATutor(Id, Subjects);
             return StatusCode(response.StatusCode, response);
+        }
+
+        [Route("{Id}/add-avaliability")]
+        [Authorize(Policy = "RequireTutorOnly")]
+        [HttpPost]
+        public async Task<IActionResult> AddAvaliabilityForATutors(string Id, [FromBody] IEnumerable<AvailabilityDTO> availabilities)
+        {
+            var response = await _tutor.AddAvaliabilityForATutor(Id, availabilities);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [Route("get-all-subject-with-categories/{pageNumber}")]
+        [HttpGet]
+        public IActionResult GetAllSubjectWithCategories(int pageNumber)
+        {
+            var tutors = _tutor.GetFeatureTutors(pageNumber);
+            return Ok(tutors);
         }
     }
 }
