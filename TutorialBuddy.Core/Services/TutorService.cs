@@ -13,22 +13,26 @@ namespace TutorBuddy.Core.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        public TutorService(IUnitOfWork unitOfWork, IMapper mapper)
+        private readonly UserManager<User> _userManager;
+        public TutorService(IUnitOfWork unitOfWork, IMapper mapper, UserManager<User> userManager)
 		{
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            
+            _userManager = userManager;
+
         }
 
         public async Task<ApiResponse<string>> AddSubjectForATutor(string Id, IEnumerable<SubjectDTO> Subjects)
         {
             var response = new ApiResponse<string>();
+            //var tutor = await _userManager.FindByIdAsync(Id);
             var tutor = await _unitOfWork.TutorRepository.GetARecord(Id);
 
             if(tutor != null)
             {
                 var subjects = _mapper.Map<IEnumerable<Subject>>(Subjects);
                 await _unitOfWork.TutorRepository.AddTutorSubjects(tutor, subjects);
+                await _unitOfWork.Save();
                 response.Message = $"Subject(s) are added successfully!!!";
                 response.Success = true;
                 response.Data = string.Empty;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SendGrid;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 
@@ -33,10 +34,10 @@ namespace TutorBuddyApi.Controllers
 
         [Route("{Id}/add-subject")]
         [HttpPost]
-        public IActionResult AddSubjectForATutors(string Id, [FromBody] IEnumerable<SubjectDTO> Subjects)
+        public async Task<IActionResult> AddSubjectForATutors(string Id, [FromBody] IEnumerable<SubjectDTO> Subjects)
         {
-            var tutors = _tutor.AddSubjectForATutor(Id, Subjects);
-            return Ok(tutors);
+            var response = await _tutor.AddSubjectForATutor(Id, Subjects);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }
