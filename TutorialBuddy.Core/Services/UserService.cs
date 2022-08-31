@@ -150,7 +150,7 @@ namespace TutorBuddy.Core.Services
                 user.PublicUrl = upload.PublicId;
                 await _userManager.UpdateAsync(user);
 
-                response.Data = user.Id;
+                response.Data = user.AvatarUrl;
                 response.StatusCode = (int)HttpStatusCode.OK;
                 response.Success = true;
                 response.Message = "Image uploaded successfully";
