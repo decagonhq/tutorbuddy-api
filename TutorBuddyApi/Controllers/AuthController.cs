@@ -61,6 +61,13 @@ namespace TutorBuddyApi.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
+
+        [HttpPost("resend-otp")]
+        public async Task<IActionResult> RefreshToken([FromBody] ResendOtpDTO model)
+        {
+            var response = await _authService.ResendOTP(model);
+            return StatusCode(response.StatusCode, response);
+        }
         [HttpPost("refresh-token")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDTO model)
         {
