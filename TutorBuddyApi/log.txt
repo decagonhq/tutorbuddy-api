@@ -3050,3 +3050,5 @@ POSITION: 1141
     File: parse_relation.c
     Line: 3514
     Routine: errorMissingColumn
+08/31/2022 04:23:23 Login Attempt
+08/31/2022 04:23:26 User successfully logged in
