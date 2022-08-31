@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -11,9 +12,10 @@ using TutorBuddy.Infrastructure.DataAccess;
 namespace TutorBuddy.Infrastructure.Migrations
 {
     [DbContext(typeof(TutorBuddyContext))]
-    partial class TutorBuddyContextModelSnapshot : ModelSnapshot
+    [Migration("20220825115554_boom")]
+    partial class boom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -396,12 +398,6 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<int>("RateStudent")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RateTutor")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Startime")
                         .HasColumnType("timestamp without time zone");
 
@@ -447,14 +443,13 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("SessionId")
+                    b.Property<string>("SessionID")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SessionId")
-                        .IsUnique();
+                    b.HasIndex("SessionID");
 
                     b.ToTable("StudentComments");
                 });
@@ -551,14 +546,13 @@ namespace TutorBuddy.Infrastructure.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("SessionId")
+                    b.Property<string>("SessiomID")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("SessionId")
-                        .IsUnique();
+                    b.HasIndex("SessiomID");
 
                     b.ToTable("TutorComments");
                 });
@@ -788,8 +782,8 @@ namespace TutorBuddy.Infrastructure.Migrations
             modelBuilder.Entity("TutorBuddy.Core.Models.StudentComment", b =>
                 {
                     b.HasOne("TutorBuddy.Core.Models.Session", "Session")
-                        .WithOne("StudentComment")
-                        .HasForeignKey("TutorBuddy.Core.Models.StudentComment", "SessionId")
+                        .WithMany()
+                        .HasForeignKey("SessionID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -836,8 +830,8 @@ namespace TutorBuddy.Infrastructure.Migrations
             modelBuilder.Entity("TutorBuddy.Core.Models.TutorComment", b =>
                 {
                     b.HasOne("TutorBuddy.Core.Models.Session", "Sessiom")
-                        .WithOne("TutorComment")
-                        .HasForeignKey("TutorBuddy.Core.Models.TutorComment", "SessionId")
+                        .WithMany()
+                        .HasForeignKey("SessiomID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -867,15 +861,6 @@ namespace TutorBuddy.Infrastructure.Migrations
             modelBuilder.Entity("TutorBuddy.Core.Models.Category", b =>
                 {
                     b.Navigation("Subjects");
-                });
-
-            modelBuilder.Entity("TutorBuddy.Core.Models.Session", b =>
-                {
-                    b.Navigation("StudentComment")
-                        .IsRequired();
-
-                    b.Navigation("TutorComment")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TutorBuddy.Core.Models.Subject", b =>

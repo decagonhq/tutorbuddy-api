@@ -59,6 +59,16 @@ namespace TutorBuddy.Infrastructure.Repository
             return sessions;
         }
 
+        public async Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId)
+        {
+            var sessions = await dbContext.Sessions
+                .AsNoTracking()
+                .Include(session => session.Tutor)
+                .Where(s => s.IsDepricated == false && s.Tutor.UserId == tutorId)
+                .ToListAsync();
+            return sessions;
+        }
+
         public async Task<bool> UpdateSession(Session session)
         {
             dbContext.Sessions.Update(session);
@@ -66,7 +76,15 @@ namespace TutorBuddy.Infrastructure.Repository
             return true;
         }
 
-       
-     
+        public async Task<ApiResponse<bool>> SaveComments(StudentComment comment)
+        {
+            var _res = new ApiResponse<bool>();
+            await _dbContext.StudentComments.AddAsync(comment);
+            var res = await _dbContext.SaveChangesAsync();
+            _res.Success = true;
+            if (res > 0) return _res;
+            _res.Success = false;
+            return _res;
+        }
     }
 }
