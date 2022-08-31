@@ -73,11 +73,24 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
-        public IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num)
+        public ApiResponse<IEnumerable<FeatureTutorDTO>> GetFeatureTutors(int num)
         {
+            var response = new ApiResponse<IEnumerable<FeatureTutorDTO>>();
             var tutors = _unitOfWork.TutorRepository.GetFeatureTutors(num);
+            if(tutors != null)
+            {
+                response.Message = "successfully!!!";
+                response.Success = true;
+                response.Data = tutors;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                return response;
+            }
 
-            return tutors;
+            response.Message = $"No record of tutor is found on our DB";
+            response.Success = false;
+            response.Data = null;
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            return response;
         }
 
         
