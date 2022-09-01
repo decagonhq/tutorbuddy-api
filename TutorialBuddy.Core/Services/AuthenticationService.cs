@@ -414,7 +414,8 @@ namespace TutorBuddy.Core.Services
             var userId = token.UserId;
 
             var user = await _userManager.FindByIdAsync(userId);
-            if (user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime != DateTime.Now)
+            int value = DateTime.Compare((DateTime) user.RefreshTokenExpiryTime, DateTime.Now);
+            if (user.RefreshToken != refreshToken || value < 0)
             {
                 response.Data = null;
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
