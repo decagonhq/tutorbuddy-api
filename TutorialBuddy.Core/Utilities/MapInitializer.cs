@@ -10,7 +10,8 @@ namespace TutorBuddy.Core.Utilities
 		public MapInitializer()
 		{
             //Authentication
-            CreateMap<Availability, AvailabilityDTO>().ReverseMap();
+            CreateMap<AvailabilityDTO, Availability>().ReverseMap()
+                .ForMember(x => x.Key, opt => opt.MapFrom(src => ConvertDayToKey(src.Day))); ;
             CreateMap<SubjectDTO, Subject>().ReverseMap()
                 .ForMember(x => x.Subject, opt => opt.MapFrom(src => src.Topic));
 
@@ -21,6 +22,28 @@ namespace TutorBuddy.Core.Utilities
             //    .ForMember(x => x.TutorSubjects.Select(x => x.Sessions.Select(x => x.RateTutors)), opt => opt.MapFrom(x => x.Id));
 
         }
-	}
+
+        private int ConvertDayToKey(string day)
+        {
+            switch (day)
+            {
+                case "Monday":
+                    return 0;
+
+                case "Tuesday":
+                    return 1;
+
+                case "Wednesday":
+                    return 2;
+
+                case "Thursday":
+                    return 3;
+
+                default:
+                    return 4;
+
+            }
+        }
+    }
 }
 

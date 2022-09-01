@@ -271,6 +271,50 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
+
+        public async Task<ApiResponse<string>> ResendOTP(ResendOtpDTO model)
+        {
+            var response = new ApiResponse<string>();
+
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+            {
+                response.Message = $"This email does not exist on this app";
+                response.Success = false;
+                response.Data = string.Empty;
+                response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return response;
+            }
+
+
+            var purpose = (model.Purpose == "ConfirmEmail") ? UserManager<User>.ConfirmEmailTokenPurpose : UserManager<User>.ResetPasswordTokenPurpose;
+            var token = await _fourDigitToken.GenerateAsync(purpose, _userManager, user);
+
+
+            var mailBody = await EmailBodyBuilder.GetEmailBody(user, emailTempPath: "StaticFiles/HTML/ConfirmEmail.html", linkName: (model.Purpose == "ConfirmEmail") ? "ConfirmPassword": "ResetPassword", token);
+            NotificationContext notificationContext = new NotificationContext()
+            {
+                Address = model.Email,
+                Header = (model.Purpose == "ConfirmEmail") ? "Confirm Your Registration": "Reset Password Request",
+                Payload = mailBody
+            };
+
+            var sendEmail = await _notificationService.SendAsync(NotifyWith.Email, notificationContext);
+            if (sendEmail) {
+                response.Data = "Successfull";
+                response.Message = $"This opt is successful sent to this mail: {model.Email}";
+                response.Success = true;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                return response;
+            }
+
+            response.Data = "UnSuccessfull";
+            response.Message = $"This opt is not successful";
+            response.Success = false;
+            response.StatusCode = (int)HttpStatusCode.BadRequest;
+            return response;
+
+        }
         public async Task<ApiResponse<CredentialResponseDTO>> LoginUser(LoginUserDTO loginUserDTO)
         {
             _logger.LogInformation("Login Attempt");
@@ -370,7 +414,8 @@ namespace TutorBuddy.Core.Services
             var userId = token.UserId;
 
             var user = await _userManager.FindByIdAsync(userId);
-            if (user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime != DateTime.Now)
+            int value = DateTime.Compare((DateTime) user.RefreshTokenExpiryTime, DateTime.Now);
+            if (user.RefreshToken != refreshToken || value < 0)
             {
                 response.Data = null;
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
@@ -498,6 +543,9 @@ namespace TutorBuddy.Core.Services
             return response;
 
         }
+
+
+        
     }
 }
 
