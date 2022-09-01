@@ -45,7 +45,7 @@ namespace TutorBuddy.Core.Services
              audience: _configuration.GetValue<string>("JWT:ValidAudience"),
              issuer: _configuration.GetValue<string>("JWT:ValidIssuer"),
              claims: authClaims,
-             expires: DateTime.UtcNow.AddMinutes(10),
+             expires: DateTime.UtcNow.AddMinutes(30),
              signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
