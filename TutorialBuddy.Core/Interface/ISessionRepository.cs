@@ -10,7 +10,7 @@ namespace TutorBuddy.Core.Interface
 {
     public interface ISessionRepository
     {
-        Task<bool> AddSession(Session session, User student);
+        Task<bool> AddSession(Session session);
         Task<bool> UpdateSession(Session session);
         Task DeleteSession(Session session, bool mode = false);
         Task<IEnumerable<Session>> GetAllSessions(string studentId);

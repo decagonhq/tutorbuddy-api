@@ -46,7 +46,7 @@ namespace TutorBuddy.Core.Services
                 Student = student,
             };
 
-            var res = await sessionRepository.AddSession(session, student);
+            var res = await sessionRepository.AddSession(session);
 
             response.Success = res;
             return response;

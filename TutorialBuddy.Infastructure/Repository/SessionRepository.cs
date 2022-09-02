@@ -15,9 +15,9 @@ namespace TutorBuddy.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> AddSession(Session session, User student)
+        public async Task<bool> AddSession(Session session)
         {
-            session.Student = student;
+            
             dbContext.Sessions.Add(session);
             await dbContext.SaveChangesAsync();
             return true;
