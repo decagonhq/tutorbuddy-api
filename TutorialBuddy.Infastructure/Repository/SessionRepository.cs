@@ -15,12 +15,10 @@ namespace TutorBuddy.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> AddSession(Session session)
+        public async Task AddSession(Session session)
         {
+            await Add(session);
             
-            dbContext.Sessions.Add(session);
-            await dbContext.SaveChangesAsync();
-            return true;
         }
 
         /// <summary>
@@ -52,22 +50,20 @@ namespace TutorBuddy.Infrastructure.Repository
         public async Task<IEnumerable<Session>> GetAllSessions(string studentId)
         {
             var sessions = await dbContext.Sessions
-                .AsNoTracking()
-                .Include(session => session.Student)
-                .Where(s => s.IsDepricated == false && s.Student.Id == studentId)
+                .Where(s => s.Student.Id == studentId)
                 .ToListAsync();
             return sessions;
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId)
-        {
-            var sessions = await dbContext.Sessions
-                .AsNoTracking()
-                .Include(session => session.Tutor)
-                .Where(s => s.IsDepricated == false && s.Tutor.UserId == tutorId)
-                .ToListAsync();
-            return sessions;
-        }
+        //public async Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId)
+        //{
+        //    var sessions = await dbContext.Sessions
+        //        .AsNoTracking()
+        //        //.Include(session => session.Tutor)
+        //        .Where(s => s.IsDepricated == false && s.TutorSubject.TutorID == tutorId)
+        //        .ToListAsync();
+        //    return sessions;
+        //}
 
         public async Task<bool> UpdateSession(Session session)
         {
@@ -76,15 +72,15 @@ namespace TutorBuddy.Infrastructure.Repository
             return true;
         }
 
-        public async Task<ApiResponse<bool>> SaveComments(StudentComment comment)
-        {
-            var _res = new ApiResponse<bool>();
-            await _dbContext.StudentComments.AddAsync(comment);
-            var res = await _dbContext.SaveChangesAsync();
-            _res.Success = true;
-            if (res > 0) return _res;
-            _res.Success = false;
-            return _res;
-        }
+        //public async Task<ApiResponse<bool>> SaveComments(StudentComment comment)
+        //{
+        //    var _res = new ApiResponse<bool>();
+        //    await _dbContext.StudentComments.AddAsync(comment);
+        //    var res = await _dbContext.SaveChangesAsync();
+        //    _res.Success = true;
+        //    if (res > 0) return _res;
+        //    _res.Success = false;
+        //    return _res;
+        //}
     }
 }

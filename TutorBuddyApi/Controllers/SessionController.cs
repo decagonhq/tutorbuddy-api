@@ -1,6 +1,7 @@
 
 ﻿using Microsoft.AspNetCore.Authorization;
 ﻿using Microsoft.AspNetCore.Mvc;
+using SendGrid;
 using System.ComponentModel.DataAnnotations;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
@@ -28,8 +29,9 @@ namespace TutorBuddyApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSession([FromBody] CreateSessionDTO createSession)
         {
-            var result = await sessionService.AddSession(createSession);
-            return Ok(result);
+            //var result = await sessionService.AddSession(createSession);
+            //return StatusCode(result.StatusCode, result);
+            return Ok();
         }
 
         /// <summary>
@@ -42,7 +44,7 @@ namespace TutorBuddyApi.Controllers
         public async Task<IActionResult> UpdateSession([FromBody] UpdateSessionDTO updateSession)
         {
             var result = await sessionService.UpdateSession(updateSession);
-            return Ok(result);
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -54,8 +56,8 @@ namespace TutorBuddyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSession([FromRoute] string id)
         {
-            var result = await sessionService.GetAllSession(id);
-            return Ok(result);
+            //var result = await sessionService.GetAllSession(id);
+            return Ok();
         }
 
         /// <summary>
@@ -67,8 +69,8 @@ namespace TutorBuddyApi.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllSessionTutor([FromRoute] string id)
         {
-            var result = await sessionService.GetAllSessionTutor(id);
-            return Ok(result);
+            //var result = await sessionService.GetAllSessionTutor(id);
+            return Ok();
         }
 
         /// <summary>
@@ -81,8 +83,8 @@ namespace TutorBuddyApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CommentOnSession([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
         {
-            var result = await sessionService.CommentOnSession(id, commentDTO, User);
-            return Ok(result);
+            //var result = await sessionService.CommentOnSession(id, commentDTO, User);
+            return Ok();
         }
 
         /// <summary>
@@ -95,8 +97,8 @@ namespace TutorBuddyApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CommentOnSessionTutor([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
         {
-            var result = await sessionService.CommentOnSessionTutor(id, commentDTO, User);
-            return Ok(result);
+            //var result = await sessionService.CommentOnSessionTutor(id, commentDTO, User);
+            return Ok();
         }
 
         /// <summary>

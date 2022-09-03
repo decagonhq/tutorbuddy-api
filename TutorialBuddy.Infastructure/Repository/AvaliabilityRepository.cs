@@ -23,13 +23,20 @@ namespace TutorBuddy.Infrastructure.Repository
         }
 
 
-        public IEnumerable<Availability> GetATutorAvaliabilityAsync(string tutorId)
+        public async Task<List<Availability>> GetATutorAvaliabilityAsync(string tutorId)
         {
-            var availabilities = _context.Availabilities
-                                        .Include(x => x.TutorAvaliabilities.Where(x => x.TutorID == tutorId))
-                                        .ToList();
+            var tutorAval = _context.TutorAvaliabilities
+                                 .Where(x => x.TutorID == tutorId)
+                                 .ToList();
 
-            return availabilities;
+            List<Availability> results = new List<Availability>();
+
+            foreach (var item in tutorAval)
+            {
+                results.Add(await GetARecord(item.AvailabilityID));
+            }
+
+            return results;
         }
     }
 }
