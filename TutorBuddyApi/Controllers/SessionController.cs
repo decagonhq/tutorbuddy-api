@@ -4,6 +4,7 @@
 using SendGrid;
 using System.ComponentModel.DataAnnotations;
 using TutorBuddy.Core.DTOs;
+using TutorBuddy.Core.Enums;
 using TutorBuddy.Core.Interface;
 
 namespace TutorBuddyApi.Controllers
@@ -27,11 +28,12 @@ namespace TutorBuddyApi.Controllers
         /// <returns></returns>
        
         [HttpPost]
+        [Authorize(Policy = "RequireStudentOnly")]
         public async Task<IActionResult> AddSession([FromBody] CreateSessionDTO createSession)
         {
-            //var result = await sessionService.AddSession(createSession);
-            //return StatusCode(result.StatusCode, result);
-            return Ok();
+            var result = await sessionService.AddSession(createSession);
+            return StatusCode(result.StatusCode, result);
+            
         }
 
         /// <summary>
@@ -40,6 +42,7 @@ namespace TutorBuddyApi.Controllers
         /// <param name="updateSession"></param>
         /// <returns></returns>
         [Route("{id}")]
+        [Authorize(Policy = "RequireTutorOnly")]
         [HttpPatch]
         public async Task<IActionResult> UpdateSession([FromBody] UpdateSessionDTO updateSession)
         {
@@ -53,11 +56,12 @@ namespace TutorBuddyApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("{id}/student")]
+        [Authorize(Policy = "RequireStudentOnly")]
         [HttpGet]
         public async Task<IActionResult> GetAllSession([FromRoute] string id)
         {
-            //var result = await sessionService.GetAllSession(id);
-            return Ok();
+            var result = await sessionService.GetAllSessionForStudent(id);
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -66,11 +70,12 @@ namespace TutorBuddyApi.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("{id}/tutor")]
+        [Authorize(Policy = "RequireTutorOnly")]
         [HttpGet]
         public async Task<IActionResult> GetAllSessionTutor([FromRoute] string id)
         {
-            //var result = await sessionService.GetAllSessionTutor(id);
-            return Ok();
+            var result = await sessionService.GetAllSessionForTutor(id);
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -80,11 +85,12 @@ namespace TutorBuddyApi.Controllers
         /// <param name="commentDTO"></param>
         /// <returns></returns>
         [Route("{id}/student-comment")]
+        [Authorize(Policy = "RequireTutorOnly")]
         [HttpPost]
         public async Task<IActionResult> CommentOnSession([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
         {
-            //var result = await sessionService.CommentOnSession(id, commentDTO, User);
-            return Ok();
+            var result = await sessionService.CommentOnSession(id, commentDTO, UserRole.Student.ToString());
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -94,11 +100,12 @@ namespace TutorBuddyApi.Controllers
         /// <param name="commentDTO"></param>
         /// <returns></returns>
         [Route("{id}/tutor-comment")]
+        [Authorize(Policy = "RequireStudentOnly")]
         [HttpPost]
         public async Task<IActionResult> CommentOnSessionTutor([FromRoute] string id, [FromBody] CreateCommentDTO commentDTO)
         {
-            //var result = await sessionService.CommentOnSessionTutor(id, commentDTO, User);
-            return Ok();
+            var result = await sessionService.CommentOnSession(id, commentDTO, UserRole.Tutor.ToString());
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -107,12 +114,13 @@ namespace TutorBuddyApi.Controllers
         /// <param name="id"></param>
         /// <param name="ratings"></param>
         /// <returns></returns>
-        [Route("session/{id}/rate-tutor")]
+        [Route("{id}/rate-tutor")]
+        [Authorize(Policy = "RequireStudentOnly")]
         [HttpPost]
         public async Task<IActionResult> RateSession([FromRoute] string id, [FromBody] RatingsDTO ratings)
         {
-            var result = await sessionService.RateSession(id, ratings.Ratings, "tutor");
-            return Ok(result);
+            var result = await sessionService.RateSession(id, ratings.Ratings, UserRole.Tutor.ToString());
+            return StatusCode(result.StatusCode, result);
         }
 
         /// <summary>
@@ -121,12 +129,13 @@ namespace TutorBuddyApi.Controllers
         /// <param name="id"></param>
         /// <param name="ratings"></param>
         /// <returns></returns>
-        [Route("session/{id}/rate-student")]
+        [Route("{id}/rate-student")]
+        [Authorize(Policy = "RequireTutorOnly")]
         [HttpPost]
         public async Task<IActionResult> RateSessionStudent([FromRoute] string id, [FromBody] RatingsDTO ratings)
         {
-            var result = await sessionService.RateSession(id, ratings.Ratings, "student");
-            return Ok(result);
+            var result = await sessionService.RateSession(id, ratings.Ratings, UserRole.Student.ToString());
+            return StatusCode(result.StatusCode, result);
         }
 
         public class RatingsDTO

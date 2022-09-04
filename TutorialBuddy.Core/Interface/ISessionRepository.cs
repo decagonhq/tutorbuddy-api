@@ -13,10 +13,8 @@ namespace TutorBuddy.Core.Interface
         Task AddSession(Session session);
         Task<bool> UpdateSession(Session session);
         Task DeleteSession(Session session, bool mode = false);
-        //Task<IEnumerable<Session>> GetAllSessions(string studentId);
+        Task<User> GetAllSessionsForAstudent(string studentId);
         Task<Session> FindSessionByIdAsync(string id);
-        //Task<ApiResponse<bool>> SaveComments(StudentComment comment);
-
-        //Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId);
+        Task<Tutor> GetAllSessionsForTutor(string tutorId);
     }
 }
