@@ -14,6 +14,14 @@ namespace TutorBuddy.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<TutorSubject>> GetAllSubjectATutor(string tutorSubjectId)
+        {
+            var result = await dbContext.TutorSubjects
+                                .Where(x => x.TutorID == tutorSubjectId)
+                                .ToListAsync();
+            return result;
+        }
+
         public async Task<TutorSubject> GetDetail(string Id)
         {
             var ts = await this.dbContext.TutorSubjects.FirstOrDefaultAsync(ts => ts.ID == Id);

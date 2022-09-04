@@ -18,6 +18,7 @@ namespace TutorBuddy.Infrastructure.Repository
         public async Task AddSession(Session session)
         {
             await Add(session);
+            await dbContext.SaveChangesAsync();
             
         }
 
@@ -47,23 +48,24 @@ namespace TutorBuddy.Infrastructure.Repository
             return res;
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessions(string studentId)
+        public async Task<User> GetAllSessionsForAstudent(string studentId)
         {
-            var sessions = await dbContext.Sessions
-                .Where(s => s.Student.Id == studentId)
-                .ToListAsync();
+            var sessions = await dbContext.Users
+                .Where(s => s.Id == studentId)
+                .Include(x => x.Sessions)
+                .SingleOrDefaultAsync();
             return sessions;
         }
 
-        //public async Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId)
-        //{
-        //    var sessions = await dbContext.Sessions
-        //        .AsNoTracking()
-        //        //.Include(session => session.Tutor)
-        //        .Where(s => s.IsDepricated == false && s.TutorSubject.TutorID == tutorId)
-        //        .ToListAsync();
-        //    return sessions;
-        //}
+        public async Task<Tutor> GetAllSessionsForTutor(string tutorId)
+        {
+            var sessions = await dbContext.Tutors
+                .Where(s => s.UserId == tutorId)
+                .Include(session => session.TutorSubjects)
+                    .ThenInclude(x => x.Sessions)
+                .SingleOrDefaultAsync();
+            return sessions;
+        }
 
         public async Task<bool> UpdateSession(Session session)
         {
@@ -72,15 +74,6 @@ namespace TutorBuddy.Infrastructure.Repository
             return true;
         }
 
-        //public async Task<ApiResponse<bool>> SaveComments(StudentComment comment)
-        //{
-        //    var _res = new ApiResponse<bool>();
-        //    await _dbContext.StudentComments.AddAsync(comment);
-        //    var res = await _dbContext.SaveChangesAsync();
-        //    _res.Success = true;
-        //    if (res > 0) return _res;
-        //    _res.Success = false;
-        //    return _res;
-        //}
+        
     }
 }

@@ -20,6 +20,13 @@ namespace TutorBuddy.Infrastructure.Repository
 
             return subject;
         }
+
+        public async Task<Subject> GetASubjectAsync(string subjectId)
+        {
+            var subject = await GetARecord(subjectId);
+
+            return subject;
+        }
     }
 }
 
