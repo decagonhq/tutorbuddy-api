@@ -3998,3 +3998,8 @@ System.InvalidOperationException: Headers are read-only, response has already st
 09/04/2022 08:23:37 Login Attempt
 09/04/2022 08:23:40 User successfully logged in
 09/04/2022 08:24:57 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 10:48:29 Login Attempt
+09/04/2022 10:48:32 User successfully logged in
+09/04/2022 10:49:19 Login Attempt
+09/04/2022 10:49:21 User successfully logged in
+09/04/2022 10:50:12 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.

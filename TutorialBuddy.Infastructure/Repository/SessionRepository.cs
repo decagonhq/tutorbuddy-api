@@ -53,6 +53,7 @@ namespace TutorBuddy.Infrastructure.Repository
             var sessions = await dbContext.Users
                 .Where(s => s.Id == studentId)
                 .Include(x => x.Sessions)
+                    .ThenInclude(x => x.TutorSubject)
                 .SingleOrDefaultAsync();
             return sessions;
         }
