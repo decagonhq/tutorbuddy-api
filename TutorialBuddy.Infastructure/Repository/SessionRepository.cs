@@ -15,12 +15,11 @@ namespace TutorBuddy.Infrastructure.Repository
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> AddSession(Session session, User student)
+        public async Task AddSession(Session session)
         {
-            session.Student = student;
-            dbContext.Sessions.Add(session);
+            await Add(session);
             await dbContext.SaveChangesAsync();
-            return true;
+            
         }
 
         /// <summary>
@@ -49,23 +48,23 @@ namespace TutorBuddy.Infrastructure.Repository
             return res;
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessions(string studentId)
+        public async Task<User> GetAllSessionsForAstudent(string studentId)
         {
-            var sessions = await dbContext.Sessions
-                .AsNoTracking()
-                .Include(session => session.Student)
-                .Where(s => s.IsDepricated == false && s.Student.Id == studentId)
-                .ToListAsync();
+            var sessions = await dbContext.Users
+                .Where(s => s.Id == studentId)
+                .Include(x => x.Sessions)
+                    .ThenInclude(x => x.TutorSubject)
+                .SingleOrDefaultAsync();
             return sessions;
         }
 
-        public async Task<IEnumerable<Session>> GetAllSessionsForTutor(string tutorId)
+        public async Task<Tutor> GetAllSessionsForTutor(string tutorId)
         {
-            var sessions = await dbContext.Sessions
-                .AsNoTracking()
-                .Include(session => session.Tutor)
-                .Where(s => s.IsDepricated == false && s.Tutor.UserId == tutorId)
-                .ToListAsync();
+            var sessions = await dbContext.Tutors
+                .Where(s => s.UserId == tutorId)
+                .Include(session => session.TutorSubjects)
+                    .ThenInclude(x => x.Sessions)
+                .SingleOrDefaultAsync();
             return sessions;
         }
 
@@ -76,15 +75,6 @@ namespace TutorBuddy.Infrastructure.Repository
             return true;
         }
 
-        public async Task<ApiResponse<bool>> SaveComments(StudentComment comment)
-        {
-            var _res = new ApiResponse<bool>();
-            await _dbContext.StudentComments.AddAsync(comment);
-            var res = await _dbContext.SaveChangesAsync();
-            _res.Success = true;
-            if (res > 0) return _res;
-            _res.Success = false;
-            return _res;
-        }
+        
     }
 }

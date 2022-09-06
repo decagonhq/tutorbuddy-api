@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TutorialBuddy.Core.Enums;
 
-namespace TutorBuddy.Core.Models
+namespace TutorBuddy.Core.DTOs
 {
-    public class Session: BaseEntity
-    {
-        public TutorSubject? TutorSubject { get; set; }
-        public User? Student { get; set; }
+	public class SessionDTO
+	{
+        public string? ID { get; set; }
         public int RateTutor { get; set; }
         public int RateStudent { get; set; }
         public string? TutorComment { get; set; }
@@ -18,6 +13,6 @@ namespace TutorBuddy.Core.Models
         public DateTime Startime { get; set; }
         public DateTime EndTime { get; set; }
         public SessionStatus Status { get; set; }
-       
     }
 }
+

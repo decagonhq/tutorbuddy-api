@@ -8,6 +8,6 @@ namespace TutorBuddy.Core.DTOs
         public string? StudentId { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public SessionStatus SessionStatus { get; set; }
+        
     }
 }

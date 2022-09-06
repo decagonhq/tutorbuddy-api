@@ -54,6 +54,7 @@ namespace TutorBuddy.Infrastructure.Repository
         {
             _dbContext.Set<T>().UpdateRange(entities);
         }
+
     }
 }
 

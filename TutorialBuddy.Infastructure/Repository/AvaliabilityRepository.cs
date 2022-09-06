@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -19,6 +20,23 @@ namespace TutorBuddy.Infrastructure.Repository
             var availabilities = await GetAllRecord();
 
             return availabilities;
+        }
+
+
+        public async Task<List<Availability>> GetATutorAvaliabilityAsync(string tutorId)
+        {
+            var tutorAval = _context.TutorAvaliabilities
+                                 .Where(x => x.TutorID == tutorId)
+                                 .ToList();
+
+            List<Availability> results = new List<Availability>();
+
+            foreach (var item in tutorAval)
+            {
+                results.Add(await GetARecord(item.AvailabilityID));
+            }
+
+            return results;
         }
     }
 }
