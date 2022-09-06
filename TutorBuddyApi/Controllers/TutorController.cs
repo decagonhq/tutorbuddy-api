@@ -54,7 +54,7 @@ namespace TutorBuddyApi.Controllers
         [HttpGet]
         public IActionResult GetAllSubjectWithCategories(int pageNumber)
         {
-            var tutors = _tutor.GetFeatureTutors(pageNumber);
+            var tutors = _tutor.GetRecommendedSubject(pageNumber);
             return Ok(tutors);
         }
     }

@@ -8,6 +8,7 @@ namespace TutorBuddy.Core.DTOs
 		public Subject? Subject { get; set; }
 		public string? Tutor { get; set; }
         public int Rate { get; set; }
+        public int UserCount { get; set; }
     }
 }
 

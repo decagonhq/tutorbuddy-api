@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Xml.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using TutorBuddy.Core.DTOs;
@@ -99,9 +100,33 @@ namespace TutorBuddy.Core.Services
             var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
             if (subjects != null)
             {
+                List<RecommendSubjectDTO> result = new List<RecommendSubjectDTO>();
+                foreach (var item in subjects)
+                {
+                    RecommendSubjectDTO subj = new RecommendSubjectDTO();
+                    var tutorSubj = item.TutorSubjects;
+                    subj.Subject = item;
+                    foreach (var element in tutorSubj)
+                    {
+                        var tutor = await _userManager.FindByIdAsync(element.ID);
+                        subj.Tutor = tutor.FirstName + " " + tutor.LastName;
+                        if (element.Sessions.Count() > 0)
+                        {
+                            int rateSum = element.Sessions.Sum(x => x.RateTutor);
+                            subj.UserCount = element.Sessions.Count();
+                            double calrate = rateSum / subj.UserCount;
+                            subj.Rate = (int)Math.Round(calrate, 1);
+                        }
+
+                    }
+
+                    result.Add(subj);
+                }
+
+
                 response.Message = "successfully!!!";
                 response.Success = true;
-                response.Data = tutors;
+                response.Data = result;
                 response.StatusCode = (int)HttpStatusCode.OK;
                 return response;
             }
