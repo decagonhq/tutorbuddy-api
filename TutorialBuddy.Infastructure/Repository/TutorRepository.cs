@@ -45,7 +45,7 @@ namespace TutorBuddy.Infrastructure.Repository
             }
         }
 
-        public async Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors(int num)
+        public async Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors()
         {
             var tutors =  await _context.Tutors
                          .Include(x => x.TutorSubjects.Where(x => x.TutorID != null))
@@ -78,7 +78,7 @@ namespace TutorBuddy.Infrastructure.Repository
 
                
            }
-            return result.OrderByDescending(x => x.Rate).Take(num);
+            return result.OrderByDescending(x => x.Rate).Take(10);
         }
 
 

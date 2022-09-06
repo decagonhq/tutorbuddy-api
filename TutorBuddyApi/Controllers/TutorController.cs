@@ -24,11 +24,11 @@ namespace TutorBuddyApi.Controllers
             _tutor = tutor;
         }
 
-        [Route("get-feature-tutors/{num}")]
+        [Route("get-feature-tutors")]
         [HttpGet]
-        public async Task<IActionResult> GetFeatureTutors(int num)
+        public async Task<IActionResult> GetFeatureTutors()
         {
-            var response = await _tutor.GetFeatureTutors(num);
+            var response = await _tutor.GetFeatureTutors();
             return StatusCode(response.StatusCode, response);
         }
 

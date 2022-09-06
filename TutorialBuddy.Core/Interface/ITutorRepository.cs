@@ -7,6 +7,6 @@ namespace TutorBuddy.Core.Interface
     {
         Task AddTutorSubjects(Tutor tutor, IEnumerable<Subject> subjects);
         Task AddTutorAvailability(Tutor tutor, IEnumerable<Availability> availabilities);
-        Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors(int num);
+        Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors();
     }
 }
