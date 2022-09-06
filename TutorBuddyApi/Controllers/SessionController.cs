@@ -41,12 +41,12 @@ namespace TutorBuddyApi.Controllers
         /// </summary>
         /// <param name="updateSession"></param>
         /// <returns></returns>
-        [Route("{id}")]
+        [Route("{Id}")]
         [Authorize(Policy = "RequireTutorOnly")]
         [HttpPatch]
-        public async Task<IActionResult> UpdateSession([FromBody] UpdateSessionDTO updateSession)
+        public async Task<IActionResult> UpdateSession([FromBody] UpdateSessionDTO updateSession, [FromRoute]string Id)
         {
-            var result = await sessionService.UpdateSession(updateSession);
+            var result = await sessionService.UpdateSession(updateSession, Id);
             return StatusCode(result.StatusCode, result);
         }
 

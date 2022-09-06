@@ -156,6 +156,7 @@ namespace TutorBuddy.Core.Services
             response.StatusCode = (int)HttpStatusCode.OK;
             response.Data = result;
             response.Success = true;
+            response.Message = "Get session Successfully";
             return response;
 
         }
@@ -239,10 +240,10 @@ namespace TutorBuddy.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResponse<bool>> UpdateSession(UpdateSessionDTO sessionDto)
+        public async Task<ApiResponse<bool>> UpdateSession(UpdateSessionDTO sessionDto, string Id)
         {
             var res = new ApiResponse<bool>();
-            var sessionRes = await sessionRepository.FindSessionByIdAsync(sessionDto.Id);
+            var sessionRes = await sessionRepository.FindSessionByIdAsync(Id);
 
             if (sessionRes == null)
             {
@@ -259,7 +260,7 @@ namespace TutorBuddy.Core.Services
 
             res.Success = true;
             res.Data = _res;
-            res.StatusCode = (int)HttpStatusCode.NoContent;
+            res.StatusCode = (int)HttpStatusCode.Created;
             res.Message = "Session status updated successfully";
             return res;
         }

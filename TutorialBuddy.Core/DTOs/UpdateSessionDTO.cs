@@ -8,8 +8,7 @@ using TutorialBuddy.Core.Enums;
 namespace TutorBuddy.Core.DTOs
 {
     public class UpdateSessionDTO
-    {
-        public string Id { get; set; }
+    { 
         public SessionStatus Status { get;  set; }
     }
 }

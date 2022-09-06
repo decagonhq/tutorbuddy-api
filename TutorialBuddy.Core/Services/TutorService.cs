@@ -98,6 +98,7 @@ namespace TutorBuddy.Core.Services
         {
             var response = new ApiResponse<IEnumerable<RecommendSubjectDTO>>();
             var subjects = await _unitOfWork.SubjectRepository.GetAllRecommendSubjectAsync();
+
             if (subjects != null)
             {
                 List<RecommendSubjectDTO> result = new List<RecommendSubjectDTO>();
