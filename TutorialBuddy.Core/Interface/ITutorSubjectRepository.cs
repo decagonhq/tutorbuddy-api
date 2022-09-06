@@ -10,5 +10,6 @@ namespace TutorBuddy.Core.Interface
     public interface ITutorSubjectRepository
     {
         Task<TutorSubject> GetDetail(string Id);
+        Task<IEnumerable<TutorSubject>> GetAllSubjectATutor(string Id);
     }
 }

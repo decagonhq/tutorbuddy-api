@@ -45,12 +45,13 @@ namespace TutorBuddy.Infrastructure.Repository
             }
         }
 
-        public IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num)
+        public async Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors()
         {
-            var tutors =  _context.Tutors
+            var tutors =  await _context.Tutors
                          .Include(x => x.TutorSubjects.Where(x => x.TutorID != null))
+                            .ThenInclude(x => x.Sessions)
                          .Include(x => x.User)
-                         .ToList();
+                         .ToListAsync();
             List<FeatureTutorDTO> result = new List<FeatureTutorDTO>();
 
            foreach(var item in tutors)
@@ -61,24 +62,23 @@ namespace TutorBuddy.Infrastructure.Repository
                 res.Avatar = item.User.AvatarUrl;
                 foreach (var element in item.TutorSubjects)
                 {
-                    if(element.Sessions != null)
+                    if(element.Sessions.Count() > 0)
                     {
                         int rateSum = element.Sessions.Sum(x => x.RateTutor);
                         int rateCount = element.Sessions.Count();
                         double calrate = rateSum / rateCount;
                         res.Rate = (int)Math.Round(calrate, 1);
                     }
-                    else
-                    {
-                        res.Rate = 0;
-                    }
+                   
 
 
                 }
 
+                result.Add(res);
+
                
            }
-            return result.OrderByDescending(x => x.Rate).Take(num);
+            return result.OrderByDescending(x => x.Rate).Take(10);
         }
 
 

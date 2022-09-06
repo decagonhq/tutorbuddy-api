@@ -8,10 +8,12 @@ namespace TutorialBuddy.Core.Enums
 {
     public enum SessionStatus
     {
-        started = 0,
-        pending = 1,
-        completed = 2,
-        cancel = 3
+        requested = 0,
+        accepted = 1,
+        inprogress = 2,
+        completed = 3,
+        abandoned = 4,
+        cancel = 5
        
     }
 }

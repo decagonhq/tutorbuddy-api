@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using SendGrid;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
+using static Google.Apis.Requests.BatchRequest;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,12 +24,12 @@ namespace TutorBuddyApi.Controllers
             _tutor = tutor;
         }
 
-        [Route("get-feature-tutors/{num}")]
+        [Route("get-feature-tutors")]
         [HttpGet]
-        public IActionResult GetFeatureTutors(int num)
+        public async Task<IActionResult> GetFeatureTutors()
         {
-            var tutors = _tutor.GetFeatureTutors(num);
-            return Ok(tutors);
+            var response = await _tutor.GetFeatureTutors();
+            return StatusCode(response.StatusCode, response);
         }
 
 
@@ -54,7 +55,7 @@ namespace TutorBuddyApi.Controllers
         [HttpGet]
         public IActionResult GetAllSubjectWithCategories(int pageNumber)
         {
-            var tutors = _tutor.GetFeatureTutors(pageNumber);
+            var tutors = _tutor.GetRecommendedSubject(pageNumber);
             return Ok(tutors);
         }
     }

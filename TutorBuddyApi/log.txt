@@ -3446,3 +3446,1177 @@ POSITION: 99
 09/01/2022 19:18:09 User successfully logged in
 09/01/2022 19:55:22 Login Attempt
 09/01/2022 19:55:25 User successfully logged in
+09/02/2022 13:02:57 Login Attempt
+09/02/2022 13:03:00 User successfully logged in
+09/02/2022 13:16:44 Login Attempt
+09/02/2022 13:16:47 User successfully logged in
+09/02/2022 13:52:29 Failed executing DbCommand ("306"ms) [Parameters=["@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = DateTime), @p8='?' (DbType = Int32), @p9='?', @p10='?', @p11='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Sessions\" (\"ID\", \"CreatedOn\", \"EndTime\", \"IsDepricated\", \"RateStudent\", \"RateTutor\", \"RatingStudentCount\", \"Startime\", \"Status\", \"StudentId\", \"TutorSubjectID\", \"TutorUserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)
+RETURNING \"LastModifiedOn\";"
+09/02/2022 13:52:29 An exception occurred in the database while saving changes for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 42703: column \"RatingStudentCount\" of relation \"Sessions\" does not exist
+
+POSITION: 99
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column \"RatingStudentCount\" of relation \"Sessions\" does not exist
+    Position: 99
+    File: parse_target.c
+    Line: 1039
+    Routine: checkInsertTargets
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)"
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 42703: column "RatingStudentCount" of relation "Sessions" does not exist
+
+POSITION: 99
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column "RatingStudentCount" of relation "Sessions" does not exist
+    Position: 99
+    File: parse_target.c
+    Line: 1039
+    Routine: checkInsertTargets
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+09/02/2022 13:53:27 Login Attempt
+09/02/2022 13:53:29 User successfully logged in
+09/02/2022 13:55:56 Failed executing DbCommand ("269"ms) [Parameters=["@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = DateTime), @p3='?' (DbType = Boolean), @p4='?' (DbType = Int32), @p5='?' (DbType = Int32), @p6='?' (DbType = Int32), @p7='?' (DbType = DateTime), @p8='?' (DbType = Int32), @p9='?', @p10='?', @p11='?'"], CommandType='Text', CommandTimeout='30']"
+""INSERT INTO \"Sessions\" (\"ID\", \"CreatedOn\", \"EndTime\", \"IsDepricated\", \"RateStudent\", \"RateTutor\", \"RatingStudentCount\", \"Startime\", \"Status\", \"StudentId\", \"TutorSubjectID\", \"TutorUserId\")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11)
+RETURNING \"LastModifiedOn\";"
+09/02/2022 13:55:56 An exception occurred in the database while saving changes for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 42703: column \"RatingStudentCount\" of relation \"Sessions\" does not exist
+
+POSITION: 99
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column \"RatingStudentCount\" of relation \"Sessions\" does not exist
+    Position: 99
+    File: parse_target.c
+    Line: 1039
+    Routine: checkInsertTargets
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)"
+Microsoft.EntityFrameworkCore.DbUpdateException: An error occurred while saving the entity changes. See the inner exception for details.
+ ---> Npgsql.PostgresException (0x80004005): 42703: column "RatingStudentCount" of relation "Sessions" does not exist
+
+POSITION: 99
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column "RatingStudentCount" of relation "Sessions" does not exist
+    Position: 99
+    File: parse_target.c
+    Line: 1039
+    Routine: checkInsertTargets
+   --- End of inner exception stack trace ---
+   at Microsoft.EntityFrameworkCore.Update.ReaderModificationCommandBatch.ExecuteAsync(IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+09/02/2022 14:04:45 Failed executing DbCommand ("249"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\", a.\"Id\", a.\"AccessFailedCount\", a.\"AvatarUrl\", a.\"ConcurrencyStamp\", a.\"Email\", a.\"EmailConfirmed\", a.\"FirstName\", a.\"IsActive\", a.\"LastName\", a.\"LockoutEnabled\", a.\"LockoutEnd\", a.\"NormalizedEmail\", a.\"NormalizedUserName\", a.\"PasswordHash\", a.\"PhoneNumber\", a.\"PhoneNumberConfirmed\", a.\"PublicUrl\", a.\"RefreshToken\", a.\"RefreshTokenExpiryTime\", a.\"SecurityStamp\", a.\"TwoFactorEnabled\", a.\"UserName\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+WHERE NOT (s.\"IsDepricated\") AND (a.\"Id\" = @__studentId_0)"
+09/02/2022 14:04:45 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/02/2022 15:18:08 Login Attempt
+09/02/2022 15:18:11 User successfully logged in
+09/02/2022 15:24:14 Failed executing DbCommand ("232"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\", a.\"Id\", a.\"AccessFailedCount\", a.\"AvatarUrl\", a.\"ConcurrencyStamp\", a.\"Email\", a.\"EmailConfirmed\", a.\"FirstName\", a.\"IsActive\", a.\"LastName\", a.\"LockoutEnabled\", a.\"LockoutEnd\", a.\"NormalizedEmail\", a.\"NormalizedUserName\", a.\"PasswordHash\", a.\"PhoneNumber\", a.\"PhoneNumberConfirmed\", a.\"PublicUrl\", a.\"RefreshToken\", a.\"RefreshTokenExpiryTime\", a.\"SecurityStamp\", a.\"TwoFactorEnabled\", a.\"UserName\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+WHERE NOT (s.\"IsDepricated\") AND (a.\"Id\" = @__studentId_0)"
+09/02/2022 15:24:14 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/02/2022 16:12:09 Failed executing DbCommand ("289"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\", a.\"Id\", a.\"AccessFailedCount\", a.\"AvatarUrl\", a.\"ConcurrencyStamp\", a.\"Email\", a.\"EmailConfirmed\", a.\"FirstName\", a.\"IsActive\", a.\"LastName\", a.\"LockoutEnabled\", a.\"LockoutEnd\", a.\"NormalizedEmail\", a.\"NormalizedUserName\", a.\"PasswordHash\", a.\"PhoneNumber\", a.\"PhoneNumberConfirmed\", a.\"PublicUrl\", a.\"RefreshToken\", a.\"RefreshTokenExpiryTime\", a.\"SecurityStamp\", a.\"TwoFactorEnabled\", a.\"UserName\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+WHERE NOT (s.\"IsDepricated\") AND (a.\"Id\" = @__studentId_0)"
+09/02/2022 16:12:09 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/03/2022 03:12:29 Login Attempt
+09/03/2022 03:12:32 User successfully logged in
+09/03/2022 03:14:21 Failed executing DbCommand ("222"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\", t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+INNER JOIN \"Tutors\" AS t ON s.\"TutorUserId\" = t.\"UserId\"
+LEFT JOIN \"TutorSubjects\" AS t0 ON s.\"TutorSubjectID\" = t0.\"ID\"
+WHERE NOT (s.\"IsDepricated\") AND (a.\"Id\" = @__studentId_0)"
+09/03/2022 03:14:21 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 467
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 467
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 467
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 467
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/03/2022 03:17:04 Failed executing DbCommand ("252"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\", t.\"UserId\", t.\"BioNote\", t.\"Price\", t.\"UnitOfPrice\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+INNER JOIN \"Tutors\" AS t ON s.\"TutorUserId\" = t.\"UserId\"
+LEFT JOIN \"TutorSubjects\" AS t0 ON s.\"TutorSubjectID\" = t0.\"ID\"
+WHERE a.\"Id\" = @__studentId_0"
+09/03/2022 03:17:04 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 467
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 467
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 467
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 467
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/03/2022 03:18:39 Failed executing DbCommand ("309"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"RatingStudentCount\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+WHERE a.\"Id\" = @__studentId_0"
+09/03/2022 03:18:39 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.RatingStudentCount does not exist
+
+POSITION: 114
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.RatingStudentCount does not exist
+    Position: 114
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/03/2022 03:27:27 Failed executing DbCommand ("254"ms) [Parameters=["@__studentId_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"Startime\", s.\"Status\", s.\"StudentId\", s.\"TutorSubjectID\", s.\"TutorUserId\"
+FROM \"Sessions\" AS s
+LEFT JOIN \"AspNetUsers\" AS a ON s.\"StudentId\" = a.\"Id\"
+WHERE a.\"Id\" = @__studentId_0"
+09/03/2022 03:27:27 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 175
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 175
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn"
+Npgsql.PostgresException (0x80004005): 42703: column s.TutorUserId does not exist
+
+POSITION: 175
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+  Exception data:
+    Severity: ERROR
+    SqlState: 42703
+    MessageText: column s.TutorUserId does not exist
+    Position: 175
+    File: parse_relation.c
+    Line: 3514
+    Routine: errorMissingColumn
+09/04/2022 03:05:48 Login Attempt
+09/04/2022 03:05:50 User successfully logged in
+09/04/2022 03:12:53 Login Attempt
+09/04/2022 03:12:55 User successfully logged in
+09/04/2022 04:20:42 Login Attempt
+09/04/2022 04:20:44 User successfully logged in
+09/04/2022 04:22:52 An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+09/04/2022 04:22:52 The response has already started, the error page middleware will not be executed.
+09/04/2022 04:22:52 Connection id ""0HMKE4H1BTH81"", Request id ""0HMKE4H1BTH81:0000000A"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+09/04/2022 04:28:36 Login Attempt
+09/04/2022 04:28:39 Invalid password for user.
+09/04/2022 04:28:39 Login operation failed
+09/04/2022 04:29:51 Login Attempt
+09/04/2022 04:29:51 Invalid password for user.
+09/04/2022 04:29:51 Login operation failed
+09/04/2022 04:30:08 Login Attempt
+09/04/2022 04:30:09 User successfully logged in
+09/04/2022 04:31:16 Login Attempt
+09/04/2022 04:31:18 User successfully logged in
+09/04/2022 04:38:37 An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+09/04/2022 04:38:37 The response has already started, the error page middleware will not be executed.
+09/04/2022 04:38:37 Connection id ""0HMKE4H1BTH82"", Request id ""0HMKE4H1BTH82:0000000C"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+09/04/2022 04:52:43 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 04:54:11 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 05:05:05 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 08:23:37 Login Attempt
+09/04/2022 08:23:40 User successfully logged in
+09/04/2022 08:24:57 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 10:48:29 Login Attempt
+09/04/2022 10:48:32 User successfully logged in
+09/04/2022 10:49:19 Login Attempt
+09/04/2022 10:49:21 User successfully logged in
+09/04/2022 10:50:12 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/04/2022 13:00:32 Login Attempt
+09/04/2022 13:00:35 User successfully logged in
+09/04/2022 14:59:24 Login Attempt
+09/04/2022 14:59:24 An error occurred using the connection to database '"tutorbuddy_db"' on server '""'.
+09/04/2022 14:59:24 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.Net.Internals.SocketExceptionFactory+ExtendedSocketException (00000005, 0xFFFDFFFF): nodename nor servname provided, or not known
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, ValueStopwatch stopwatch)
+   at System.Net.Dns.<>c.<GetHostEntryOrAddressesCoreAsync>b__33_0(Object s, ValueStopwatch stopwatch)
+   at System.Net.Dns.<>c__DisplayClass39_0`1.<RunAsync>b__0(Task <p0>, Object <p1>)
+   at System.Threading.Tasks.ContinuationResultTaskFromTask`1.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskExtensions.ExecuteWithTimeout[TResult](Func`2 func, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskExtensions.WithCancellation[T](Task`1 task, CancellationToken cancellationToken)
+   at Npgsql.TaskExtensions.WithTimeout[T](Task`1 task, NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|191_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.<Get>g__RentAsync|28_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|45_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.Net.Internals.SocketExceptionFactory+ExtendedSocketException (00000005, 0xFFFDFFFF): nodename nor servname provided, or not known
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, ValueStopwatch stopwatch)
+   at System.Net.Dns.<>c.<GetHostEntryOrAddressesCoreAsync>b__33_0(Object s, ValueStopwatch stopwatch)
+   at System.Net.Dns.<>c__DisplayClass39_0`1.<RunAsync>b__0(Task <p0>, Object <p1>)
+   at System.Threading.Tasks.ContinuationResultTaskFromTask`1.InnerInvoke()
+   at System.Threading.Tasks.Task.<>c.<.cctor>b__272_0(Object obj)
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+--- End of stack trace from previous location ---
+   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)
+   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)
+--- End of stack trace from previous location ---
+   at Npgsql.TaskExtensions.ExecuteWithTimeout[TResult](Func`2 func, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.TaskExtensions.WithCancellation[T](Task`1 task, CancellationToken cancellationToken)
+   at Npgsql.TaskExtensions.WithTimeout[T](Task`1 task, NpgsqlTimeout timeout)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|191_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.ConnectorPool.<Get>g__RentAsync|28_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|45_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/04/2022 14:59:42 Login Attempt
+09/04/2022 14:59:47 User successfully logged in
+09/06/2022 05:36:19 Login Attempt
+09/06/2022 05:36:36 User successfully logged in
+09/06/2022 05:43:38 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 05:50:25 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 06:05:33 Login Attempt
+09/06/2022 06:05:36 User successfully logged in
+09/06/2022 06:07:13 An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+09/06/2022 06:07:13 The response has already started, the error page middleware will not be executed.
+09/06/2022 06:07:13 Connection id ""0HMKFOCVG310N"", Request id ""0HMKFOCVG310N:00000012"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+09/06/2022 07:02:35 Login Attempt
+09/06/2022 07:02:38 User successfully logged in
+09/06/2022 07:05:14 Failed executing DbCommand ("5,683"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\"
+FROM \"Subjects\" AS s"
+09/06/2022 07:05:14 Connection id ""0HMKFPMSDTUH1"", Request id ""0HMKFPMSDTUH1:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 07:05:14 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 07:06:07 Connection id ""0HMKFPMSDTUH1"", Request id ""0HMKFPMSDTUH1:00000005"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Can't close, connection is in state Connecting
+   at Npgsql.NpgsqlConnection.Close(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 07:07:36 Failed executing DbCommand ("43,534"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\"
+FROM \"Subjects\" AS s"
+09/06/2022 07:07:36 Connection id ""0HMKFPNOP8T90"", Request id ""0HMKFPNOP8T90:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 07:07:36 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:02:59 Login Attempt
+09/06/2022 13:03:02 User successfully logged in
+09/06/2022 13:04:45 Failed executing DbCommand ("86"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\"
+FROM \"Subjects\" AS s"
+09/06/2022 13:04:45 Connection id ""0HMKFVUQ48UF1"", Request id ""0HMKFVUQ48UF1:00000005"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 13:04:45 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:05:37 Connection id ""0HMKFVUQ48UF1"", Request id ""0HMKFVUQ48UF1:00000006"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Can't close, connection is in state Connecting
+   at Npgsql.NpgsqlConnection.Close(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 13:05:38 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: Cannot access a disposed context instance. A common cause of this error is disposing a context instance that was resolved from dependency injection and then later trying to use the same context instance elsewhere in your application. This may occur if you are calling 'Dispose' on the context instance, or wrapping it in a using statement. If you are using dependency injection, you should let the dependency injection container take care of disposing context instances.
+Object name: 'TutorBuddyContext'.
+   at Microsoft.EntityFrameworkCore.DbContext.CheckDisposed()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.get_StateManager()
+   at Microsoft.EntityFrameworkCore.Query.QueryContext.InitializeStateManager(Boolean standAlone)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: Cannot access a disposed context instance. A common cause of this error is disposing a context instance that was resolved from dependency injection and then later trying to use the same context instance elsewhere in your application. This may occur if you are calling 'Dispose' on the context instance, or wrapping it in a using statement. If you are using dependency injection, you should let the dependency injection container take care of disposing context instances.
+Object name: 'TutorBuddyContext'.
+   at Microsoft.EntityFrameworkCore.DbContext.CheckDisposed()
+   at Microsoft.EntityFrameworkCore.DbContext.get_DbContextDependencies()
+   at Microsoft.EntityFrameworkCore.DbContext.Microsoft.EntityFrameworkCore.Internal.IDbContextDependencies.get_StateManager()
+   at Microsoft.EntityFrameworkCore.Query.QueryContext.InitializeStateManager(Boolean standAlone)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:16:22 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 13:17:44 Connection id ""0HMKG0638HR2H"", Request id ""0HMKG0638HR2H:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 13:17:44 Failed executing DbCommand ("81,063"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\", t0.\"ID0\", t0.\"CreatedOn0\", t0.\"EndTime\", t0.\"IsDepricated0\", t0.\"LastModifiedOn0\", t0.\"RateStudent\", t0.\"RateTutor\", t0.\"Startime\", t0.\"Status\", t0.\"StudentComment\", t0.\"StudentId\", t0.\"TutorComment\", t0.\"TutorSubjectID\"
+FROM \"Subjects\" AS s
+LEFT JOIN (
+    SELECT t.\"ID\", t.\"CreatedOn\", t.\"IsDepricated\", t.\"LastModifiedOn\", t.\"SubjectID\", t.\"TutorID\", s0.\"ID\" AS \"ID0\", s0.\"CreatedOn\" AS \"CreatedOn0\", s0.\"EndTime\", s0.\"IsDepricated\" AS \"IsDepricated0\", s0.\"LastModifiedOn\" AS \"LastModifiedOn0\", s0.\"RateStudent\", s0.\"RateTutor\", s0.\"Startime\", s0.\"Status\", s0.\"StudentComment\", s0.\"StudentId\", s0.\"TutorComment\", s0.\"TutorSubjectID\"
+    FROM \"TutorSubjects\" AS t
+    LEFT JOIN \"Sessions\" AS s0 ON t.\"ID\" = s0.\"TutorSubjectID\"
+) AS t0 ON s.\"ID\" = t0.\"SubjectID\"
+ORDER BY s.\"ID\", t0.\"ID\""
+09/06/2022 13:17:44 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:37:46 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 13:37:56 Connection id ""0HMKG0I1G6B1T"", Request id ""0HMKG0I1G6B1T:00000004"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 13:37:56 Failed executing DbCommand ("9,419"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\", t0.\"ID0\", t0.\"CreatedOn0\", t0.\"EndTime\", t0.\"IsDepricated0\", t0.\"LastModifiedOn0\", t0.\"RateStudent\", t0.\"RateTutor\", t0.\"Startime\", t0.\"Status\", t0.\"StudentComment\", t0.\"StudentId\", t0.\"TutorComment\", t0.\"TutorSubjectID\"
+FROM \"Subjects\" AS s
+LEFT JOIN (
+    SELECT t.\"ID\", t.\"CreatedOn\", t.\"IsDepricated\", t.\"LastModifiedOn\", t.\"SubjectID\", t.\"TutorID\", s0.\"ID\" AS \"ID0\", s0.\"CreatedOn\" AS \"CreatedOn0\", s0.\"EndTime\", s0.\"IsDepricated\" AS \"IsDepricated0\", s0.\"LastModifiedOn\" AS \"LastModifiedOn0\", s0.\"RateStudent\", s0.\"RateTutor\", s0.\"Startime\", s0.\"Status\", s0.\"StudentComment\", s0.\"StudentId\", s0.\"TutorComment\", s0.\"TutorSubjectID\"
+    FROM \"TutorSubjects\" AS t
+    LEFT JOIN \"Sessions\" AS s0 ON t.\"ID\" = s0.\"TutorSubjectID\"
+) AS t0 ON s.\"ID\" = t0.\"SubjectID\"
+ORDER BY s.\"ID\", t0.\"ID\""
+09/06/2022 13:37:56 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:39:18 Login Attempt
+09/06/2022 13:39:22 User successfully logged in
+09/06/2022 13:40:02 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 13:40:59 Failed executing DbCommand ("3,063"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CategoryID\", s.\"CreatedOn\", s.\"Description\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"Thumbnail\", s.\"Topic\", t0.\"ID\", t0.\"CreatedOn\", t0.\"IsDepricated\", t0.\"LastModifiedOn\", t0.\"SubjectID\", t0.\"TutorID\", t0.\"ID0\", t0.\"CreatedOn0\", t0.\"EndTime\", t0.\"IsDepricated0\", t0.\"LastModifiedOn0\", t0.\"RateStudent\", t0.\"RateTutor\", t0.\"Startime\", t0.\"Status\", t0.\"StudentComment\", t0.\"StudentId\", t0.\"TutorComment\", t0.\"TutorSubjectID\"
+FROM \"Subjects\" AS s
+LEFT JOIN (
+    SELECT t.\"ID\", t.\"CreatedOn\", t.\"IsDepricated\", t.\"LastModifiedOn\", t.\"SubjectID\", t.\"TutorID\", s0.\"ID\" AS \"ID0\", s0.\"CreatedOn\" AS \"CreatedOn0\", s0.\"EndTime\", s0.\"IsDepricated\" AS \"IsDepricated0\", s0.\"LastModifiedOn\" AS \"LastModifiedOn0\", s0.\"RateStudent\", s0.\"RateTutor\", s0.\"Startime\", s0.\"Status\", s0.\"StudentComment\", s0.\"StudentId\", s0.\"TutorComment\", s0.\"TutorSubjectID\"
+    FROM \"TutorSubjects\" AS t
+    LEFT JOIN \"Sessions\" AS s0 ON t.\"ID\" = s0.\"TutorSubjectID\"
+) AS t0 ON s.\"ID\" = t0.\"SubjectID\"
+ORDER BY s.\"ID\", t0.\"ID\""
+09/06/2022 13:40:59 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.ObjectDisposedException: The CancellationTokenSource has been disposed.
+   at System.Threading.CancellationTokenSource.CancelAfter(UInt32 millisecondsDelay)
+   at System.Threading.CancellationTokenSource.CancelAfter(TimeSpan delay)
+   at Npgsql.Util.ResettableCancellationTokenSource.Stop()
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 13:40:59 Connection id ""0HMKG0I1G6B1T"", Request id ""0HMKG0I1G6B1T:00000008"": An unhandled exception was thrown by the application.
+Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.NotSupportedException:  The ReadAsync method cannot be called when another read operation is pending.
+   at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+   at System.Net.Security.SslStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlDataReader.Consume(Boolean async)
+   at Npgsql.NpgsqlDataReader.Close(Boolean connectionClosing, Boolean async, Boolean isDisposing)
+   at Npgsql.Internal.NpgsqlConnector.CloseOngoingOperations(Boolean async)
+   at Npgsql.NpgsqlConnection.CloseAsync(Boolean async)
+   at Npgsql.NpgsqlConnection.Close()
+   at Npgsql.NpgsqlConnection.Dispose(Boolean disposing)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.DisposeDbConnection()
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.ResetState(Boolean disposeDbConnection)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.Dispose()
+   at Microsoft.EntityFrameworkCore.DbContext.Dispose()
+   at TutorBuddy.Infrastructure.Repository.UnitOfWork.Dispose() in /Users/mac/Projects/tutorbuddy-api/TutorialBuddy.Infastructure/Repository/UnitOfWork.cs:line 25
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.DisposeAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Http.Features.RequestServicesFeature.<DisposeAsync>g__Awaited|9_0(RequestServicesFeature servicesFeature, ValueTask vt)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.<FireOnCompleted>g__ProcessEvents|227_0(HttpProtocol protocol, Stack`1 events)
+09/06/2022 16:17:59 Login Attempt
+09/06/2022 16:18:02 User successfully logged in
+09/06/2022 16:26:07 Login Attempt
+09/06/2022 16:26:11 User successfully logged in
+09/06/2022 16:42:56 Login Attempt
+09/06/2022 16:42:59 User successfully logged in
+09/06/2022 16:53:58 Login Attempt
+09/06/2022 16:54:02 User successfully logged in
+09/06/2022 16:55:21 An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+09/06/2022 16:55:21 The response has already started, the error page middleware will not be executed.
+09/06/2022 16:55:21 Connection id ""0HMKG3VT6TNTJ"", Request id ""0HMKG3VT6TNTJ:00000005"": An unhandled exception was thrown by the application.
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpResponseHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_ContentType(StringValues value)
+   at Microsoft.AspNetCore.Http.DefaultHttpResponse.set_ContentType(String value)
+   at TutorBuddyApi.Middleware.ErrorHandlerMiddleware.Invoke(HttpContext context) in /Users/mac/Projects/tutorbuddy-api/TutorBuddyApi/Middleware/ErrorHandlerMiddleware.cs:line 25
+   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpProtocol.ProcessRequests[TContext](IHttpApplication`1 application)
+09/06/2022 17:04:54 Login Attempt
+09/06/2022 17:04:57 User successfully logged in
+09/06/2022 17:07:51 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+09/06/2022 17:15:44 Failed executing DbCommand ("34,010"ms) [Parameters=["@__id_0='?'"], CommandType='Text', CommandTimeout='30']"
+""SELECT s.\"ID\", s.\"CreatedOn\", s.\"EndTime\", s.\"IsDepricated\", s.\"LastModifiedOn\", s.\"RateStudent\", s.\"RateTutor\", s.\"Startime\", s.\"Status\", s.\"StudentComment\", s.\"StudentId\", s.\"TutorComment\", s.\"TutorSubjectID\"
+FROM \"Sessions\" AS s
+WHERE NOT (s.\"IsDepricated\") AND (s.\"ID\" = @__id_0)
+LIMIT 1"
+09/06/2022 17:15:44 An exception occurred while iterating over the results of a query for context type '"TutorBuddy.Infrastructure.DataAccess.TutorBuddyContext"'."
+""System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()"
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Exception while reading from stream
+ ---> System.TimeoutException: Timeout during reading attempt
+   at Npgsql.Internal.NpgsqlReadBuffer.<Ensure>g__EnsureLong|41_0(NpgsqlReadBuffer buffer, Int32 count, Boolean async, Boolean readingNotifications)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.Internal.NpgsqlConnector.<ReadMessage>g__ReadMessageLong|211_0(NpgsqlConnector connector, Boolean async, DataRowLoadingMode dataRowLoadingMode, Boolean readingNotifications, Boolean isReadingPrependedMessage)
+   at Npgsql.NpgsqlDataReader.NextResult(Boolean async, Boolean isConsuming, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteReader(CommandBehavior behavior, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlCommand.ExecuteDbDataReaderAsync(CommandBehavior behavior, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+09/06/2022 19:45:06 Login Attempt
+09/06/2022 19:45:08 User successfully logged in
+09/06/2022 19:45:43 Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
