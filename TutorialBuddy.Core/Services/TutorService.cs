@@ -93,7 +93,25 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
-        
-	}
+        public async Task<ApiResponse<IEnumerable<RecommendSubjectDTO>>> GetRecommendedSubject(int num)
+        {
+            var response = new ApiResponse<IEnumerable<RecommendSubjectDTO>>();
+            var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
+            if (subjects != null)
+            {
+                response.Message = "successfully!!!";
+                response.Success = true;
+                response.Data = tutors;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                return response;
+            }
+
+            response.Message = $"No record of tutor is found on our DB";
+            response.Success = false;
+            response.Data = null;
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            return response;
+        }
+    }
 }
 
