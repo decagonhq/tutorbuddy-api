@@ -45,13 +45,13 @@ namespace TutorBuddy.Infrastructure.Repository
             }
         }
 
-        public IEnumerable<FeatureTutorDTO> GetFeatureTutors(int num)
+        public async Task<IEnumerable<FeatureTutorDTO>> GetFeatureTutors(int num)
         {
-            var tutors =  _context.Tutors
+            var tutors =  await _context.Tutors
                          .Include(x => x.TutorSubjects.Where(x => x.TutorID != null))
                             .ThenInclude(x => x.Sessions)
                          .Include(x => x.User)
-                         .ToList();
+                         .ToListAsync();
             List<FeatureTutorDTO> result = new List<FeatureTutorDTO>();
 
            foreach(var item in tutors)

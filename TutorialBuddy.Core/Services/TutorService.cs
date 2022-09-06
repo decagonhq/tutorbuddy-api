@@ -74,10 +74,10 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
-        public ApiResponse<IEnumerable<FeatureTutorDTO>> GetFeatureTutors(int num)
+        public async Task<ApiResponse<IEnumerable<FeatureTutorDTO>>> GetFeatureTutors(int num)
         {
             var response = new ApiResponse<IEnumerable<FeatureTutorDTO>>();
-            var tutors = _unitOfWork.TutorRepository.GetFeatureTutors(num);
+            var tutors = await _unitOfWork.TutorRepository.GetFeatureTutors(num);
             if(tutors != null)
             {
                 response.Message = "successfully!!!";
@@ -97,7 +97,7 @@ namespace TutorBuddy.Core.Services
         public async Task<ApiResponse<IEnumerable<RecommendSubjectDTO>>> GetRecommendedSubject(int num)
         {
             var response = new ApiResponse<IEnumerable<RecommendSubjectDTO>>();
-            var subjects = await _unitOfWork.SubjectRepository.GetAllSubjectAsync();
+            var subjects = await _unitOfWork.SubjectRepository.GetAllRecommendSubjectAsync();
             if (subjects != null)
             {
                 List<RecommendSubjectDTO> result = new List<RecommendSubjectDTO>();

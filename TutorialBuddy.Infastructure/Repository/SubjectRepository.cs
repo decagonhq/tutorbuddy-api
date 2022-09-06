@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorBuddy.Infrastructure.DataAccess;
@@ -28,7 +29,14 @@ namespace TutorBuddy.Infrastructure.Repository
             return subject;
         }
 
-        
+        public async Task<IEnumerable<Subject>> GetAllRecommendSubjectAsync()
+        {
+            var subject = await _context.Subjects
+                          .Include(x => x.TutorSubjects)
+                            .ThenInclude(x => x.Sessions).ToListAsync();
+
+            return subject;
+        }
     }
 }
 
