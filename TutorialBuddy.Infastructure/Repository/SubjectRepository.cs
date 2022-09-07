@@ -33,7 +33,6 @@ namespace TutorBuddy.Infrastructure.Repository
         {
             var subject = await _context.Subjects
                           .Include(x => x.TutorSubjects)
-                            .ThenInclude(x => x.Sessions)
                           .ToListAsync();
 
             return subject;

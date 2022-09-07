@@ -33,6 +33,14 @@ namespace TutorBuddyApi.Controllers
         }
 
 
+        [Route("{Id}")]
+        [HttpGet]
+        public async Task<IActionResult> GetATutors([FromRoute] string Id)
+        {
+            var response = await _tutor.GetATutor(Id);
+            return StatusCode(response.StatusCode, response);
+        }
+
         [Route("{Id}/add-subject")]
         [Authorize(Policy = "RequireTutorOnly")]
         [HttpPost]
