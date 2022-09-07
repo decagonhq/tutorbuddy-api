@@ -5,8 +5,9 @@ namespace TutorBuddy.Core.DTOs
 {
 	public class RecommendSubjectDTO
 	{
-		public Subject? Subject { get; set; }
-		public string? Tutor { get; set; }
+		public SubjectRecommedDTO? Subject { get; set; }
+        public string? TutorSubjectId { get; set; }
+        public string? Tutor { get; set; }
         public int Rate { get; set; }
         public int UserCount { get; set; }
     }

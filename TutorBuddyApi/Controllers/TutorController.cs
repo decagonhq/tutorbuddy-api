@@ -19,9 +19,11 @@ namespace TutorBuddyApi.Controllers
     public class TutorController : ControllerBase
     {
         private readonly ITutorService _tutor;
-        public TutorController(ITutorService tutor)
+        private readonly ISubjectService _subject;
+        public TutorController(ITutorService tutor, ISubjectService subject)
         {
             _tutor = tutor;
+            _subject = subject;
         }
 
         [Route("get-feature-tutors")]
@@ -61,9 +63,9 @@ namespace TutorBuddyApi.Controllers
 
         [Route("get-all-subject-with-categories/{pageNumber}")]
         [HttpGet]
-        public IActionResult GetAllSubjectWithCategories(int pageNumber)
+        public async Task<IActionResult> GetAllSubjectWithCategories(int pageNumber)
         {
-            var tutors = _tutor.GetRecommendedSubject(pageNumber);
+            var tutors = await _subject.GetRecommendedSubject(pageNumber);
             return Ok(tutors);
         }
     }
