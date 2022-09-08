@@ -144,7 +144,7 @@ namespace TutorBuddy.Core.Services
                 var subject = await subjectRepository.GetASubjectAsync(item.SubjectID);
                 var sess = new StudentSessionResponseDTO()
                 {
-                    Sessions = _mapper.Map<List<SessionDTO>>(item.Sessions),
+                    Sessions = _mapper.Map<List<StudentSessionDTO>>(item.Sessions),
                     Subject = _mapper.Map<SubjectDTO>(subject),
                     Tutor = tutor.FirstName + " " + tutor.LastName
                 };
@@ -182,7 +182,7 @@ namespace TutorBuddy.Core.Services
                 {
                     TutorSessionResponseDTO sess = new TutorSessionResponseDTO()
                     {
-                        Sessions = _mapper.Map<List<SessionDTO>>(item.Sessions),
+                        Sessions = _mapper.Map<List<TutorSessionDTO>>(item.Sessions),
                         Subject = _mapper.Map<SubjectDTO>(await subjectRepository.GetASubjectAsync(item.SubjectID)),
                         Student = student.FirstName + " " + student.LastName,
                         StudentImage = student.AvatarUrl
@@ -199,6 +199,7 @@ namespace TutorBuddy.Core.Services
             response.Success = true;
             response.StatusCode = (int)HttpStatusCode.OK;
             response.Data = result;
+            response.Message = "Get session Successfully";
             return response;
         }
 
