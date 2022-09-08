@@ -3,6 +3,7 @@ using System.Net;
 using System.Xml.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json.Linq;
 using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
@@ -94,50 +95,57 @@ namespace TutorBuddy.Core.Services
             return response;
         }
 
-        public async Task<ApiResponse<IEnumerable<RecommendSubjectDTO>>> GetRecommendedSubject(int num)
+        
+
+
+        public async Task<ApiResponse<TutorResponseDTO>> GetATutor(string Id)
         {
-            var response = new ApiResponse<IEnumerable<RecommendSubjectDTO>>();
-            var subjects = await _unitOfWork.SubjectRepository.GetAllRecommendSubjectAsync();
+            var response = new ApiResponse<TutorResponseDTO>();
+            var tutor = await _unitOfWork.TutorRepository.GetTutor(Id);
+            
 
-            if (subjects != null)
+            if (tutor != null)
             {
-                List<RecommendSubjectDTO> result = new List<RecommendSubjectDTO>();
-                foreach (var item in subjects)
+                var avals = (tutor.TutorAvaliabilities.Count() > 0)? await _unitOfWork.AvailabilityRepository.GetATutorAvaliabilityAsync(tutor.UserId): new List<Availability>();
+                var subjs = (tutor.TutorSubjects.Count() > 0)? tutor.TutorSubjects.Select(x => x.SubjectID): new List<string>();
+                var subjects = new List<string>();
+                var days = new List<string>();
+                foreach (var item in subjs)
                 {
-                    RecommendSubjectDTO subj = new RecommendSubjectDTO();
-                    var tutorSubj = item.TutorSubjects;
-                    subj.Subject = item;
-                    foreach (var element in tutorSubj)
-                    {
-                        var tutor = await _userManager.FindByIdAsync(element.ID);
-                        subj.Tutor = tutor.FirstName + " " + tutor.LastName;
-                        if (element.Sessions.Count() > 0)
-                        {
-                            int rateSum = element.Sessions.Sum(x => x.RateTutor);
-                            subj.UserCount = element.Sessions.Count();
-                            double calrate = rateSum / subj.UserCount;
-                            subj.Rate = (int)Math.Round(calrate, 1);
-                        }
-
-                    }
-
-                    result.Add(subj);
+                    var subj = await _unitOfWork.SubjectRepository.GetASubjectAsync(item);
+                    subjects.Add(subj.Topic);
                 }
 
+                foreach (var item in avals)
+                {
 
-                response.Message = "successfully!!!";
-                response.Success = true;
-                response.Data = result;
+                    days.Add(item.Day);
+                }
+
+                TutorResponseDTO tutor1 = new TutorResponseDTO()
+                {
+                    FullName = tutor.User.FirstName + " " + tutor.User.LastName,
+                    BioNote = tutor.BioNote,
+                    Avatar = tutor.User.AvatarUrl,
+                    Subject = subjects,
+                    Avaliabilities = days
+                };
+
+                response.Message = "Record Found!!!";
+                response.Data = tutor1;
                 response.StatusCode = (int)HttpStatusCode.OK;
+                response.Success = true;
                 return response;
             }
 
             response.Message = $"No record of tutor is found on our DB";
             response.Success = false;
-            response.Data = null;
             response.StatusCode = (int)HttpStatusCode.NotFound;
             return response;
         }
+
+
+
     }
 }
 

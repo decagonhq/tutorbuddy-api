@@ -11,11 +11,14 @@ namespace TutorBuddy.Core.Utilities
 		{
             //Authentication
             CreateMap<AvailabilityDTO, Availability>().ReverseMap()
-                .ForMember(x => x.Key, opt => opt.MapFrom(src => ConvertDayToKey(src.Day))); ;
+                .ForMember(x => x.Key, opt => opt.MapFrom(src => ConvertDayToKey(src.Day))); 
             CreateMap<SubjectDTO, Subject>().ReverseMap()
                 .ForMember(x => x.Subject, opt => opt.MapFrom(src => src.Topic));
-
-            CreateMap<SessionDTO, Session>().ReverseMap();
+            CreateMap<SubjectRecommedDTO, Subject>().ReverseMap()
+                 .ForMember(x => x.Subject, opt => opt.MapFrom(src => src.Topic));
+                 
+            CreateMap<StudentSessionDTO, Session>().ReverseMap();
+            CreateMap<TutorSessionDTO, Session>().ReverseMap();
 
         }
 

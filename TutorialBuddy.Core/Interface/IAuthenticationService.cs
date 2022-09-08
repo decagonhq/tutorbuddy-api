@@ -20,5 +20,7 @@ namespace TutorBuddy.Core.Interface
         Task<ApiResponse<RefreshTokenResponse>> RefreshTokenAsync(RefreshTokenRequestDTO token);
         Task<ApiResponse<CredentialResponseDTO>> VerifyGoogleToken(GoogleLoginRequestDTO google);
         Task<ApiResponse<string>> ResendOTP(ResendOtpDTO model);
+
+       
     }
 }

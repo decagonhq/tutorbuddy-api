@@ -12,7 +12,7 @@ namespace TutorBuddy.Core.Interface
         Task<ApiResponse<string>> AddSubjectForATutor(string Id, IEnumerable<SubjectDTO> Subjects);
         Task<ApiResponse<string>> AddAvaliabilityForATutor(string Id, IEnumerable<AvailabilityDTO> availabilities);
         Task<ApiResponse<IEnumerable<FeatureTutorDTO>>> GetFeatureTutors();
-        Task<ApiResponse<IEnumerable<RecommendSubjectDTO>>> GetRecommendedSubject(int num);
+        Task<ApiResponse<TutorResponseDTO>> GetATutor(string Id);
     }
 }
 

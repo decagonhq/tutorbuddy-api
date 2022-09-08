@@ -82,7 +82,18 @@ namespace TutorBuddy.Infrastructure.Repository
         }
 
 
+        public async Task<Tutor> GetTutor(string Id)
+        {
+            var user = await _context.Tutors
+                        .Where(x => x.UserId == Id)
+                        .Include(x => x.User)
+                        .Include(x => x.TutorSubjects)
+                        .Include(x => x.TutorAvaliabilities)
+                        .FirstOrDefaultAsync();
 
 
+            return user; 
+        }
+ 
     }
 }
