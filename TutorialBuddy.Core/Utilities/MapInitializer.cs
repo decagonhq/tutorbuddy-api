@@ -17,7 +17,8 @@ namespace TutorBuddy.Core.Utilities
             CreateMap<SubjectRecommedDTO, Subject>().ReverseMap()
                  .ForMember(x => x.Subject, opt => opt.MapFrom(src => src.Topic));
                  
-            CreateMap<SessionDTO, Session>().ReverseMap();
+            CreateMap<StudentSessionDTO, Session>().ReverseMap();
+            CreateMap<TutorSessionDTO, Session>().ReverseMap();
 
         }
 
