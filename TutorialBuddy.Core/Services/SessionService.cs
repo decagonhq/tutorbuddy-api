@@ -8,6 +8,7 @@ using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Enums;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
+using TutorBuddy.Core.Utilities;
 using TutorialBuddy.Core;
 using TutorialBuddy.Core.Enums;
 using static Google.Apis.Requests.BatchRequest;
@@ -124,9 +125,9 @@ namespace TutorBuddy.Core.Services
 
         
 
-        public async Task<ApiResponse<IEnumerable<StudentSessionResponseDTO>>> GetAllSessionForStudent(string studentId)
+        public async Task<ApiResponse<PaginationModel<IEnumerable<StudentSessionResponseDTO>>>> GetAllSessionForStudent(string studentId, int pageSize, int pageNumber)
         {
-            var response = new ApiResponse<IEnumerable<StudentSessionResponseDTO>>();
+            var response = new ApiResponse<PaginationModel<IEnumerable<StudentSessionResponseDTO>>>();
             var studentSession = await sessionRepository.GetAllSessionsForAstudent(studentId);
             List<StudentSessionResponseDTO> result = new List<StudentSessionResponseDTO>();
 
@@ -152,18 +153,18 @@ namespace TutorBuddy.Core.Services
                 result.Add(sess);
             }
 
-
+            var paginatedResult = Pagination.PaginationAsync(result, pageSize, pageNumber);
             response.StatusCode = (int)HttpStatusCode.OK;
-            response.Data = result;
+            response.Data = paginatedResult;
             response.Success = true;
             response.Message = "Get session Successfully";
             return response;
 
         }
 
-        public async Task<ApiResponse<IEnumerable<TutorSessionResponseDTO>>> GetAllSessionForTutor(string tutorId)
+        public async Task<ApiResponse<PaginationModel<IEnumerable<TutorSessionResponseDTO>>>> GetAllSessionForTutor(string tutorId, int pageSize, int pageNumber)
         {
-            var response = new ApiResponse<IEnumerable<TutorSessionResponseDTO>>();
+            var response = new ApiResponse<PaginationModel<IEnumerable<TutorSessionResponseDTO>>>();
             var tutorSession = await sessionRepository.GetAllSessionsForTutor(tutorId);
             List<TutorSessionResponseDTO> result = new List<TutorSessionResponseDTO>();
 
@@ -194,11 +195,11 @@ namespace TutorBuddy.Core.Services
             }
 
 
-            
 
+            var paginatedResult = Pagination.PaginationAsync(result, pageSize, pageNumber);
             response.Success = true;
             response.StatusCode = (int)HttpStatusCode.OK;
-            response.Data = result;
+            response.Data = paginatedResult;
             response.Message = "Get session Successfully";
             return response;
         }

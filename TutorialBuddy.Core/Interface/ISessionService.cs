@@ -14,8 +14,8 @@ namespace TutorBuddy.Core.Interface
     {
         Task<ApiResponse<bool>> AddSession(CreateSessionDTO createSession);
         Task RemoveSession(string sessionId);
-        Task<ApiResponse<IEnumerable<StudentSessionResponseDTO>>> GetAllSessionForStudent(string studentId);
-        Task<ApiResponse<IEnumerable<TutorSessionResponseDTO>>> GetAllSessionForTutor(string tutorId);
+        Task<ApiResponse<PaginationModel<IEnumerable<StudentSessionResponseDTO>>>>GetAllSessionForStudent(string studentId, int pageSize, int pageNumber);
+        Task<ApiResponse<PaginationModel<IEnumerable<TutorSessionResponseDTO>>>> GetAllSessionForTutor(string tutorId, int pageSize, int pageNumber);
         Task<ApiResponse<bool>> UpdateSession(UpdateSessionDTO session, string Id);
         Task<ApiResponse<bool>> CommentOnSession(string sessionId, CreateCommentDTO createComment, string commentFor);
         Task<ApiResponse<bool>> RateSession(string sessionId, int ratings, string ratingsFor);
