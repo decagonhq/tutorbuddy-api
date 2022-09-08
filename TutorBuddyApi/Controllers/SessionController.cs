@@ -58,9 +58,9 @@ namespace TutorBuddyApi.Controllers
         [Route("{id}/student")]
         [Authorize(Policy = "RequireStudentOnly")]
         [HttpGet]
-        public async Task<IActionResult> GetAllSession([FromRoute] string id)
+        public async Task<IActionResult> GetAllSession([FromRoute] string id, int pageSize, int pageNumber)
         {
-            var result = await sessionService.GetAllSessionForStudent(id);
+            var result = await sessionService.GetAllSessionForStudent(id, pageSize, pageNumber);
             return StatusCode(result.StatusCode, result);
         }
 
@@ -72,9 +72,9 @@ namespace TutorBuddyApi.Controllers
         [Route("{id}/tutor")]
         [Authorize(Policy = "RequireTutorOnly")]
         [HttpGet]
-        public async Task<IActionResult> GetAllSessionTutor([FromRoute] string id)
+        public async Task<IActionResult> GetAllSessionTutor([FromRoute] string id, int pageSize, int pageNumber)
         {
-            var result = await sessionService.GetAllSessionForTutor(id);
+            var result = await sessionService.GetAllSessionForTutor(id, pageSize, pageNumber);
             return StatusCode(result.StatusCode, result);
         }
 
