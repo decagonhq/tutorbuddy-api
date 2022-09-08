@@ -61,12 +61,20 @@ namespace TutorBuddyApi.Controllers
             return StatusCode(response.StatusCode, response);
         }
 
-        [Route("get-all-subject-with-categories/{pageNumber}")]
+        [Route("get-all-recommend-subject")]
         [HttpGet]
-        public async Task<IActionResult> GetAllSubjectWithCategories(int pageNumber)
+        public async Task<IActionResult> GetAllRecommendSubject(int pageSize, int pageNumber)
         {
-            var tutors = await _subject.GetRecommendedSubject(pageNumber);
-            return Ok(tutors);
+            var response = await _subject.GetRecommendedSubject(pageSize, pageNumber);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [Route("get-all-subject-with-categories")]
+        [HttpGet]
+        public async Task<IActionResult> GetAllSubjectWithCategories(int pageSize, int pageNumber)
+        {
+            var response = await _subject.GetAllCategoriesWithSubject(pageSize, pageNumber);
+            return StatusCode(response.StatusCode, response);
         }
     }
 }

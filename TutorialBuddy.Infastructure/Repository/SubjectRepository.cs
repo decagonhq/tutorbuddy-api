@@ -40,6 +40,17 @@ namespace TutorBuddy.Infrastructure.Repository
 
             return subject;
         }
+
+        public async Task<IEnumerable<Category>> GetAllSubjectsWithCategoryAsync()
+        {
+            var subject = await _context.Categories
+                          .Include(x => x.Subjects)
+                          .ToListAsync();
+
+            return subject;
+        }
+
+
     }
 }
 
