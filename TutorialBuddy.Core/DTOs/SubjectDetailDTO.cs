@@ -11,8 +11,7 @@ namespace TutorBuddy.Core.DTOs
         public string? BioNote { get; set; }
         public double? Price { get; set; }
         public string? UnitOfPrice { get; set; }
-        public int? SubjectRating { get; set; }
-        public int? TutorRating { get; set; }
+        public int? Rating { get; set; }
         public DateTime? CreatedAt { get; set; }
         public IEnumerable<string>? TutorComments { get; set; }
     }

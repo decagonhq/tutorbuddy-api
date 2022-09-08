@@ -21,13 +21,13 @@ namespace TutorBuddyApi.Controllers
             _subject = subject;
         }
 
-        [Route("{Id}")]
+        [Route("{tutorSubjectId}")]
         [HttpGet]
-        public async Task<IActionResult> GetASubject([FromRoute] string Id)
+        public async Task<IActionResult> GetASubject([FromRoute] string tutorSubjectId)
         {
-            var response = await _subject.GetASubject(Id);
-            // return StatusCode(response.StatusCode, response);
-            return Ok(response);
+            var response = await _subject.GetASubjectDetails(tutorSubjectId);
+            return StatusCode(response.StatusCode, response);
+            
         }
 
     }

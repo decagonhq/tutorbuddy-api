@@ -131,7 +131,7 @@ namespace TutorBuddy.Core.Services
             var result = new SubjectDetailDTO();
             if (tutorSubject != null)
             {
-                var tutor = await _unitOfWork.TutorRepository.GetARecord(tutorSubject.TutorID);
+                var tutor = await _unitOfWork.TutorRepository.GetTutor(tutorSubject.TutorID);
                 result.Name = tutor.User.FirstName + " " + tutor.User.LastName;
                 result.BioNote = tutor.BioNote;
                 result.Price = tutor.Price;
@@ -142,7 +142,7 @@ namespace TutorBuddy.Core.Services
                 result.Thumbnail = subject.Thumbnail;
                 result.CreatedAt = subject.CreatedOn;
                 result.NoOfCourses = tutor.TutorSubjects.Count();
-                result.SubjectRating = tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count();
+                result.Rating = tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count();
                 result.TutorComments = tutorSubject.Sessions.Select(x => x.TutorComment).ToList();
 
                 response.Data = result;
