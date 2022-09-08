@@ -9,6 +9,7 @@ namespace TutorBuddy.Core.Interface
 	{
         Task<ApiResponse<PaginationModel<IEnumerable<RecommendSubjectDTO>>>> GetRecommendedSubject(int pageSize, int pageNumber);
         Task<ApiResponse<PaginationModel<IEnumerable<CategorySubjectDTO>>>> GetAllCategoriesWithSubject(int pageSize, int pageNumber);
+        Task<ApiResponse<SubjectDetailDTO>> GetASubjectDetails(string tutorSubjectId);
 
     }
 }

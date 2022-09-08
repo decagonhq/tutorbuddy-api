@@ -122,6 +122,40 @@ namespace TutorBuddy.Core.Services
 
         }
 
+
+
+        public async Task<ApiResponse<SubjectDetailDTO>> GetASubjectDetails(string tutorSubjectId)
+        {
+            var response = new ApiResponse<SubjectDetailDTO>();
+            var tutorSubject = await _unitOfWork.SubjectRepository.GetASubjectDetialAsync(tutorSubjectId);
+            var result = new SubjectDetailDTO();
+            if (tutorSubject != null)
+            {
+                var tutor = await _unitOfWork.TutorRepository.GetARecord(tutorSubject.TutorID);
+                result.Name = tutor.User.FirstName + " " + tutor.User.LastName;
+                result.BioNote = tutor.BioNote;
+                result.Price = tutor.Price;
+                result.UnitOfPrice = tutor.UnitOfPrice;
+                var subject = await _unitOfWork.SubjectRepository.GetASubjectAsync(tutorSubject.SubjectID);
+                result.Topic = subject.Topic;
+                result.Description = subject.Description;
+                result.Thumbnail = subject.Thumbnail;
+                result.CreatedAt = subject.CreatedOn;
+                result.NoOfCourses = tutor.TutorSubjects.Count();
+                result.SubjectRating = tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count();
+                result.TutorComments = tutorSubject.Sessions.Select(x => x.TutorComment).ToList();
+
+                response.Data = result;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Success = true;
+                return response;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            response.Success = true;
+            return response;
+        }
+
     }
 }
 

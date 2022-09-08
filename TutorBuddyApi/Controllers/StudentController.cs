@@ -24,14 +24,14 @@ namespace TutorBuddyApi.Controllers
 
 
         [Route("{Id}/add-reminder")]
-        [Authorize(Policy = "RequireTutorOnly")]
+        [Authorize(Policy = "RequireStudentOnly")]
         [HttpPost]
-        public async Task<IActionResult> AddReminder(string Id, [FromBody] IEnumerable<AddReminderRequestDTO> reminder)
+        public async Task<IActionResult> AddReminder(string Id, [FromBody] AddReminderRequestDTO reminder)
         {
-            //var response = await _tutor.AddAvaliabilityForATutor(Id, availabilities);
-            //return StatusCode(response.StatusCode, response);
+            var response = await _student.AddReminder(Id, reminder);
+            return StatusCode(response.StatusCode, response);
 
-            return Ok();
+            
         }
     }
 }
