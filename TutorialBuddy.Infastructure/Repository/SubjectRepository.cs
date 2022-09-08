@@ -41,13 +41,16 @@ namespace TutorBuddy.Infrastructure.Repository
             return subject;
         }
 
-        public async Task<IEnumerable<Category>> GetAllSubjectsWithCategoryAsync()
+        public async Task<IEnumerable<IGrouping<Category,Subject>>> GetAllSubjectsWithCategoryAsync()
         {
-            var subject = await _context.Categories
-                          .Include(x => x.Subjects)
+            var subject = await _context.Subjects
+                          .Include(x => x.Category)
+                          .Include(x => x.TutorSubjects)
+                            .ThenInclude(x => x.Sessions)
+                          
                           .ToListAsync();
-
-            return subject;
+            var result  = subject.GroupBy(x => x.Category);
+            return result;
         }
 
 

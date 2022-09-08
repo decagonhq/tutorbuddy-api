@@ -65,10 +65,10 @@ namespace TutorBuddy.Core.Services
                 foreach (var item in categories)
                 {
                     CategorySubjectDTO catg = new CategorySubjectDTO();
-                    catg.CategoryId = item.ID;
-                    catg.CategoryName = item.Title;
+                    catg.CategoryId = item.Key.ID;
+                    catg.CategoryName = item.Key.Title;
                     List<RecommendSubjectDTO> catSubjects = new List<RecommendSubjectDTO>();
-                    catg.Subject = (item.Subjects != null) ? await RefineSubject(item.Subjects): null;
+                    catg.Subject = (item.Key.Subjects != null) ? await RefineSubject(item.Key.Subjects) : null;
                     result.Add(catg);
                 }
 
@@ -96,23 +96,26 @@ namespace TutorBuddy.Core.Services
             {
                 RecommendSubjectDTO subj = new RecommendSubjectDTO();
                 var tutorSubj = item.TutorSubjects;
-                subj.Subject = _mapper.Map<SubjectRecommedDTO>(item);
-                foreach (var element in tutorSubj)
+                if(tutorSubj != null)
                 {
-                    var tutor = await _userManager.FindByIdAsync(element.TutorID);
-                    subj.Tutor = tutor.FirstName + " " + tutor.LastName;
-                    subj.TutorSubjectId = element.ID;
-                    if (element.Sessions.Count() > 0)
+                    subj.Subject = _mapper.Map<SubjectRecommedDTO>(item);
+                    foreach (var element in tutorSubj)
                     {
-                        int rateSum = element.Sessions.Sum(x => x.RateTutor);
-                        subj.UserCount = element.Sessions.Count();
-                        double calrate = rateSum / subj.UserCount;
-                        subj.Rate = (int)Math.Round(calrate, 1);
+                        var tutor = await _userManager.FindByIdAsync(element.TutorID);
+                        subj.Tutor = tutor.FirstName + " " + tutor.LastName;
+                        subj.TutorSubjectId = element.ID;
+                        if (element.Sessions.Count() > 0)
+                        {
+                            int rateSum = element.Sessions.Sum(x => x.RateTutor);
+                            subj.UserCount = element.Sessions.Count();
+                            double calrate = rateSum / subj.UserCount;
+                            subj.Rate = (int)Math.Round(calrate, 1);
+                        }
+
                     }
 
+                    result.Add(subj);
                 }
-
-                result.Add(subj);
             }
 
             return result;
