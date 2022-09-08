@@ -75,7 +75,9 @@ namespace FindRApi.Extensions
             builder.Services.AddScoped<ISessionService,                 SessionService>();
             builder.Services.AddScoped<ITutorService, TutorService>();
             builder.Services.AddScoped<ISubjectService, SubjectService>();
+            builder.Services.AddScoped<IStudentService, StudentService>();
             builder.Services.AddScoped<IAvailabilityRepository, AvaliabilityRepository>();
+            builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<Seeder>();
 
 
