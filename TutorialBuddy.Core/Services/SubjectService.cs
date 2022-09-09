@@ -142,7 +142,7 @@ namespace TutorBuddy.Core.Services
                 result.Thumbnail = subject.Thumbnail;
                 result.CreatedAt = subject.CreatedOn;
                 result.NoOfCourses = tutor.TutorSubjects.Count();
-                result.Rating = tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count();
+                result.Rating = (tutorSubject.Sessions.Count() > 0) ? tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count(): 0;
                 result.TutorComments = tutorSubject.Sessions.Select(x => x.TutorComment).ToList();
 
                 response.Data = result;
