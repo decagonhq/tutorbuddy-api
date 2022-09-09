@@ -141,16 +141,30 @@ namespace TutorBuddy.Core.Services
 
             foreach (var item in tutorSubject)
             {
-                var tutor = await userManager.FindByIdAsync(item.TutorID);
-                var subject = await subjectRepository.GetASubjectAsync(item.SubjectID);
-                var sess = new StudentSessionResponseDTO()
+                if(item.Sessions.Any())
                 {
-                    Sessions = _mapper.Map<List<StudentSessionDTO>>(item.Sessions),
-                    Subject = _mapper.Map<SubjectDTO>(subject),
-                    Tutor = tutor.FirstName + " " + tutor.LastName
-                };
+                    var tutor = await userManager.FindByIdAsync(item.TutorID);
+                    var subject = await subjectRepository.GetASubjectAsync(item.SubjectID);
+                    foreach (var ele in item.Sessions)
+                    {
+                        StudentSessionResponseDTO sess = new StudentSessionResponseDTO()
+                        {
+                            SessionId = ele.ID,
+                            Topic = subject.Topic,
+                            Thumbnail = subject.Thumbnail,
+                            Tutor = tutor.FirstName + " " + tutor.LastName,
+                            TutorImage = tutor.AvatarUrl,
+                            Startime = ele.Startime,
+                            EndTime = ele.EndTime,
+                            Status = ele.Status
+                        };
 
-                result.Add(sess);
+                        result.Add(sess);
+                    }
+                    
+                }
+
+               
             }
 
             var paginatedResult = Pagination.PaginationAsync(result, pageSize, pageNumber);
@@ -176,20 +190,30 @@ namespace TutorBuddy.Core.Services
 
 
             var tutorSubject = tutorSession.TutorSubjects;
-            var student = await userManager.FindByIdAsync(tutorSession.UserId);
             foreach (var item in tutorSubject)
             {
-                if(item.Sessions.Any())
+                if (item.Sessions.Any())
                 {
-                    TutorSessionResponseDTO sess = new TutorSessionResponseDTO()
-                    {
-                        Sessions = _mapper.Map<List<TutorSessionDTO>>(item.Sessions),
-                        Subject = _mapper.Map<SubjectDTO>(await subjectRepository.GetASubjectAsync(item.SubjectID)),
-                        Student = student.FirstName + " " + student.LastName,
-                        StudentImage = student.AvatarUrl
-                    };
+                    var subject = await subjectRepository.GetASubjectAsync(item.SubjectID);
 
-                    result.Add(sess);
+                    foreach (var ele in item.Sessions)
+                    {
+                        TutorSessionResponseDTO sess = new TutorSessionResponseDTO()
+                        {
+                            SessionId = ele.ID,
+                            Topic = subject.Topic,
+                            Thumbnail = subject.Thumbnail,
+                            Student = ele.Student.FirstName + " " + ele.Student.LastName,
+                            StudentImage = ele.Student.AvatarUrl,
+                            Startime = ele.Startime,
+                            EndTime = ele.EndTime,
+                            Status = ele.Status
+                        };
+
+                        result.Add(sess);
+                    }
+
+                    
                 }
 
             }

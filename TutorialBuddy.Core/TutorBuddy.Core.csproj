@@ -29,6 +29,7 @@
     <PackageReference Include="CloudinaryDotNet" Version="1.19.0" />
     <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="Google.Apis.Auth" Version="1.57.0" />
+    <PackageReference Include="Ical.Net" Version="4.2.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +38,7 @@
     <None Remove="AutoMapper" />
     <None Remove="Google.Apis" />
     <None Remove="Google.Apis.Auth" />
+    <None Remove="Ical.Net" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\Mapping\" />

@@ -98,7 +98,10 @@ namespace TutorBuddy.Core.Services
                 var tutorSubj = item.TutorSubjects;
                 if(tutorSubj != null)
                 {
-                    subj.Subject = _mapper.Map<SubjectRecommedDTO>(item);
+                    subj.ID = item.ID;
+                    subj.Subject = item.Topic;
+                    subj.Thumbnail = item.Thumbnail;
+                    subj.Description = item.Description;
                     foreach (var element in tutorSubj)
                     {
                         var tutor = await _userManager.FindByIdAsync(element.TutorID);
@@ -120,6 +123,40 @@ namespace TutorBuddy.Core.Services
 
             return result;
 
+        }
+
+
+
+        public async Task<ApiResponse<SubjectDetailDTO>> GetASubjectDetails(string tutorSubjectId)
+        {
+            var response = new ApiResponse<SubjectDetailDTO>();
+            var tutorSubject = await _unitOfWork.SubjectRepository.GetASubjectDetialAsync(tutorSubjectId);
+            var result = new SubjectDetailDTO();
+            if (tutorSubject != null)
+            {
+                var tutor = await _unitOfWork.TutorRepository.GetTutor(tutorSubject.TutorID);
+                result.Name = tutor.User.FirstName + " " + tutor.User.LastName;
+                result.BioNote = tutor.BioNote;
+                result.Price = tutor.Price;
+                result.UnitOfPrice = tutor.UnitOfPrice;
+                var subject = await _unitOfWork.SubjectRepository.GetASubjectAsync(tutorSubject.SubjectID);
+                result.Topic = subject.Topic;
+                result.Description = subject.Description;
+                result.Thumbnail = subject.Thumbnail;
+                result.CreatedAt = subject.CreatedOn;
+                result.NoOfCourses = tutor.TutorSubjects.Count();
+                result.Rating = (tutorSubject.Sessions.Count() > 0) ? tutorSubject.Sessions.Sum(x => x.RateTutor) / tutorSubject.Sessions.Count(): 0;
+                result.TutorComments = tutorSubject.Sessions.Select(x => x.TutorComment).ToList();
+
+                response.Data = result;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Success = true;
+                return response;
+            }
+
+            response.StatusCode = (int)HttpStatusCode.NotFound;
+            response.Success = true;
+            return response;
         }
 
     }

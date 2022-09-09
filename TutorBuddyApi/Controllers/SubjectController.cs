@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TutorBuddy.Core.DTOs;
 using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 
@@ -14,24 +13,22 @@ namespace TutorBuddyApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = "Bearer")]
-    public class StudentController : ControllerBase
+    public class SubjectController : ControllerBase
     {
-        private readonly IStudentService _student;
-        public StudentController(IStudentService student)
+        private readonly ISubjectService _subject;
+        public SubjectController(ISubjectService subject)
         {
-            _student = student;
+            _subject = subject;
         }
 
-
-        [Route("{Id}/add-reminder")]
-        [Authorize(Policy = "RequireStudentOnly")]
-        [HttpPost]
-        public async Task<IActionResult> AddReminder(string Id, [FromBody] AddReminderRequestDTO reminder)
+        [Route("{tutorSubjectId}")]
+        [HttpGet]
+        public async Task<IActionResult> GetASubject([FromRoute] string tutorSubjectId)
         {
-            var response = await _student.AddReminder(Id, reminder);
+            var response = await _subject.GetASubjectDetails(tutorSubjectId);
             return StatusCode(response.StatusCode, response);
-
             
         }
+
     }
 }

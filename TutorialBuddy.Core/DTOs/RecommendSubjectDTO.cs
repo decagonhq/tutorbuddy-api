@@ -5,7 +5,10 @@ namespace TutorBuddy.Core.DTOs
 {
 	public class RecommendSubjectDTO
 	{
-		public SubjectRecommedDTO? Subject { get; set; }
+        public string? ID { get; set; }
+        public string? Subject { get; set; }
+        public string? Thumbnail { get; set; }
+        public string? Description { get; set; }
         public string? TutorSubjectId { get; set; }
         public string? Tutor { get; set; }
         public int Rate { get; set; }
