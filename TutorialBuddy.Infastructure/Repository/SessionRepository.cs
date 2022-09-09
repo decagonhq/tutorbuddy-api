@@ -64,6 +64,7 @@ namespace TutorBuddy.Infrastructure.Repository
                 .Where(s => s.UserId == tutorId)
                 .Include(session => session.TutorSubjects)
                     .ThenInclude(x => x.Sessions)
+                        .ThenInclude(x => x.Student)
                 .SingleOrDefaultAsync();
             return sessions;
         }

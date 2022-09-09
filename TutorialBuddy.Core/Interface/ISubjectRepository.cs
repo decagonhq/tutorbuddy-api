@@ -9,6 +9,7 @@ namespace TutorBuddy.Core.Interface
         Task<Subject> GetASubjectAsync(string subjectId);
         Task<IEnumerable<Subject>> GetAllRecommendSubjectAsync();
         Task<IEnumerable<IGrouping<Category, Subject>>> GetAllSubjectsWithCategoryAsync();
+        Task<TutorSubject> GetASubjectDetialAsync(string tutorSubjectId);
     }
 }
 

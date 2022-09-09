@@ -53,7 +53,15 @@ namespace TutorBuddy.Infrastructure.Repository
             return result;
         }
 
+        public async Task<TutorSubject> GetASubjectDetialAsync(string tutorSubjectId)
+        {
+            var subject = await _context.TutorSubjects
+                         .Where(x => x.ID == tutorSubjectId)
+                         .Include(x => x.Sessions)
+                         .FirstOrDefaultAsync();
+            return subject;
 
+        }
     }
 }
 
