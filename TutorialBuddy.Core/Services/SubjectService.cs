@@ -98,7 +98,10 @@ namespace TutorBuddy.Core.Services
                 var tutorSubj = item.TutorSubjects;
                 if(tutorSubj != null)
                 {
-                    subj.Subject = _mapper.Map<SubjectRecommedDTO>(item);
+                    subj.ID = item.ID;
+                    subj.Subject = item.Topic;
+                    subj.Thumbnail = item.Thumbnail;
+                    subj.Description = item.Description;
                     foreach (var element in tutorSubj)
                     {
                         var tutor = await _userManager.FindByIdAsync(element.TutorID);
