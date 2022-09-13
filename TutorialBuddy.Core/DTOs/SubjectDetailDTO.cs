@@ -7,6 +7,7 @@ namespace TutorBuddy.Core.DTOs
         public string? Thumbnail { get; set; }
         public string? Description { get; set; }
         public string? Name { get; set; }
+        public string? Avatar { get; set; }
         public int? NoOfCourses { get; set; }
         public string? BioNote { get; set; }
         public double? Price { get; set; }
