@@ -11,6 +11,7 @@ namespace TutorBuddy.Core.DTOs
         public string? Description { get; set; }
         public string? TutorSubjectId { get; set; }
         public string? Tutor { get; set; }
+        public string? TutorImage { get; set; }
         public int Rate { get; set; }
         public int UserCount { get; set; }
     }
