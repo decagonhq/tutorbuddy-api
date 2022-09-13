@@ -106,6 +106,7 @@ namespace TutorBuddy.Core.Services
                     {
                         var tutor = await _userManager.FindByIdAsync(element.TutorID);
                         subj.Tutor = tutor.FirstName + " " + tutor.LastName;
+                        subj.TutorImage = tutor.AvatarUrl;
                         subj.TutorSubjectId = element.ID;
                         if (element.Sessions.Count() > 0)
                         {
