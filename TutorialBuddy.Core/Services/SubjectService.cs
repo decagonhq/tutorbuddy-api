@@ -140,6 +140,7 @@ namespace TutorBuddy.Core.Services
                 result.BioNote = tutor.BioNote;
                 result.Price = tutor.Price;
                 result.UnitOfPrice = tutor.UnitOfPrice;
+                result.Avatar = tutor.User.AvatarUrl;
                 var subject = await _unitOfWork.SubjectRepository.GetASubjectAsync(tutorSubject.SubjectID);
                 result.Topic = subject.Topic;
                 result.Description = subject.Description;
