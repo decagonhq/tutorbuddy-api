@@ -115,10 +115,10 @@ namespace TutorBuddy.Core.Services
                             double calrate = rateSum / subj.UserCount;
                             subj.Rate = (int)Math.Round(calrate, 1);
                         }
-
+                        result.Add(subj);
                     }
 
-                    result.Add(subj);
+                   
                 }
             }
 

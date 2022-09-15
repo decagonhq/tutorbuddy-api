@@ -8,6 +8,7 @@ using TutorBuddy.Core.Interface;
 using TutorBuddy.Core.Models;
 using TutorialBuddy.Core;
 using Serilog;
+using AutoMapper;
 
 namespace TutorBuddy.Core.Services
 {
@@ -17,11 +18,13 @@ namespace TutorBuddy.Core.Services
         private readonly UserManager<User> _userManager;
         private readonly IImageUploadService _imageUpload;
         private readonly ILogger<UserService> _logger;
-        public UserService(IUnitOfWork unitOfWork, IImageUploadService imageUpload, UserManager<User> userManager)
+        private readonly IMapper _mapper;
+        public UserService(IUnitOfWork unitOfWork, IImageUploadService imageUpload, UserManager<User> userManager, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userManager = userManager;
             _imageUpload = imageUpload;
+            _mapper = mapper;
            
 
         }
@@ -60,6 +63,8 @@ namespace TutorBuddy.Core.Services
             return response;
 
         }
+
+       
 
         public async Task<ApiResponse<string>> UpdateAsync(UpdateUserDTO model)
         {
@@ -169,6 +174,87 @@ namespace TutorBuddy.Core.Services
 
 
         }
+
+        public async Task<ApiResponse<IEnumerable<NotificationDTO>>> GetUserNotification(string Id)
+        {
+            var response = new ApiResponse<IEnumerable<NotificationDTO>>();
+
+            var user = await _unitOfWork.UserRepository.GetAUserNotification(Id);
+
+            if(user != null && user.Notifications != null)
+            {
+                List<NotificationDTO> notifications = new List<NotificationDTO>();
+                foreach (var item in user.Notifications)
+                {
+                    if(!item.Isread)
+                    {
+                        var sender = await _userManager.FindByIdAsync(item.SenderId);
+                        NotificationDTO notify = new NotificationDTO()
+                        {
+                            Id = item.ID,
+                            SenderName = sender.FirstName + " " + sender.LastName,
+                            SenderImage = sender.AvatarUrl,
+                            Message = item.Message,
+                            CreatedAt = item.CreatedOn
+
+                        };
+
+                        notifications.Add(notify);
+                    }
+                }
+
+                response.Data = notifications;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Success = true;
+                response.Message = "Successfully";
+
+                return response;
+            }
+
+            response.Data = null;
+            response.StatusCode = (int)HttpStatusCode.BadRequest;
+            response.Success = false;
+            response.Message = "UnSuccessfully";
+
+            return response;
+        }
+
+        public async Task<ApiResponse<IEnumerable<ReminderDTO>>> GetUserReminders(string Id)
+        {
+            var response = new ApiResponse<IEnumerable<ReminderDTO>>();
+
+            var user = await _unitOfWork.UserRepository.GetAUserReminders(Id);
+            List<ReminderDTO> result = new List<ReminderDTO>();
+            if(user != null && user.Reminders != null)
+            {
+                var newDay = DateTime.Now;
+                var reminders = user.Reminders.Where(x => x.StartTime >= newDay.AddDays(-3) && x.StartTime <= newDay.AddDays(3));
+                foreach (var item in reminders)
+                {
+                    result.Add(_mapper.Map<ReminderDTO>(item));
+                }
+
+
+                response.Data = result;
+                response.StatusCode = (int)HttpStatusCode.OK;
+                response.Success = true;
+                response.Message = "Successfully";
+
+                return response;
+
+            }
+
+
+            response.Data = null;
+            response.StatusCode = (int)HttpStatusCode.BadRequest;
+            response.Success = false;
+            response.Message = "UnSuccessfully";
+
+            return response;
+
+
+        }
+
     }
 }
 

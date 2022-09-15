@@ -15,9 +15,14 @@ namespace TutorBuddy.Infrastructure.Repository
             _appDbContext = appDbContext;
         }
 
-        public Task<User> GetAUserNotification(string userId)
+        public async Task<User> GetAUserNotification(string userId)
         {
-            throw new NotImplementedException();
+            var user = await _appDbContext.Users
+                        .Include(x => x.Notifications)
+                        .Where(x => x.Id == userId)
+                        .FirstOrDefaultAsync();
+
+            return user;
         }
 
         public Task<bool> UpdateUser(User user)
@@ -35,18 +40,7 @@ namespace TutorBuddy.Infrastructure.Repository
             return user;
         }
 
-        //public async Task AddUserAreaOfInterestA(User user, IEnumerable<Subject> subjects)
-        //{
-        //    if (subjects.Any())
-        //    {
-        //        var userAreaOfInterest = new AreaOfInterest()
-        //        {
-        //            User = user,
-        //            Subjects = subjects
-        //        };
-        //        await _appDbContext.AreaOfInterests.AddAsync(userAreaOfInterest);
-        //    }
-        //}
+        
 
         public async Task<User> GetAUser(string Id, string role)
         {
@@ -68,6 +62,35 @@ namespace TutorBuddy.Infrastructure.Repository
             }
             
         }
+
+        public async Task<User> GetAUserReminders(string userId)
+        {
+            
+            var user = await _appDbContext.Users
+                       .Include(x => x.Reminders)
+                       .Where(x => x.Id == userId)
+                       .FirstOrDefaultAsync();
+
+            return user;
+        }
+
+
+        //private static DateTime GetDateExcludeWeekends(DateTime date, int index)
+        //{
+        //    var newDate = date.AddDays(-index);
+
+        //    if (newDate.DayOfWeek == DayOfWeek.Sunday)
+        //    {
+        //        return newDate.AddDays(-2);
+        //    }
+
+        //    if (newDate.DayOfWeek == DayOfWeek.Saturday)
+        //    {
+        //        return newDate.AddDays(-1);
+        //    }
+
+        //    return DateTime.Now;
+        //}
     }
 }
 

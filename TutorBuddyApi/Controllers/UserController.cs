@@ -79,6 +79,26 @@ namespace TutorBuddyApi.Controllers
             var result = await _userService.UpdateAsync(model);
             return StatusCode(result.StatusCode, result);
         }
+
+
+        [HttpGet]
+        [Route("{Id}/notifications")]
+        public async Task<IActionResult> GetNotification(string Id)
+        {
+
+            var result = await _userService.GetUserNotification(Id);
+            return StatusCode(result.StatusCode, result);
+        }
+
+
+        [HttpGet]
+        [Route("{Id}/reminders")]
+        public async Task<IActionResult> GetReminders(string Id)
+        {
+
+            var result = await _userService.GetUserReminders(Id);
+            return StatusCode(result.StatusCode, result);
+        }
     }
 }
 
