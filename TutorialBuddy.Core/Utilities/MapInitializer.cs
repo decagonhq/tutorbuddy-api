@@ -19,6 +19,8 @@ namespace TutorBuddy.Core.Utilities
                  
             CreateMap<StudentSessionDTO, Session>().ReverseMap();
             CreateMap<TutorSessionDTO, Session>().ReverseMap();
+            CreateMap<ReminderDTO, Reminder>().ReverseMap();
+
 
         }
 

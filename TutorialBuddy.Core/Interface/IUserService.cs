@@ -14,6 +14,9 @@ namespace TutorBuddy.Core.Interface
         Task<ApiResponse<string>> UpdatePasswordAsync(UpdatePasswordDTO model);
 
         Task<ApiResponse<string>> UpdateAsync(UpdateUserDTO model);
+
+        Task<ApiResponse<IEnumerable<NotificationDTO>>> GetUserNotification(string Id);
+        Task<ApiResponse<IEnumerable<ReminderDTO>>> GetUserReminders(string Id);
     }
 }
 
