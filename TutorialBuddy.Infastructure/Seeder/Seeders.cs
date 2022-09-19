@@ -27,8 +27,7 @@ namespace TutorBuddy.Infrastructure.Seeder
             await SeedCategory(_dbContext);     // seed categories and its subject
             await SeedAvalaibility(_dbContext);
             await SeedUser(_userManager, _dbContext);
-            await SeedTutorSubject(_dbContext);
-            await SeedTutorAvailability(_dbContext);
+            
 
         }
 
@@ -104,27 +103,6 @@ namespace TutorBuddy.Infrastructure.Seeder
             }   
         }
 
-        private static async Task SeedTutorSubject(TutorBuddyContext dbContext)
-        {
-            if (!dbContext.TutorSubjects.Any())
-            {
-                var tutorSubjects = SeederHelper<TutorSubject>.GetData("TutorSubject.json");
-               
-
-                await dbContext.TutorSubjects.AddRangeAsync(tutorSubjects);
-            }
-        }
-
-
-        private static async Task SeedTutorAvailability(TutorBuddyContext dbContext)
-        {
-            if (!dbContext.TutorAvaliabilities.Any())
-            {
-                var tutorSubjects = SeederHelper<TutorAvaliability>.GetData("TutorAvailability.json");
-               
-
-                await dbContext.TutorAvaliabilities.AddRangeAsync(tutorSubjects);
-            }
-        }
+       
     }
 }

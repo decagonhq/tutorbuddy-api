@@ -14,7 +14,7 @@ namespace FindR.Integrations.NotificationProviders
 
             var msg = new SendGridMessage
             {
-                From = new EmailAddress("emma4lil@gmail.com", "Tutorial Buddy"),
+                From = new EmailAddress("emma4lil@gmail.com", "Tutor Buddy"),
                 Subject = nctx.Header,
                 HtmlContent = nctx.Payload.ToString(),
             };
