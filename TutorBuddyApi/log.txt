@@ -5769,3 +5769,5 @@ System.InvalidOperationException: An exception has been raised that is likely du
 09/15/2022 08:38:19 User successfully logged in
 09/15/2022 08:56:17 Login Attempt
 09/15/2022 08:56:26 User successfully logged in
+09/19/2022 08:35:57 Login Attempt
+09/19/2022 08:36:00 User successfully logged in
