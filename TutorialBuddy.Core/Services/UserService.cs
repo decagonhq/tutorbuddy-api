@@ -228,7 +228,7 @@ namespace TutorBuddy.Core.Services
             if(user != null && user.Reminders != null)
             {
                 var newDay = DateTime.Now;
-                var reminders = user.Reminders.Where(x => x.StartTime >= newDay.AddDays(-3) && x.StartTime <= newDay.AddDays(3));
+                var reminders = user.Reminders.Where(x => x.StartTime >= newDay.AddDays(-1));
                 foreach (var item in reminders)
                 {
                     result.Add(_mapper.Map<ReminderDTO>(item));
