@@ -65,6 +65,7 @@ namespace TutorBuddy.Core.Services
                 return response;
             }
 
+            
             var session = new Session
             {
                 CreatedOn = DateTime.Now,

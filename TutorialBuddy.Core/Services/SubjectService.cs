@@ -94,16 +94,18 @@ namespace TutorBuddy.Core.Services
             List<RecommendSubjectDTO> result = new List<RecommendSubjectDTO>();
             foreach (var item in subjects)
             {
-                RecommendSubjectDTO subj = new RecommendSubjectDTO();
+                
                 var tutorSubj = item.TutorSubjects;
                 if(tutorSubj != null)
                 {
-                    subj.ID = item.ID;
-                    subj.Subject = item.Topic;
-                    subj.Thumbnail = item.Thumbnail;
-                    subj.Description = item.Description;
+                   
                     foreach (var element in tutorSubj)
                     {
+                        RecommendSubjectDTO subj = new RecommendSubjectDTO();
+                        subj.ID = item.ID;
+                        subj.Subject = item.Topic;
+                        subj.Thumbnail = item.Thumbnail;
+                        subj.Description = item.Description;
                         var tutor = await _userManager.FindByIdAsync(element.TutorID);
                         subj.Tutor = tutor.FirstName + " " + tutor.LastName;
                         subj.TutorImage = tutor.AvatarUrl;
@@ -111,8 +113,8 @@ namespace TutorBuddy.Core.Services
                         if (element.Sessions.Count() > 0)
                         {
                             int rateSum = element.Sessions.Sum(x => x.RateTutor);
-                            subj.UserCount = element.Sessions.Count();
-                            double calrate = rateSum / subj.UserCount;
+                            subj.UserCount = element.Sessions.Count(x => x.RateTutor > 0);
+                            double calrate = (subj.UserCount > 0) ? rateSum / subj.UserCount: 0;
                             subj.Rate = (int)Math.Round(calrate, 1);
                         }
                         result.Add(subj);
